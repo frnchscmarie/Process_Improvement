@@ -15,35 +15,28 @@
                   </div>
                     <div class="clearfix"></div>
                     <div class="x_content" >
-                      <p class="text-muted font-13 m-b-30">Training Details.</p>
+                      <p class="text-muted font-13 m-b-30">Training Details</p>
                     <div>&nbsp;</div>
 
                         <div class="x_content">
                             <div class="col-md-12" style=" text-align: center; ">
-                              <!--search bar and buttons-->
-                              <div class="pull-right" style="padding-bottom: 10px;">
-                                <input type="text" name="" placeholder="Search..">
-                                <a href="" class="btn btn-success btn-xs"><i class="fa fa-search"></i> Search</a>
-                                <a href="" class="btn btn-success btn-xs"><i class="fa fa-print"></i> Print</a>
-                              </div>
 
-                    <table id="datatable" class="table table-striped table-bordered">
+                              <table id="datatable" class="table table-striped table-bordered">
                       <thead>
   
-                          <tr id="trHead">
-                            <th rowspan="2">Employee ID</th>          
-                            <th rowspan="2">Employee Name</th>
-                            <th rowspan="2">Title of Seminar/Conference/Workshop/Short Courses<br>(write in full)</th>
-                            <th colspan="2" style="text-align: center;">Inclusive Dates<br><label style="margin-left: 0%;">From</label><label style="margin-left: 30%;">To</label></th>
-                            <th rowspan="2">Number of Hours</th>
-                            <th rowspan="2">Conducted/Sponsored by<br>(Write in full)</th>
-                            <th rowspan="2">Attachments</th>
-                          </tr>
-                      </thead>
-                        <tbody>
-          
-                           <tr>
-                            <td>11/15/2018</td>
+                    <tr id="trHead">
+           <th >Employee ID</th>
+            <th >Employee Name</th>
+            <th >Title of Seminar/Conference/Workshop/Short Courses<br>(write in full)</th>
+            <th colspan="2">Inclusive Dates<br><label style="margin-left: 0%;">From</label><label style="margin-left: 30%;">To</label></th>
+            <th >Number of Hours</th>
+            <th >Conducted/Sponsored by<br>(Write in full)</th>
+            <th >Attachments</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+                        <!--<td>11/15/2018</td>
                             <td>15-037-044</td>
                             <td>Franchesca Marie Cortez</td>
                             <td>11/15/2018</td>
@@ -51,13 +44,11 @@
                             <td>00</td>
                             <td>00</td>
                             <td>00</td>
-                            
-                          </tr>
-                         </tbody>
-                     
-                     </table>
-
-            
+                            <td><a href="'.base_url('process_improvement/updateEmployee/'.$c['employeeID']).'" class="btn btn-success btn-xs"><i class="fa fa-print"></i></a></td>  
+                          </tr>-->
+         
+        </tbody>
+    </table>
                               </div>
                         </div>
                     </div>
