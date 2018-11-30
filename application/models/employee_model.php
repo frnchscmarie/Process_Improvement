@@ -8,7 +8,7 @@ class Employee_model extends CI_Model {
         $this->db->insert($this->table, $employeeRecord);
         $data = array( 
         'id'=>$employeeRecord['employeeID'],
-        'username' => $employeeRecord['employee_name'] , 
+        'username' => $employeeRecord['fname'] , 
         'password' => '12345'
         );
         $this-> db->insert('login', $data);

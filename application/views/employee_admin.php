@@ -43,13 +43,13 @@
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="employee_name" id="inputSuccess2" placeholder=" Last Name" name="employee_name" value="<?php echo set_value('employee_name'); ?>" id="employee_name">
+                         <input type="text" class="form-control"  required="required"for="lname" placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname">
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="employee_name" id="inputSuccess2" placeholder=" First Name" name="employee_name" value="<?php echo set_value('employee_name'); ?>" id="employee_name">
+                         <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname">
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="employee_name" id="inputSuccess2" placeholder="Middle Name" name="employee_name" value="<?php echo set_value('employee_name'); ?>" id="employee_name">
+                         <input type="text" class="form-control" for="mname" id="inputSuccess2" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname">
                         </div>
                       </div>
 
