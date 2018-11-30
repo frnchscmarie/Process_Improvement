@@ -3,7 +3,7 @@
 class MR_model extends CI_Model {
     private $table = 'mr';
     
-    function create($mrRecord){
+    function createproperties($mrRecord){
         $this->db->insert($this->table, $mrRecord);
     }
     

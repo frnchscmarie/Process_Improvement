@@ -10,9 +10,6 @@
                     <h4>Memorandum Receipt</h4>
                     
                     <div class="clearfix"></div>
-               </div>
-
-                    <div class="clearfix"></div>
                      <div class="x_content">
                     
                   <table id="datatable" class="table table-striped table-bordered">
@@ -34,7 +31,7 @@
         </thead>
         <tbody>
             <?php
-        if($mr != null){
+        if($mr!=null){
                 foreach($mr as $c){  
                     echo "<tr><td>".$c['qty']."</td><td>".$c['unit']."</td><td>".$c['unit_name']."</td><td>".$c['description']."</td><td>".$c['date_purchased']."</td><td>".$c['property_no']."</td><td>".$c['classification_no']."</td><td>".$c['unit_value']."</td><td>".$c['total_value']."</td><td>".$c['mr_no']."</td><td>".$c['date_assigned'].'</td></tr>';
                    

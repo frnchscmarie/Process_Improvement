@@ -152,7 +152,8 @@ class Process_Improvement extends CI_Controller {
         //add to db
         $rules = array(
                    array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
-                   array('field'=>'employee_name', 'label'=>'Name', 'rules'=>'required'),
+                   array('field'=>'lname', 'label'=>'Last Name', 'rules'=>'required'),
+                   array('field'=>'fname', 'label'=>'First Name', 'rules'=>'required'),
                    array('field'=>'pg_level', 'label'=>'PG_Level', 'rules'=>'required'),
                    array('field'=>'birthday', 'label'=>'Birthdate', 'rules'=>'required'),
                    array('field'=>'date_hired', 'label'=>'Date Hired', 'rules'=>'required'),
@@ -164,23 +165,15 @@ class Process_Improvement extends CI_Controller {
                 );
             $this->form_validation->set_rules($rules);
             if($this->form_validation->run()==FALSE){
-            $data1 = $_SESSION['username'];
-            $type= $this->employee->read($data1);
-            foreach($type as $t){
-              $ut= array(
-                          'type'=>$t['type']
-              );
-              $types[]=$ut;
-            }
-            $usertype['types'] = $types;
-            $this->load->view('include/header',$usertype);
-            $this->load->view('include/footer');
+
         }
        else{
           
             $employeeRecord=array(
                 'employeeID'=>$_POST['employeeID'],
-                'employee_name'=>$_POST['employee_name'],
+                'lname'=>$_POST['lname'],
+                'fname'=>$_POST['fname'],
+                'mname'=>$_POST['mname'],
                 'pg_level'=>$_POST['pg_level'],
                 'birthday'=>$_POST['birthday'],
                 'date_hired'=>$_POST['date_hired'],
@@ -202,7 +195,9 @@ class Process_Improvement extends CI_Controller {
         
         foreach($oldRecord as $o){
                 $data['employeeID']=$o['employeeID'];
-                $data['employee_name']=$o['employee_name'];
+                $data['lname']=$o['lname'];
+                $data['fname']=$o['fname'];
+                $data['mname']=$o['mname'];
                 $data['pg_level']=$o['pg_level'];
                 $data['birthday']=$o['birthday'];
                 $data['date_hired']=$o['date_hired'];
@@ -215,7 +210,9 @@ class Process_Improvement extends CI_Controller {
             
              $rules = array(
                    array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
-                   array('field'=>'employee_name', 'label'=>'Name', 'rules'=>'required'),
+                   array('field'=>'lname', 'label'=>'Name', 'rules'=>'required'),
+                   array('field'=>'fname', 'label'=>'Name', 'rules'=>'required'),
+                   array('field'=>'mname', 'label'=>'Name', 'rules'=>'required'),
                    array('field'=>'pg_level', 'label'=>'PG_Level', 'rules'=>'required'),
                    array('field'=>'birthday', 'label'=>'Birthdate', 'rules'=>'required'),
                    array('field'=>'date_hired', 'label'=>'Date Hired', 'rules'=>'required'),
@@ -247,7 +244,9 @@ class Process_Improvement extends CI_Controller {
           
                 $newRecord=array(
                     'employeeID'=>$_POST['employeeID'],
-                    'employee_name'=>$_POST['employee_name'],
+                    'lname'=>$_POST['lname'],
+                    'fname'=>$_POST['fname'],
+                    'mname'=>$_POST['mname'],
                     'pg_level'=>$_POST['pg_level'],
                     'birthday'=>$_POST['birthday'],
                     'date_hired'=>$_POST['date_hired'],
@@ -329,8 +328,9 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-    public function viewProperties(){
-     
+   public function viewProperties(){
+       $result_array = $this->mr->read();
+        $data['mrRecord'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -341,10 +341,67 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('mradmin_view');
+        $this->load->view('mradmin_view',$data);
         $this->load->view('include/footer');
         
     }
+    public function addProperties(){
+      
+        $rules = array(
+                   array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
+                   array('field'=>'lname', 'label'=>' Last Name', 'rules'=>'required'),
+                   array('field'=>'fname', 'label'=>' First Name', 'rules'=>'required'),
+                   array('field'=>'mname', 'label'=>' Middle Name', 'rules'=>'required'),
+                   array('field'=>'date_assigned', 'label'=>'Date_assigned', 'rules'=>'required'),
+                   array('field'=>'qty', 'label'=>'qty', 'rules'=>'required'),
+                   array('field'=>'unit', 'label'=>'Unit', 'rules'=>'required'),
+                   array('field'=>'property_name', 'label'=>'property_name', 'rules'=>'required'),
+                   array('field'=>'description', 'label'=>'description', 'rules'=>'required'),
+                   array('field'=>'date_purchased', 'label'=>'Date Purchased', 'rules'=>'required'),
+                   array('field'=>'property_no', 'label'=>'Property Number', 'rules'=>'required'),
+                   array('field'=>'classification_no', 'label'=>'Classification Number', 'rules'=>'required'),
+                   array('field'=>'unit_value', 'label'=>'Unit Value', 'rules'=>'required'),
+                   array('field'=>'total_value', 'label'=>'Total Value', 'rules'=>'required'),
+                   array('field'=>'mr_no', 'label'=>'MR Number', 'rules'=>'required')
+                );
+            $this->form_validation->set_rules($rules);
+            if($this->form_validation->run()==FALSE){
+            $data1 = $_SESSION['username'];
+            $type= $this->employee->read($data1);
+            foreach($type as $t){
+              $ut= array(
+                          'type'=>$t['type']
+              );
+              $types[]=$ut;
+            }
+            $usertype['types'] = $types;
+            $this->load->view('include/header',$usertype);
+            $this->load->view('include/footer');
+        }
+       else{
+          
+            $mrRecord=array(
+                'employeeID'=>$_POST['employeeID'],
+                'lname'=>$_POST['lname'],
+                'fname'=>$_POST['fname'],
+                'mname'=>$_POST['mname'],
+                'date_assigned'=>$_POST['date_assigned'],
+                'qty'=>$_POST['qty'],
+                'unit'=>$_POST['unit'],
+                'property_name'=>$_POST['property_name'],
+                'description'=>$_POST['description'],
+                'date_purchased'=>$_POST['date_purchased'],
+                'property_no'=>$_POST['property_no'],
+                'classification_no'=>$_POST['classification_no'],
+                'unit_value'=>$_POST['unit_value'],
+                'total_value'=>$_POST['total_value'],
+                'mr_no'=>$_POST['mr_no']
+            );
+            $this->mr->createproperties($mrRecord);
+            redirect('process_improvement/viewProperties');
+            }
+    }
+
 
     public function updateProperties(){
         
