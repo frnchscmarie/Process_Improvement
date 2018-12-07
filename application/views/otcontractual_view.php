@@ -147,17 +147,7 @@
 
                        <tbody>
           
-                         <tr>
-                          <td>11/15/2018</td>
-                          <td>15-037-044</td>
-                          <td>Franchesca Marie Cortez</td>
-                          <td>Vacation Leave</td>
-                          <td>7</td>
-                          <td>00</td>
-                          <td>00</td>
-                          <td>00</td>
-                          <td>Sample Tasks</td>
-                        </tr>
+                        <!--insert data here!-->
                       </tbody>
                      </table>
 

@@ -29,22 +29,22 @@
   
                           <tr id="trHead">
                             <th >Date Filed:</th>
-                            <td>11/15/2018</td>  
+                            <!--<td>11/15/2018</td>--> 
                           </tr> 
 
                           <tr id="trHead">
                             <th >Where will leave be spent:</th>
-                            <td>Paris, France</td>  
+                            <!--<td>Paris, France</td>--> 
                           </tr>
 
                           <tr id="trHead">
                             <th >Type of Leave:</th>
-                            <td>Vacation Leave</td>  
+                            <!--<td>Vacation Leave</td>-->
                           </tr>  
 
                           <tr id="trHead">
                             <th >Remarks:</th>
-                            <td>Local</td>  
+                            <!--<td>Local</td>--> 
                           </tr> 
                           
                          
@@ -52,18 +52,18 @@
                           <tr id="trHead"><th >INCLUSIVE DATES </th></tr> 
                           <tr id="trHead">
                             <th >FROM: </th>
-                            <td> 12/10/2018</td>
+                            <!--<td> 12/10/2018</td>-->
                           </tr> 
                           <tr id="trHead">
                             <th >TO: </th>
-                            <td> 12/17/2018</td>
+                            <!--<td> 12/17/2018</td>-->
                           </tr>   
 
                           <tr id="trHead"><th >COMMUTATION </th></tr> 
                             
                             <tr id="trHead">
                             <th >No. of working days applied for:</th>
-                            <td> 1</td>  
+                            <!--<td> 1</td>-->  
                           </tr>
                             
               
@@ -95,7 +95,7 @@
                       </thead>
                        <tbody>
           
-                         <tr>
+                         <!--<tr>
                           <td>11/15/2018</td>
                           <td>15-037-044</td>
                           <td>Franchesca Marie Cortez</td>
@@ -104,7 +104,7 @@
                           <td>08/10/2018</td>
                           <td>08/17/2018</td>
                           <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View </a></td>
-                        </tr>
+                        </tr>-->
                       </tbody>
                      </table>
             </div>
@@ -152,7 +152,7 @@
                       </thead>
                        <tbody>
           
-                         <tr>
+                        <!-- <tr>
                           <td>11/15/2018</td>
                           <td>15-037-044</td>
                           <td>Franchesca Marie Cortez</td>
@@ -161,7 +161,7 @@
                           <td>08/10/2018</td>
                           <td>08/17/2018</td>
                           <td><a href=""> APPROVED </a></td>
-                        </tr>
+                        </tr>-->
                       </tbody>
                      </table>
 
@@ -227,7 +227,7 @@
 
                        <tbody>
           
-                         <tr>
+                         <!--<tr>
                           <td>11/15/2018</td>
                           <td>15-037-044</td>
                           <td>Franchesca Marie Cortez</td>
@@ -237,16 +237,16 @@
                           <td>00</td>
                           <td>00</td>
                           <td>Sample Tasks</td>
-                        </tr>
+                        </tr>-->
                       </tbody>
                       <tfoot>
                         <tr id="trHead">
                           <th colspan="4" style="text-align: right;">TOTAL</th>
-                          <th >7</th>
-                          <th >00</th>
-                          <th >00</th>
-                          <th >00</th>
-                          <th colspan="1"><!--space only--></th>
+                          <th > </th>
+                          <th > </th>
+                          <th > </th>
+                          <th > </th>
+                          <th colspan="1"></th><!--space only-->
                         </tr>
                       </tfoot>
                      </table>
@@ -352,7 +352,7 @@
 
                        <tbody>
           
-                         <tr>
+                        <!-- <tr>
                           <td>11/15/2018</td>
                           <td>15-037-044</td>
                           <td>Franchesca Marie Cortez</td>
@@ -362,15 +362,15 @@
                           <td>00</td>
                           <td>00</td>
                           <td>Sample Tasks</td>
-                        </tr>
+                        </tr>-->
                       </tbody>
                       <tfoot>
                         <tr id="trHead">
                           <th colspan="4" style="text-align: right;">TOTAL</th>
-                          <th >7</th>
-                          <th >00</th>
-                          <th >00</th>
-                          <th >00</th>
+                          <th > </th>
+                          <th > </th>
+                          <th > </th>
+                          <th > </th>
                           <th colspan="1"><!--space only--></th>
                         </tr>
                       </tfoot>
