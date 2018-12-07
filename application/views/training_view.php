@@ -141,8 +141,8 @@
                     
                   </thead>
         <tbody>
-            <tr>
-                          <td>Coding Seminar</td>
+             <!--<tr>
+                         <td>Coding Seminar</td>
                           <td>06/18/2018</td>
                           <td>06/19/2018</td>
                           <td>16</td>
@@ -151,7 +151,7 @@
                             <a href="" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> EDIT </a> 
                             <a href="" class="btn btn-success btn-xs"><i class="fa fa-trash"></i> DELETE </a>
                           </td>
-                        </tr>
+                        </tr>-->
         </tbody>
     </table>
 
