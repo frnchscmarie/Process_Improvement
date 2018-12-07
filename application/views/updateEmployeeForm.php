@@ -30,7 +30,8 @@
                       </div>
 
                       <div class=" form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left"  required="required"for="employee_name" id="inputSuccess2" placeholder=" Employee Name" name="employee_name" value="<?php echo $employee_name; ?>" id="employee_name">
+                        <input type="text" class="form-control has-feedback-left"  required="required"for="employee_name" id="inputSuccess2" placeholder=" Employee Name" name="employee_name" value="<?php echo $lname; $fname ; $mname; ?>" id="employee_name"> 
+      <!-- Janey, hindi ako marunong mag-echo ng multiple values pero ikaw na bahala hahahahaha o kaya pwede hiwalay nalang 'yung fname tsaka mname hahahahahahaha me su sorry-->
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
 

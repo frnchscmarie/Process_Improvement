@@ -191,7 +191,7 @@ class Process_Improvement extends CI_Controller {
     public function updateEmployee($employeeID){
          $employeeRecord['employeeID']=$employeeID;
          $condition = array('employeeID' => $employeeID);
-         $oldRecord = $this->employee->read($condition);
+         $oldRecord = $this->employee->read_employees($condition);
         
         foreach($oldRecord as $o){
                 $data['employeeID']=$o['employeeID'];
