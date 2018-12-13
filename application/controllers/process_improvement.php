@@ -257,7 +257,7 @@ class Process_Improvement extends CI_Controller {
                     'cp_no'=>$_POST['cp_no']
                      );
                     
-                    $this->employee->update($newRecord);
+                    $this->employee->update_employee($newRecord);
                     redirect('process_improvement/viewEmployeeAdmin');
                  }
         }
@@ -436,7 +436,8 @@ class Process_Improvement extends CI_Controller {
         
     }
     public function viewTraining(){
-     
+        $result_array = $this->training->read();
+        $data['training'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -447,9 +448,38 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('training_view');
+        $this->load->view('training_view',$data);
         $this->load->view('include/footer');
         
+    }
+
+    public function addTraining(){
+        
+        $rules = array(
+                   array('field'=>'title', 'label'=>'Title', 'rules'=>'required'),
+                   array('field'=>'inc_dates', 'label'=>'Inclusive Dates', 'rules'=>'required'),
+                   array('field'=>'no_of_hours', 'label'=>'No of hours', 'rules'=>'required'),
+                   array('field'=>'conducted_by', 'label'=>'Conducted by', 'rules'=>'required'),
+                   array('field'=>'attachments', 'label'=>'attachments')
+                   
+                );
+            $this->form_validation->set_rules($rules);
+            if($this->form_validation->run()==FALSE){
+
+        }
+       else{
+          
+            $trainingRecord=array(
+                'title'=>$_POST['title'],
+                'inc_dates'=>$_POST['inc_dates'],
+                'no_of_hours'=>$_POST['no_of_hours'],
+                'conducted_by'=>$_POST['conducted_by'],
+                'attachments'=>$_POST['attachments']
+                
+            );
+            $this->training->createtraining($trainingRecord);
+            redirect('process_improvement/viewTraining');
+            }
     }
 
 

@@ -3,7 +3,7 @@
 class Training_model extends CI_Model {
     private $table = 'training';
     
-    function create($trainingRecord){
+    function createtraining($trainingRecord){
         $this->db->insert($this->table, $trainingRecord);
     }
     

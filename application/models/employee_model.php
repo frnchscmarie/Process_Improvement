@@ -50,7 +50,7 @@ class Employee_model extends CI_Model {
     }
 
 
-    function update($newRecord){
+    function update_employee($newRecord){
 
         $this->db->replace($this->table, $newRecord);
     }
