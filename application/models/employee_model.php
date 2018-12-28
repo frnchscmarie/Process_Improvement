@@ -7,9 +7,10 @@ class Employee_model extends CI_Model {
 
         $this->db->insert($this->table, $employeeRecord);
         $data = array( 
-        'id'=>$employeeRecord['employeeID'],
-        'username' => $employeeRecord['fname'] , 
-        'password' => '12345'
+        'id'=>$_POST['employeeID'],
+        'username'=>$_POST['username'],
+        'type'=>$_POST['type'],
+        'password'=> '12345'
         );
         $this-> db->insert('login', $data);
     }
@@ -52,7 +53,7 @@ class Employee_model extends CI_Model {
 
     function update_employee($newRecord){
 
-        $this->db->replace($this->table, $newRecord);
+        $this->db->update($this->table, $newRecord);
     }
     
     function del($where_array){

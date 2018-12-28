@@ -86,7 +86,7 @@ class Process_Improvement extends CI_Controller {
           );
           $types[]=$ut;
         }
-        $userid=$ut['id'];
+        $userid = $ut['id'];
         $info = $this->employee->remployee($userid);
         foreach($info as $f){
           $in=array(
@@ -154,6 +154,8 @@ class Process_Improvement extends CI_Controller {
                    array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
                    array('field'=>'lname', 'label'=>'Last Name', 'rules'=>'required'),
                    array('field'=>'fname', 'label'=>'First Name', 'rules'=>'required'),
+                   array('field'=>'username', 'label'=>'Username', 'rules'=>'required'),
+                   array('field'=>'type', 'label'=>'type', 'rules'=>'required'),
                    array('field'=>'pg_level', 'label'=>'PG_Level', 'rules'=>'required'),
                    array('field'=>'birthday', 'label'=>'Birthdate', 'rules'=>'required'),
                    array('field'=>'date_hired', 'label'=>'Date Hired', 'rules'=>'required'),
@@ -168,12 +170,14 @@ class Process_Improvement extends CI_Controller {
 
         }
        else{
-          
             $employeeRecord=array(
                 'employeeID'=>$_POST['employeeID'],
                 'lname'=>$_POST['lname'],
                 'fname'=>$_POST['fname'],
                 'mname'=>$_POST['mname'],
+                'username'=>$_POST['username'],
+                'type'=>$_POST['type'],
+                'password'=> '12345',
                 'pg_level'=>$_POST['pg_level'],
                 'birthday'=>$_POST['birthday'],
                 'date_hired'=>$_POST['date_hired'],

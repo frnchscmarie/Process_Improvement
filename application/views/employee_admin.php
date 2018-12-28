@@ -53,6 +53,20 @@
                         </div>
                       </div>
 
+                      <div class = "form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Username</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" class="form-control has-feedback-left"  required="required"for="username" id="inputSuccess2" placeholder="Employee Username" name="username" value="<?php echo set_value('username'); ?>" id="username">
+                        </div>
+
+                      </div>
+                      <div class = "form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" class="form-control has-feedback-left"  required="required"for="type" id="inputSuccess2" placeholder="Employee Usertype" name="type" value="<?php echo set_value('type'); ?>" id="type">
+                        </div>
+                      </div>
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">PG Level</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
