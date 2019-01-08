@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2018 at 08:34 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Jan 08, 2019 at 06:15 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,11 +34,11 @@ CREATE TABLE `employee` (
   `lname` varchar(50) NOT NULL,
   `mname` varchar(50) NOT NULL,
   `pg_level` varchar(10) NOT NULL,
-  `birthday` varchar(15) NOT NULL,
-  `date_hired` varchar(15) NOT NULL,
+  `birthday` date NOT NULL,
+  `date_hired` date NOT NULL,
   `position` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `promo_date` varchar(20) NOT NULL,
+  `promo_date` date NOT NULL,
   `civil_stat` varchar(20) NOT NULL,
   `cp_no` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,12 +48,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`) VALUES
-('01', 'Janelyn', 'Gellado', '', '6', '08/08/2016', '06/18/2018', 'OJT', 'janelynanngellado@gmail.com', '06/18/2018', 'single', 12355),
-('02', 'Herchell Mari', 'Forteo', '', '6', '1111-11-11', '2222-02-22', 'xxx', 'xxxxx', '3333-03-31', 'SINGLE', 12345789),
-('03', 'Al Francis', 'Orias', 'Protacio', '5', '1998-11-07', '2018-09-17', 'OJT', 'alorias', '2018-09-17', 'single', 911111111),
-('04', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '11/15/98', '06/18/2018', 'OJT', 'chesca@gmail.com', '06/18/2018', 'single', 12355),
-('05', 'Alexandra', 'Bello', '', '5', '01/30/99', '06/18/2018', 'OJT', 'xandra@gmail.com', '06/18/2018', 'single', 12355),
-('123456', 'Grace', 'Cortez', 'Marie', '15', '2007-08-28', '2018-12-12', 'Trainee', 'dfghjkl', '1111-11-11', 'Single', 2147483647);
+('01', 'Janelyn', 'Gellado', '', '6', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', 12355),
+('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', 12355),
+('03', 'Alexandra', 'Bello', '', '5', '1999-01-30', '2019-01-02', 'OJT', 'xandra@gmail.com', '2019-01-08', 'single', 12355);
 
 -- --------------------------------------------------------
 
@@ -109,9 +106,8 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
 ('01', 'Janelyn', 'admin', 'admin'),
-('06', 'Red', '12345', 'superadmin'),
-('07', 'Noel', '12345', 'employee'),
-('123456', 'Grace', '12345', '');
+('02', 'Chesca', 'employee', 'employee'),
+('03', 'Anda', 'superadmin', 'superadmin');
 
 -- --------------------------------------------------------
 
@@ -172,8 +168,7 @@ CREATE TABLE `ot` (
 
 CREATE TABLE `training` (
   `title` varchar(100) NOT NULL,
-  `id_from` varchar(50) NOT NULL,
-  `id_to` varchar(50) NOT NULL,
+  `inc_dates` varchar(50) NOT NULL,
   `no_of_hours` varchar(50) NOT NULL,
   `conducted_by` varchar(50) NOT NULL,
   `attachments` varchar(100) NOT NULL
@@ -183,8 +178,8 @@ CREATE TABLE `training` (
 -- Dumping data for table `training`
 --
 
-INSERT INTO `training` (`title`, `id_from`, `id_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
-('Data Mining ', 'November 15,2018', 'November 18, 2018', '14 hours', 'IBM Philippines', '');
+INSERT INTO `training` (`title`, `inc_dates`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
+('Data Mining ', 'November 15,2018', '14 hours', 'IBM Philippines', '');
 
 -- --------------------------------------------------------
 
