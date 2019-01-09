@@ -32,8 +32,8 @@
         <tbody>
             <?php
         if($mr!=null){
-                foreach($mr as $c){  
-                    echo "<tr><td>".$c['qty']."</td><td>".$c['unit']."</td><td>".$c['unit_name']."</td><td>".$c['description']."</td><td>".$c['date_purchased']."</td><td>".$c['property_no']."</td><td>".$c['classification_no']."</td><td>".$c['unit_value']."</td><td>".$c['total_value']."</td><td>".$c['mr_no']."</td><td>".$c['date_assigned'].'</td></tr>';
+                foreach($mr as $m){  
+                    echo "<tr><td>".$m['qty']."</td><td>".$m['unit']."</td><td>".$m['lname'].", ".$m['fname']." ".$m['mname']."</td><td>".$m['description']."</td><td>".$m['date_purchased']."</td><td>".$m['property_no']."</td><td>".$m['classification_no']."</td><td>".$m['unit_value']."</td><td>".$m['total_value']."</td><td>".$m['mr_no']."</td><td>".$m['date_assigned'].'</td></tr>';
                    
                 }
         }

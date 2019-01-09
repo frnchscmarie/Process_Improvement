@@ -53,7 +53,7 @@ class Employee_model extends CI_Model {
 
     function update_employee($newRecord){
 
-        $this->db->update($this->table, $newRecord);
+        $this->db->replace($this->table,$newRecord);
     }
     
     function del($where_array){

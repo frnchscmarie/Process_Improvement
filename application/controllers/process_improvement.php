@@ -541,7 +541,8 @@ class Process_Improvement extends CI_Controller {
         
     }
     public function viewMR(){
-     
+        $result_array = $this->mr->read();
+        $data['mr'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -552,7 +553,7 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('mr_view');
+        $this->load->view('mr_view',$data);
         $this->load->view('include/footer');   
     }
 

@@ -20,7 +20,6 @@ class Login extends CI_Controller {
     
     public function verifyLogin($password) {
         $username = $this->input->post('username');
-        
         $condition = array('username'=>$user, 'password'=>$pass);
         $this->load->model('employee_model','Employee');
         $result_array = $this->Employee->read();
@@ -28,11 +27,7 @@ class Login extends CI_Controller {
         if($result_array){
             foreach($result_array as $row){
                 $this->session->set_userdata('username', $row['username']);
-                /*$sess_data=array(
-                    'userID' => $row['userID'],
-                    'isAdmin' => $row['isAdmin']
-                );*/
-                //$this->session->set_userdata('logged_in', $sess_data);
+            
             }
             return true;
         }
@@ -43,7 +38,8 @@ class Login extends CI_Controller {
     }
     
     public function logout(){
+        session_unset();
         session_destroy();
-        redirect(base_url());
+        redirect(base_url('login'));
     }
 }
