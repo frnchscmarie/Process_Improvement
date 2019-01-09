@@ -40,16 +40,50 @@
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Leave</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                       <!-- <div class="col-md-9 col-sm-9 col-xs-12">
                          <select class="form-control" value="<?php echo set_value('type'); ?>">
                             <option value="Vacation Leave(Local)">Vacation Leave (Local)</option>
                             <option value="Vacation Leave(Interational)">Vacation Leave (International)</option>
                             <option value="Sick Leave">Sick Leave</option>
-                            <option value="Special Leave Priveledge">Special Leave Priveledge</option>
+                            <option value="Special Leave Priveledge">Special Leave Privelege</option>
                             <option value="Others">Others</option>
                           </select>
-                        </div>
-                      </div>
+                        </div>-->
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="radio">
+                            <label>
+                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Vacation Leave (LOCAL)
+                            </label>
+                          </div>
+
+                          <div class="radio">
+                            <label>
+                              <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Vacation Leave (INTERNATIONAL)
+                            </label>
+                          </div>
+
+                           <div class="radio">
+                            <label>
+                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Sick Leave
+                            </label>
+                          </div>
+
+                           <div class="radio">
+                            <label>
+                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Special Leave Privilege
+                            </label>
+                          </div>
+
+                          <div class="radio">
+                            <label>
+                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Others
+                              <input type="text" id="recommendation" name="recommendation" for="recommendation" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value(''); ?>" disabled="disabled">
+                            </label>
+
+                          </div>
+                        </div> <!--end of options-->
+
+                    </div>
                       <div>&nbsp;</div>
 
                       <div class="form-group">
@@ -295,12 +329,12 @@
 
   <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" ">
                 <div class="x_panel">
-                  <div class="x_content" style="margin-left: 10%;">
+                  <div class="x_content" style="margin-left:;">
                          <label class="text-danger font-20 m-b-40">Availed Leaves</label>
                     <br />
                    
 
-          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left col-md-5 col-sm-5 col-xs-12">
+        <!--  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left col-md-2 col-sm-2 col-xs-12">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">From</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -318,18 +352,10 @@
                        <div style="margin-left: 55%;">
                             <button class="btn btn-default" type="reset">Search</button>
                         </div>              
-          </form>
+          </form>-->
+                        
 
-                       
-                                            
-
-
-           
-                        <div style="margin-right: 15%; ">
-                         <label class="control-label col-md-2 col-sm-2 col-xs-12">SLV</label>
-                        <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
-
-                        <div class="">
+                        <!--<div class="">
                          <label class="control-label col-md-2 col-sm-2 col-xs-12">VL</label>
                         <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
                       </div>
@@ -340,8 +366,36 @@
                         <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
                         <label class="control-label col-md-2 col-sm-2 col-xs-12">SL</label>
                         <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                      </div>-->
+
+                      <div style="margin-right: 15%;">
+                         <label class="control-label col-md-2 col-sm-2 col-xs-12">SLV</label>
+                        <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">VL</label>
+                        <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">FML</label>
+                        <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">SL</label>
+                        <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
                       </div>
+
+                      <div style="margin-top: 4%;">
+                      <form class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <label class="control-label col-xs-3 col-sm-3 col-xs-12" > From</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12" style="margin-left: -20%;">
+                          <input class="form-control col-md-3 col-sm-3 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
                         </div>
+                        <label class="control-label col-xs-3 col-sm-3 col-xs-12" > To</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12" style="margin-left: -20%;">
+                          <input class="form-control col-md-3 col-sm-3 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                  </div>
             
      
     </div>
