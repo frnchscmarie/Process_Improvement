@@ -4,8 +4,9 @@
 
     <div class="container body">
       <div class="main_container">
-        <?php echo form_open('process_improvement/updateEmployee/'.$employeeID);?> 
-
+        
+        
+<?php echo form_open('process_improvement/updateEmployee/'.$employeeID);?> 
 <div class="right_col" role="main">
           <div class="">
            
@@ -22,6 +23,7 @@
                   <div class="x_content">
                     <br />
         <div class="col-md-6" style="padding: 10px; text-align: center; margin-left: 250px;">
+          
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                      <div class="form-group has-feedback">
@@ -87,9 +89,9 @@
   
    <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button" style="margin-left: 30%;"><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>" style="color: white;">Cancel</a></button>
+                          <button class="btn btn-primary" type="button" style="margin-left: 30%;"><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin/')?>" style="color: white;">Cancel</a></button>
                           
-                          <button type="submit" class="btn btn-success" value="submit">Submit</button>
+                          <button type="submit" class="btn btn-success" for="inputSuccess2" value="submit">Submit</button>
                         </div>
       </div>
     

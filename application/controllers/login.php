@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	public function index()
-	{
-		$this->form_validation->set_rules('username','Username','required', array('required' => 'Invalid Username or Password.'));
+    public function index()
+    {
+        $this->form_validation->set_rules('username','Username','required', array('required' => 'Invalid Username or Password.'));
         if($this->form_validation->run()==TRUE)
             $this->form_validation->set_rules('password','Password','callback_verifyLogin');
         if($this->form_validation->run()==FALSE){
@@ -16,7 +16,7 @@ class Login extends CI_Controller {
                  redirect(base_url('process_improvement'));
             
         }
-	}
+    }
     
     public function verifyLogin($password) {
         $username = $this->input->post('username');

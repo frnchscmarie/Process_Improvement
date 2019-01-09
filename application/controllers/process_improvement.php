@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Process_Improvement extends CI_Controller {
-	public function __construct(){
+  public function __construct(){
         parent::__construct();
 
     $this->load->library('session');
@@ -10,11 +10,11 @@ class Process_Improvement extends CI_Controller {
     $this->load->library('form_validation'); 
     $this->load->model('employee_model','employee');
     $this->load->model('leavedb_model','leavedb');
-		$this->load->model('mr_model','mr');
-		$this->load->model('ot_model','ot');
-		$this->load->model('training_model','training');
-		$this->load->model('trainingsched_model','trainingsched');
-		
+    $this->load->model('mr_model','mr');
+    $this->load->model('ot_model','ot');
+    $this->load->model('training_model','training');
+    $this->load->model('trainingsched_model','trainingsched');
+    
     }
 
     public function index()
@@ -56,8 +56,9 @@ class Process_Improvement extends CI_Controller {
         }
         else
         {
-          $this->session->set_flashdata('item',array('message' => 'Invalid Email or Password', 'class'));
-          redirect('process_improvement/index');
+         echo "<script type='text/javascript'>alert('Wrong Username or Password');
+                window.location='index';
+                </script>";
         }
     }
     else
@@ -68,15 +69,25 @@ class Process_Improvement extends CI_Controller {
   }
 
     public function logout(){
-
+      $this->load->driver('cache');
+      $this->session->sess_destroy();
       $this->session->unset_userdata('username');
       $this->session->unset_userdata('headername');
       $this->session->unset_userdata('logged_in');
+      $this->cache->clean();
+      ob_clean();
       redirect(base_url(), 'refresh');
   }
 
     public function EmployeeProfile()
     {
+    $logged_in = $this->session->userdata('logged_in');
+    if($logged_in != TRUE || empty($logged_in))
+    {
+
+        $this->session->set_flashdata('error', 'Session has Expired');
+        redirect('process_improvement/index');
+    }else{
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -112,17 +123,18 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('pick',$infos);
         $this->load->view('include/footer');
     }
+  }
 
   public function display()
-    {			
+    {     
 
     $employeeID = $this->input->post('employeeID');
     $data = $this->employee->data($employeeID);
     if(count($data)>0)
-    	{
-    		$array=$data;
-    	}
-    	echo json_encode($data);
+      {
+        $array=$data;
+      }
+      echo json_encode($data);
     }
 
     public function viewEmployeeAdmin(){
@@ -213,18 +225,9 @@ class Process_Improvement extends CI_Controller {
               }
             
              $rules = array(
-                   array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
-                   array('field'=>'lname', 'label'=>'Name', 'rules'=>'required'),
-                   array('field'=>'fname', 'label'=>'Name', 'rules'=>'required'),
-                   array('field'=>'mname', 'label'=>'Name', 'rules'=>'required'),
-                   array('field'=>'pg_level', 'label'=>'PG_Level', 'rules'=>'required'),
-                   array('field'=>'birthday', 'label'=>'Birthdate', 'rules'=>'required'),
-                   array('field'=>'date_hired', 'label'=>'Date Hired', 'rules'=>'required'),
-                   array('field'=>'position', 'label'=>'Position', 'rules'=>'required'),
-                   array('field'=>'email', 'label'=>'Email', 'rules'=>'required'),
-                   array('field'=>'promo_date', 'label'=>'Date of last promotion', 'rules'=>'required'),
-                   array('field'=>'civil_stat', 'label'=>'Civil Status', 'rules'=>'required'),
-                   array('field'=>'cp_no', 'label'=>'Contact No', 'rules'=>'required')
+                  
+                   array('field'=>'employeeID', 'label'=>'EmployeeID', 'rules'=>'required'),
+                  
                 );
             
             $this->form_validation->set_rules($rules);
@@ -247,7 +250,7 @@ class Process_Improvement extends CI_Controller {
             else{
           
                 $newRecord=array(
-                    'employeeID'=>$_POST['employeeID'],
+                    'employeeID'=>$employeeID,
                     'lname'=>$_POST['lname'],
                     'fname'=>$_POST['fname'],
                     'mname'=>$_POST['mname'],
@@ -261,7 +264,7 @@ class Process_Improvement extends CI_Controller {
                     'cp_no'=>$_POST['cp_no']
                      );
                     
-                    $this->employee->update_employee($newRecord);
+                    $this->employee->update_employee($employeeID,$newRecord);
                     redirect('process_improvement/viewEmployeeAdmin');
                  }
         }
@@ -287,7 +290,7 @@ class Process_Improvement extends CI_Controller {
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
         $this->load->view('leave_view',$data);
-       	$this->load->view('include/footer');   
+        $this->load->view('include/footer');   
     }
 
     public function addLeave(){

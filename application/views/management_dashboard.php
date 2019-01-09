@@ -9,19 +9,19 @@
 
             <div class="clearfix"></div>
            
-		  
-		  <div class="clearfix"></div>
+      
+      <div class="clearfix"></div>
 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>My Profile</h2>
-			
+      
                     <div class="clearfix"></div>
                   
                   <div class="x_content">
-				  <div>&nbsp;</div>
+          <div>&nbsp;</div>
                     <div>
                       <div class="" style="width: 32%; height: 398px; border: 3px solid gray; position: absolute; margin-left: 3%;"> </div>
                      <table  class="table table-striped table-bordered" style="width: 60%; align: center; margin-left: 37%;">
@@ -87,9 +87,9 @@
         
       </tbody>
     </table>
-		  
-		   </div>
-		   </div>
+      
+       </div>
+       </div>
         </div>
         </div>
         </div>

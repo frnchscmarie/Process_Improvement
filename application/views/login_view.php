@@ -38,7 +38,14 @@ if($this->session->flashdata('item')) {
 <div class= "<?php echo $message['message']?>;" </div>
 <?php 
 }
+
+if(isset($_SESSION['username'])) {
+     redirect('process_improvement/EmployeeProfile', 'refresh');
+     exit; // for good measure
+}
+
 ?>
+
               <h1>Login Form</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" name="username" id="user" required />
