@@ -2,12 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Process_Improvement extends CI_Controller {
+
   public function __construct(){
         parent::__construct();
 
     $this->load->library('session');
     $this->load->helper(array('form', 'url'));
-    $this->load->library('form_validation'); 
+    // $this->load->library('form_validation'); 
+    $this->load->library(array('form_validation','ciqrcode')); 
+    // $this->load->library('ciqrcode');
+
     $this->load->model('employee_model','employee');
     $this->load->model('leavedb_model','leavedb');
     $this->load->model('mr_model','mr');
@@ -22,6 +26,7 @@ class Process_Improvement extends CI_Controller {
 
           $data['employee'] = $this->employee->users();
           $this->load->view('login_view', $data);
+
     }
 
   public function login_validate(){
@@ -351,6 +356,28 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('mradmin_view',$data);
         $this->load->view('include/footer');
         
+
+        //trial for qrcode 
+        //controller
+        // $get_current_path_to_front = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/'; 
+        // $set_new_path_to_front = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode')) . '/';
+        // $load_path = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode/')) . '/';
+        // $params['data'] = '15-082-238'; //enter the data to be converted to qrcode
+        // $params['size'] = 10;
+        // $params['savename'] = $set_new_path_to_front.'15-082-238.png';
+        // $config['cacheable']  = true; //boolean, the default is true
+        // $config['cachedir']   = ''; //string, the default is application/cache/
+        // $config['errorlog']   = ''; //string, the default is application/logs/
+        // $config['quality']    = true; //boolean, the default is true
+        // $config['size']     = ''; //interger, the default is 1024
+        // $config['black']    = array(224,255,255); // array, default is array(255,255,255)
+        // $config['white']    = array(70,130,180); // array, default is array(0,0,0)
+        // $this->ciqrcode->generate($params);    
+        
+
+
+        // //view
+        // echo '<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />';        
     }
     public function addProperties(){
       

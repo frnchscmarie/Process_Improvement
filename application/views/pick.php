@@ -19,10 +19,7 @@
                   
                   <div class="x_content">
           <div>&nbsp;</div>
-<!--start of eployee picker-->
-
-
-<!--end of employee picker-->
+          
 <div>
 <div class="" style="width: 32%; height: 398px; border: 3px solid gray; position: absolute; margin-left: 3%;"> </div>
  <table  class="table table-striped table-bordered" style="width: 60%; align: center; margin-left: 37%;">

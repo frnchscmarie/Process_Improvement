@@ -25,6 +25,9 @@
     <div class="modal-body">
     <div>&nbsp;</div>
   <div class="container">
+    
+    
+    
   <?php echo validation_errors(); ?>
   
   <?php echo form_open('process_improvement/addProperties'); 
@@ -32,6 +35,7 @@
               <form class="form-horizontal form-label-left">
 
                 <div class="form-group">
+
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" id="inputSuccess2" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
@@ -151,6 +155,8 @@
 </form>
 
   <div class="container">
+    <?php echo "qrcode"; ?>
+                  <img src="http://localhost/Process_Improvement/application/libraries/qr-generator.php?t=<?=date("YmdHis")?>"/>
   <?php echo validation_errors(); ?>
   
   <?php echo form_open('process_improvement/viewProperties'); 
