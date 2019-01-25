@@ -84,6 +84,25 @@ class Process_Improvement extends CI_Controller {
       redirect(base_url(), 'refresh');
   }
 
+
+public function changepass(){
+  $result_array = $this->leavedb->read();
+        $data['leavedb'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+       $this->load->view('include/header', $usertype);
+       $this->load->view('changepass_view', $data);
+       $this->load->view('include/footer');
+  }
+
+
     public function EmployeeProfile()
     {
     $logged_in = $this->session->userdata('logged_in');

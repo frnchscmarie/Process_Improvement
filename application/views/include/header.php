@@ -177,7 +177,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     
                     
-                    <li><a href="<?php echo base_url('knoxville/changepass'); ?>"><i class="fa fa-lock pull-right"></i> Change Password</a></li>
+                    <li><a href="<?php echo base_url('process_improvement/changepass'); ?>"><i class="fa fa-lock pull-right"></i> Change Password</a></li>
                     <li><a href="<?php echo base_url('process_improvement/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
