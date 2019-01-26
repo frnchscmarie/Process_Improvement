@@ -102,6 +102,23 @@ public function changepass(){
        $this->load->view('include/footer');
   }
 
+  public function dashboard(){
+  $result_array = $this->leavedb->read();
+        $data['leavedb'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+       $this->load->view('include/header', $usertype);
+       $this->load->view('dashboard', $data);
+       $this->load->view('include/footer');
+  }
+
 
     public function EmployeeProfile()
     {
