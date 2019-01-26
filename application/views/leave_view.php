@@ -33,14 +33,14 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Filing</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo set_value date('Y-m-d'); ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Leave</label>
-                       <!-- <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
                          <select class="form-control" value="<?php echo set_value('type'); ?>">
                             <option value="Vacation Leave(Local)">Vacation Leave (Local)</option>
                             <option value="Vacation Leave(Interational)">Vacation Leave (International)</option>
@@ -48,7 +48,8 @@
                             <option value="Special Leave Priveledge">Special Leave Privelege</option>
                             <option value="Others">Others</option>
                           </select>
-                        </div>-->
+                        </div>
+                        <!--
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <div class="radio">
                             <label>
@@ -81,7 +82,7 @@
                             </label>
 
                           </div>
-                        </div> <!--end of options-->
+                        </div>--> <!--end of options-->
 
                     </div>
                       <div>&nbsp;</div>

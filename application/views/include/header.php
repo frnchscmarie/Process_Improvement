@@ -82,6 +82,8 @@
                 <!--START -->
                 <ul class="nav side-menu">
                   
+                  <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                  </li>
                   <li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i> PROFILE </a>
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>"> <i class="fa fa-user-secret"></i>EMPLOYEE ADMIN</a>
@@ -109,6 +111,8 @@
                 <ul class="nav side-menu">
                   
                   
+                  <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                  </li>  
 
                   <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
                   </li>
