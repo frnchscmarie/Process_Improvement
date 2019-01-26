@@ -39,8 +39,9 @@
     <link href="<?php echo base_url('assets/css/build/css/custom.css'); ?>" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/js/multiple_selection.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/search.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/search.js'); ?>"></script>
   <script src="<?php echo base_url('assets/js/select.js'); ?>"></script>
+   <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
   </head>
 
   <body class="nav-md">
