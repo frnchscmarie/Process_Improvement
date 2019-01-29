@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2019 at 05:35 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Jan 29, 2019 at 10:57 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -51,10 +51,11 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`) VALUES
-('01', 'Janelyn', 'Gellado', '', '6', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', 12355, 'Janelyn', 'admin', ''),
-('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', 12355, 'Chesca', 'employee', ''),
+('01', 'Janelyn', 'Gellado', '', '6', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', 1234567, 'Janelyn', 'admin', ''),
+('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', 45633, 'Chesca', 'employee', ''),
 ('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', 12355, 'Anda', 'superadmin', ''),
-('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', 2147483647, 'Noel', '12345', 'employee');
+('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', 2147483647, 'Noel', '12345', 'employee'),
+('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', 12344, 'Julius', '12345', 'employee');
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,8 @@ CREATE TABLE `leavedb` (
   `date_of_filing` varchar(20) NOT NULL,
   `place` text NOT NULL,
   `type` text NOT NULL,
-  `inc_dates` date NOT NULL,
+  `inc_from` date NOT NULL,
+  `inc_to` date NOT NULL,
   `recommendation` varchar(50) NOT NULL,
   `supervisor` text NOT NULL,
   `no_of_days` varchar(20) NOT NULL,
@@ -88,8 +90,8 @@ CREATE TABLE `leavedb` (
 -- Dumping data for table `leavedb`
 --
 
-INSERT INTO `leavedb` (`date_of_filing`, `place`, `type`, `inc_dates`, `recommendation`, `supervisor`, `no_of_days`, `status`) VALUES
-('09/17/2018', 'manila', 'Sick Leave', '0000-00-00', '', 'aaaa', '1', '');
+INSERT INTO `leavedb` (`date_of_filing`, `place`, `type`, `inc_from`, `inc_to`, `recommendation`, `supervisor`, `no_of_days`, `status`) VALUES
+('09/17/2018', 'manila', 'Sick Leave', '0000-00-00', '0000-00-00', 'n/a', 'chesca', '1', 'approved');
 
 -- --------------------------------------------------------
 
@@ -112,7 +114,8 @@ INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
 ('01', 'Janelyn', 'admin', 'admin'),
 ('02', 'Chesca', 'employee', 'employee'),
 ('03', 'Anda', 'superadmin', 'superadmin'),
-('04', 'Noel', '12345', 'employee');
+('04', 'Noel', '12345', 'employee'),
+('05', 'Julius', '12345', 'employee');
 
 -- --------------------------------------------------------
 
@@ -143,7 +146,8 @@ CREATE TABLE `mr` (
 --
 
 INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty`, `unit`, `property_name`, `description`, `date_purchased`, `property_no`, `classification_no`, `unit_value`, `total_value`, `mr_no`) VALUES
-('08', 'sdfa', 'fadsg', 'fgad', '0000-00-00', 'dsgdg', '21', 'rfweag', 'dgsahd', '0002-03-04', 'sfag', '4543', '433', '3454', '654654');
+('08', 'sdfa', 'fadsg', 'fgad', '0000-00-00', 'dsgdg', '21', 'rfweag', 'dgsahd', '0002-03-04', 'sfag', '4543', '433', '3454', '654654'),
+('1234656', 'jkdxcn', 'FFCVGBHJNKM', 'KJHKJH', '1111-11-11', '12', '12', 'GOAT', 'CGVHBJNKM', '1111-11-11', '456', '6363', '63', '22', '522');
 
 -- --------------------------------------------------------
 
@@ -173,11 +177,10 @@ CREATE TABLE `ot` (
 
 CREATE TABLE `training` (
   `employeeID` varchar(25) NOT NULL,
-  `lname` varchar(50) NOT NULL,
-  `fname` varchar(50) NOT NULL,
-  `mname` varchar(50) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `inc_dates` varchar(50) NOT NULL,
+  `inc_from` date NOT NULL,
+  `inc_to` date NOT NULL,
   `no_of_hours` varchar(50) NOT NULL,
   `conducted_by` varchar(50) NOT NULL,
   `attachments` varchar(100) NOT NULL
@@ -187,8 +190,10 @@ CREATE TABLE `training` (
 -- Dumping data for table `training`
 --
 
-INSERT INTO `training` (`employeeID`, `lname`, `fname`, `mname`, `title`, `inc_dates`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
-('', '', '', '', 'sfsaf', '2019-01-09', '4536', 'fhbs', 'dsag');
+INSERT INTO `training` (`employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
+('02', 'Chesca', '12121', '2019-01-03', '2019-01-10', '131', '131', '13'),
+('04', 'Noel ', 'weqweq', '2019-01-19', '0000-00-00', '1231', '123', '13'),
+('02', 'Chesca', 'werewrwe', '2019-01-04', '2019-01-15', '23423423', '235235235', '22342');
 
 -- --------------------------------------------------------
 

@@ -51,7 +51,18 @@
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-comments-o"></i></div>
-                  <div class="count">179</div>
+                  <div class="count">             
+                  <?php 
+                  if($total!=null){
+                  $x = null; 
+                  foreach($total as $t){
+                    $x++;
+                  }
+                  }else{
+                    $x = 0;
+                  }
+                  echo $x;
+                  ?></div>
                   <h3>Trainings Attended</h3>
                   <p>Total number of trainings attended.</p>
                 </div>

@@ -7,12 +7,10 @@ class Training_model extends CI_Model {
         $this->db->insert($this->table, $trainingRecord);
     }
     
-    function read($condition=null){
+    function read($id){
         $this->db->select('*');
-        $this->db->from($this->table);
-        
-        if(isset($condition))
-            $this->db->where($condition);
+        $this->db->from('training');
+        $this->db->where('employeeID', $id);
         
         $query = $this->db->get();
         
@@ -35,6 +33,18 @@ class Training_model extends CI_Model {
     $this->db->from($this->table);
     $query = $this->db->get();
     return $query->num_rows();
+    }
+
+    function readtraining(){
+        $this->db->select('*');
+        $this->db->from($this->table);
+
+        $query = $this->db->get();
+
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false; 
     }
 }
 ?>

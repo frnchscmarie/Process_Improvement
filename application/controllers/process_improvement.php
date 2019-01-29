@@ -84,27 +84,16 @@ class Process_Improvement extends CI_Controller {
       redirect(base_url(), 'refresh');
   }
 
-
-public function changepass(){
-  $result_array = $this->leavedb->read();
-        $data['leavedb'] = $result_array; 
-        $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
-        foreach($type as $t){
-          $ut= array(
-                      'type'=>$t['type']
-          );
-          $types[]=$ut;
-        }
-        $usertype['types'] = $types;
-       $this->load->view('include/header', $usertype);
-       $this->load->view('changepass_view', $data);
-       $this->load->view('include/footer');
-  }
-
   public function dashboard(){
-  $result_array = $this->leavedb->read();
-        $data['leavedb'] = $result_array; 
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data['total'] = $this->training->read($info['id']);
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -341,7 +330,8 @@ public function changepass(){
                    array('field'=>'place', 'label'=>'Place', 'rules'=>'required'),
                    array('field'=>'type', 'label'=>'Type of Leave', 'rules'=>'required'),
                    array('field'=>'no_of_days', 'label'=>'No. of Days', 'rules'=>'required'),
-                   array('field'=>'inc_dates', 'label'=>'Inclusive Dates', 'rules'=>'required'),
+                   array('field'=>'inc_from', 'label'=>'Inclusive Dates', 'rules'=>'required'),
+                   array('field'=>'inc_to', 'label'=>'Inclusive Dates', 'rules'=>'required'),
                    array('field'=>'supervisor', 'label'=>'Approver', 'rules'=>'required'),
                    array('field'=>'status', 'label'=>'Status', 'rules'=>'required'),
                 );
@@ -366,8 +356,9 @@ public function changepass(){
                 'place'=>$_POST['place'],
                 'type'=>$_POST['type'],
                 'no_of_days'=>$_POST['no_of_days'],
-                'inc_dates' =>$_POST['inc_dates'],
-                'supervisor'=>$_POST['supervisor'],
+                'inc_from' =>$_POST['inc_from'],
+                'inc_to' =>$_POST['inc_to'],
+                'supervisor'=>$_POST['supervisor'], 
                 'status'=>$_POST['status'],
                 
             );
@@ -490,7 +481,6 @@ public function changepass(){
         
     }
        public function viewTrainingAdmin(){
-     
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -500,13 +490,25 @@ public function changepass(){
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+
+        $result_array = $this->training->readtraining();
+        $data['alltraining'] = $result_array;
         $this->load->view('include/header',$usertype);
-        $this->load->view('trainingadmin_view');
+        $this->load->view('trainingadmin_view', $data);
         $this->load->view('include/footer');
         
     }
     public function viewTraining(){
-        $result_array = $this->training->read();
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+
+        $result_array = $this->training->read($info['id']);
         $data['training'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
@@ -527,7 +529,8 @@ public function changepass(){
         
         $rules = array(
                    array('field'=>'title', 'label'=>'Title', 'rules'=>'required'),
-                   array('field'=>'inc_dates', 'label'=>'Inclusive Dates', 'rules'=>'required'),
+                   array('field'=>'inc_from', 'label'=>'Inclusive Dates', 'rules'=>'required'),
+                   array('field'=>'inc_to', 'label'=>'Inclusive Dates', 'rules'=>'required'),
                    array('field'=>'no_of_hours', 'label'=>'No of hours', 'rules'=>'required'),
                    array('field'=>'conducted_by', 'label'=>'Conducted by', 'rules'=>'required'),
                    array('field'=>'attachments', 'label'=>'attachments')
@@ -538,13 +541,25 @@ public function changepass(){
 
         }
        else{
-          
+              $data['username'] = $this->session->userdata('username');            
+              $userinfo = $this->employee->read($data['username']);
+              foreach($userinfo as $i){
+              $info = array(
+                'id' => $i['id'],
+              );
+              $info;
+            }       
+
+
             $trainingRecord=array(
                 'title'=>$_POST['title'],
-                'inc_dates'=>$_POST['inc_dates'],
+                'inc_from'=>$_POST['inc_from'],
+                'inc_to'=>$_POST['inc_to'],
                 'no_of_hours'=>$_POST['no_of_hours'],
                 'conducted_by'=>$_POST['conducted_by'],
-                'attachments'=>$_POST['attachments']
+                'attachments'=>$_POST['attachments'],
+                'employeeID'=>$info['id'],
+                'username'=>$data['username']
                 
             );
             $this->training->createtraining($trainingRecord);
@@ -641,8 +656,74 @@ public function changepass(){
         
     }
 
+   /** public function changepass(){
+        
+        if($this->input->post('change_pass'))
+          {
+            $old_pass=$this->input->post('old_pass');
+            $new_pass=$this->input->post('new_pass');
+            $confirm_pass=$this->input->post('confirm_pass');
+            $session_id=$this->session->userdata('employeeID');
+            $que=$this->db->query("select * from user_login where employeeID='$session_id'");
+            $row=$que->row();
+            if((!strcmp($old_pass, $password))&& (!strcmp($new_pass, $confirm_pass))){
+              $this->employee->change_pass($session_id,$new_pass);
+              echo "Password changed successfully !";
+              }
+                else{
+                echo "Invalid";
+              }
+          }
+  
 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('changepass_view');
+        $this->load->view('include/footer');
 
+    }**/
+
+    public function changepass(){
+        $employeeRecord =  $this->session->userdata('employeeID');
+        $condition = array('employeeID' => $employeeRecord);
+        $array = $this->employee->read($condition);
+        foreach($array as $o){
+                    $password = $o['password'];
+                    $employeeID = $o['employeeID'];   
+        }
+        $rules = array(
+                    array('field'=>'password', 'label'=>'Password', 'rules'=>'required|matches['.$password.']'),
+                    array('field'=>'confirm_password', 'label'=>'New Password', 'rules'=>'required'),
+                    array('field'=>'new_password', 'label'=>'Re-enter New Password', 'rules'=>'required|matches[confirm_password]')
+        );
+        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+        if($this->form_validation->run()==FALSE){
+            $employee =  $this->session->userdata('employeeID');
+            $condition = array('employeeID' => $user);
+            $result_array = $this->employee->read($condition);
+            $data['d'] = $result_array;
+            $header_data['title'] = "CHANGE PASSWORD";
+            $this->load->view('include/header',$header_data);       
+            $this->load->view('changepass_view',$data);
+      $this->load->view('include/footer');
+        }else{
+            $employee =  $this->session->userdata('employeeID');
+            $change=array('employeeID'=>$employeeID,'password'=>$_POST['new_password']);
+            $this->employee->update($change);
+            redirect('process_improvement/dashboard');
+        }
+    }
+
+    
 }
     
 

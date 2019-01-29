@@ -44,11 +44,18 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Inclusive Dates</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Inclusive Dates From</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="date" class="form-control has-feedback-left"  required="required"for="inc_dates" id="inputSuccess2" placeholder=" Inclusive dates" name="inc_dates" value="<?php echo set_value('inc_dates'); ?>" id="inc_dates">
+                         <input type="date" class="form-control has-feedback-left"  required="required"for="inc_from" id="inputSuccess2" placeholder=" Inclusive dates" name="inc_from" value="<?php echo set_value('inc_from'); ?>" id="inc_from">
                         </div>
                       </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Inclusive Dates To</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="date" class="form-control has-feedback-left"  required="required"for="inc_to" id="inputSuccess2" placeholder="Inclusive dates" name="inc_to" value="<?php echo set_value('inc_to'); ?>" id="inc_to">
+                        </div>
+                      </div>                      
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No of Hours</label>
@@ -117,10 +124,11 @@
   
                     <tr id="trHead">
                       <th rowspan="2">Title</th>
-                      <th rowspan="2">Inclusive Dates of Attendance (mm/dd/yyy)</th>
+                      <th colspan="2">Inclusive Dates</th>
                       <th rowspan="2">No. of Hours</th>
                       <th rowspan="2">Conducted/Sponsored By:</th>
                       <th rowspan="2">ATTACHMENTS</th>
+                      <th rowspan="2">ACTION</th>
                     </tr>
 
                     
@@ -129,7 +137,7 @@
              <?php
         if($training!=null){
                 foreach($training as $t){  
-                    echo "<tr><td>".$t['title']."</td><td>".$t['inc_dates']."</td><td>".$t['no_of_hours']."</td><td>".$t['conducted_by']."</td><td>".$t['attachments']."</td>".'
+                    echo "<tr><td>".$t['title']."</td><td>".$t['inc_from']."</td><td>".$t['inc_to']."</td><td>".$t['no_of_hours']."</td><td>".$t['conducted_by']."</td><td>".$t['attachments']."</td>".'
                     <td><a href="'.base_url('process_improvement/updateTraining/'.$t['title']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$t['title']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
                     
                 }
