@@ -84,7 +84,7 @@ class Employee_model extends CI_Model {
     function can_login($username, $password)  
       {  
            $this->db->where('username', $username);  
-           $this->db->where('password', $password);  
+           $this->db->where('password', $password);     
            $query = $this->db->get('login');  
            //SELECT * FROM users WHERE username = '$username' AND password = '$password'  
            if($query->num_rows() > 0)  
@@ -96,6 +96,17 @@ class Employee_model extends CI_Model {
                 return false;       
            }  
       }
+
+    function fetch_pass($session_id)
+    {
+    $fetch_pass=$this->db->query("select * from user_login where id='$session_id'");
+    $res=$fetch_pass->result();
+    }
+   
+    function change_pass($session_id,$new_pass)
+    {
+    $update_pass=$this->db->query("UPDATE user_login set pass='$new_pass'  where id='$session_id'");
+    }
 
 }
 ?>

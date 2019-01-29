@@ -17,6 +17,10 @@
                     <div class="x_content" >
                       <p class="text-muted font-13 m-b-30">Training Details</p>
                     <div>&nbsp;</div>
+                    <?php echo validation_errors(); ?>
+  
+                    <?php echo form_open('process_improvement/viewTrainingAdmin'); 
+                    ?> 
 
                         <div class="x_content">
                             <div class="col-md-12" style=" text-align: center; ">
@@ -36,16 +40,14 @@
           </tr>
         </thead>
         <tbody>
-                        <!--<td>11/15/2018</td>
-                            <td>15-037-044</td>
-                            <td>Franchesca Marie Cortez</td>
-                            <td>11/15/2018</td>
-                            <td>11/20/2018</td>
-                            <td>00</td>
-                            <td>00</td>
-                            <td>00</td>
-                            <td><a href="'.base_url('process_improvement/updateEmployee/'.$c['employeeID']).'" class="btn btn-success btn-xs"><i class="fa fa-print"></i></a></td>  
-                          </tr>-->
+                       <?php
+                       if($alltraining!=null){
+                         foreach($alltraining as $a){  
+                            echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td>".$a['attachments']."</td>".'<td><a href="'.base_url('process_improvement/updateTraining/'.$a['title']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$a['title']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    
+                }
+        }
+            ?>
          
         </tbody>
     </table>

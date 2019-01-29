@@ -25,7 +25,7 @@
      <div>&nbsp;</div>
         <div class="container">
         <?php echo validation_errors(); ?>
-        <?php echo form_open('process_improvement/addEmployee'); 
+        <?php echo form_open('process_improvement/viewLeave'); 
         ?> 
               <form class="form-horizontal form-label-left">
 
@@ -80,7 +80,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >FROM</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="date" id="" name="" for="recommendation" required="required" class="form-control col-md-7 col-xs-12 center" value="<?php echo set_value(''); ?>">
+                         <input type="date" id="" name="" for="recommendation" required="required" class="form-control col-md-7 col-xs-12 center" value="<?php echo set_value('inc_from'); ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -88,7 +88,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">TO</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="date" id="" name="" for="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value(''); ?>">
+                         <input type="date" id="" name="" for="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('inc_to'); ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -142,7 +142,7 @@
   <div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/viewEmployeeAdmin'); 
+  <?php echo form_open('process_improvement/addLeave'); 
   ?> 
                        
             </li>
@@ -171,7 +171,6 @@
                           <th colspan="2">Inclusive Dates</th>
                           <th >Approver</th>
                           <th >Status</th>
-                          <th >ACTION</th>
                         </tr>
                       </thead>
 
@@ -179,7 +178,7 @@
                        <?php
                         if($leavedb!=null){
                           foreach($leavedb as $l){
-                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['place']."</td><td>".$l['type']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_dates']."</td><td>".$l['supervisor']."</td><td>".$l['status']."</td>".'</tr>';
+                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['place']."</td><td>".$l['type']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisor']."</td><td>".$l['status']."</td>".'</tr>';
                           }
                                 }
                                 ?>
