@@ -42,20 +42,24 @@
                           <input type="text" class="form-control has-feedback-left" required="required" for="title" id="inputSuccess2" placeholder=" Title" name="title" value="<?php echo set_value('title')?>" id="title">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Inclusive Dates From</label>
+                  <label class=" col-md-12 col-sm-12 col-xs-12">INCLUSIVE DATES</label><br>
+                   <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 right">From</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                          <input type="date" class="form-control has-feedback-left"  required="required"for="inc_from" id="inputSuccess2" placeholder=" Inclusive dates" name="inc_from" value="<?php echo set_value('inc_from'); ?>" id="inc_from">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Inclusive Dates To</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">To</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                          <input type="date" class="form-control has-feedback-left"  required="required"for="inc_to" id="inputSuccess2" placeholder="Inclusive dates" name="inc_to" value="<?php echo set_value('inc_to'); ?>" id="inc_to">
                         </div>
-                      </div>                      
+                      </div>
+                      <div>&nbsp;</div>                  
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No of Hours</label>
@@ -63,7 +67,7 @@
                          <input type="text" class="form-control has-feedback-left" required="required" for="no_of_hours" id="inputSuccess2" placeholder=" No of Hours" name="no_of_hours" value="<?php echo set_value('no_of_hours'); ?>" id="no_of_hours">
                         </div>
                       </div>
-            
+                      <div>&nbsp;</div>
             
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Conducted By</label>
@@ -71,6 +75,7 @@
                          <input type="text" class="form-control has-feedback-left" required="required" for="conducted_by" id="inputSuccess2" placeholder="Conducted By" name="conducted_by" value="<?php echo set_value('conducted_by'); ?>" id="conducted_by">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Attachments</label>
