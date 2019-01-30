@@ -56,10 +56,10 @@
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
+            <!-- menu profile quick info (left side) -->
             <div class="profile clearfix">
                 <div class="profile_pic">
-                  <img src="<?php echo base_url('assets/css/build/images/sampleuser.png'); ?>" alt="..." class="img-circle profile_img">
+                 <a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <img src="<?php echo base_url('assets/css/build/images/sampleuser.png'); ?>" alt="..." class="img-circle profile_img"> </a>
                 </div>
 
                 <div class="profile_info">
@@ -85,8 +85,8 @@
                   
                   <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
                   </li>
-                  <li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i> PROFILE </a>
-                  </li>
+                  <!--<li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i> PROFILE </a>
+                  </li>-->
                   <li><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>"> <i class="fa fa-user-secret"></i>EMPLOYEE ADMIN</a>
                   </li>
             
@@ -108,20 +108,13 @@
                 else if($usertype['type']=='superadmin')
                 {
                 ?>
-                <!--START -->
+                <!--START ( SUPER ADMIN)-->
                 <ul class="nav side-menu">
-                  
-                  
-                  <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
-                  </li>  
+                      <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                      </li>  
 
-                  <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
-                  </li>
-          
-                  
-                
-                  
-
+                      <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
+                      </li>
                 </ul>
                 <!-- end -->
                 <?php 
@@ -130,8 +123,8 @@
                 {
                   ?>
                   <ul class="nav side-menu">
-                  <li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i>PROFILE</a>
-                  </li>
+                  <!--<li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i>PROFILE</a>
+                  </li>-->
                   <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
@@ -183,7 +176,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     
-                     <li><a href="<?php echo base_url('process_improvement/changepass'); ?>"><i class="fa fa-user pull-right"></i> Profile</a></li>
+                     <li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"><i class="fa fa-user pull-right"></i> Profile</a></li>
                     <li><a href="<?php echo base_url('process_improvement/changepass'); ?>"><i class="fa fa-lock pull-right"></i> Change Password</a></li>
                     <li><a href="<?php echo base_url('process_improvement/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
