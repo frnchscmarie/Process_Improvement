@@ -43,7 +43,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                          <select class="form-control" value="<?php echo set_value('type'); ?>" onchange="showradiobutton()" id="type">
                             <option value="Vacation Leave(Local)">Vacation Leave (Local)</option>
-                            <option value="Vacation Leave(Interational)">Vacation Leave (International)</option>
+                            <option value="Vacation Leave(International)">Vacation Leave (International)</option>
                             <option value="Sick Leave">Sick Leave</option>
                             <option value="Special Leave Priveledge">Special Leave Privelege</option>
                             <option value="Others">Others</option>
@@ -53,9 +53,17 @@
                       <div>&nbsp;</div>
 
 
+                        <!--hidden forms-->
+                        <div class="form-group" style="display: none;" id="vl_int">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
+                        </div>
+                      </div>
+
                         <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <div class="radio" style="display: none;" id="in_hospital">
+                          <div class="radio" style="display: none;" id="sick_leave">
                             <label>
                               <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> In hospital
                             </label>
@@ -66,14 +74,29 @@
                         </div>
                      <div>&nbsp;</div>
 
+                      <div class="form-group" style="display: none;" id="sick_leave_specify">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate reason for admission/leave">
+                        </div>
+                      </div>
 
-                      <div class="form-group">
+                      <div class="form-group" style="display: none;" id="others">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Reason/s for leave">
+                        </div>
+                      </div>
+                    
+
+
+                   <!--   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Where will leave be spent</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                          <input type="text" id="place" name="place" value="<?php echo set_value('place'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place">
                         </div>
                       </div>
-                      <div>&nbsp;</div>
+                      <div>&nbsp;</div>-->
 
 
                       <label class=" col-md-12 col-sm-12 col-xs-12">INCLUSIVE DATES</label><br>
