@@ -102,6 +102,14 @@
     </table>
       
        </div>
+
+        <div class="form-group">
+              <div class="">
+                 <button class="btn btn-primary" type="button" style="margin-left: 12%;"><a href="<?php echo base_url('process_improvement/viewLeave')?>" style="color: white;">UPLOAD IMAGE</a></button>
+                                  
+              </div>
+           </div>
+
        </div>
         </div>
         </div>
