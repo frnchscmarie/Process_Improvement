@@ -23,21 +23,21 @@
                                <div class="form-group">
                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Current Password: </label>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
-                                          <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Current Password" name="old_pass" value="" id="">
+                                          <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Current Password" name="old_pass" value="" id="password">
                                       </div>
                                </div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">New Password: </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
-                             <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Enter new password" name="new_pass" value="<?php echo set_value('password'); ?>" id="">
+                             <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Enter new password" name="new_pass" value="<?php echo set_value('password'); ?>" id="password">
                          </div>
                       </div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Verify Password: </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Re-enter new password" name="confirm_pass" value="<?php echo set_value('password'); ?>" id="">
+                            <input type="password" class="form-control has-feedback-left" required="required" for="" id="inputSuccess2" placeholder="Re-enter new password" name="confirm_pass" value="<?php echo set_value('password'); ?>" id="change_pass">
                           </div>
                       </div>
 

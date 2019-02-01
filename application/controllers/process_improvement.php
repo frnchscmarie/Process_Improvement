@@ -384,27 +384,43 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('include/footer');
         
 
-        //trial for qrcode 
-        //controller
-        // $get_current_path_to_front = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/'; 
-        // $set_new_path_to_front = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode')) . '/';
-        // $load_path = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode/')) . '/';
-        // $params['data'] = '15-082-238'; //enter the data to be converted to qrcode
-        // $params['size'] = 10;
-        // $params['savename'] = $set_new_path_to_front.'15-082-238.png';
-        // $config['cacheable']  = true; //boolean, the default is true
-        // $config['cachedir']   = ''; //string, the default is application/cache/
-        // $config['errorlog']   = ''; //string, the default is application/logs/
-        // $config['quality']    = true; //boolean, the default is true
-        // $config['size']     = ''; //interger, the default is 1024
-        // $config['black']    = array(224,255,255); // array, default is array(255,255,255)
-        // $config['white']    = array(70,130,180); // array, default is array(0,0,0)
-        // $this->ciqrcode->generate($params);    
         
+           $get_current_path_to_front = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/'; 
+           $set_new_path_to_front = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode')) . '/';
+           $load_path = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode/')) . '/';
+           $params['data'] = '15-082-238'; //enter the data to be converted to qrcode
+           $params['size'] = 10;
+           $params['savename'] = $set_new_path_to_front.'15-082-238.png';
+           $config['cacheable']  = true; //boolean, the default is true
+           $config['cachedir']   = ''; //string, the default is application/cache/
+           $config['errorlog']   = ''; //string, the default is application/logs/
+           $config['quality']    = true; //boolean, the default is true
+           $config['size']     = ''; //interger, the default is 1024
+           $config['black']    = array(224,255,255); // array, default is array(255,255,255)
+           $config['white']    = array(70,130,180); // array, default is array(0,0,0)
+           $this->ciqrcode->generate($params);    
+        
+        }
+      public function qrcode(){
+        $result_array = $this->mr->read();
+        $data['mrRecord'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('mr_view',$data);
+        $this->load->view('include/footer');
+      
 
 
-        // //view
-        // echo '<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />';        
+        
+        echo '<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />';        
     }
     public function addProperties(){
       
@@ -656,75 +672,29 @@ class Process_Improvement extends CI_Controller {
         
     }
 
-   /** public function changepass(){
-        
-        if($this->input->post('change_pass'))
+  public function changepass()
+        {
+          if($this->input->post('change_pass'))
           {
             $old_pass=$this->input->post('old_pass');
             $new_pass=$this->input->post('new_pass');
             $confirm_pass=$this->input->post('confirm_pass');
-            $session_id=$this->session->userdata('employeeID');
-            $que=$this->db->query("select * from user_login where employeeID='$session_id'");
+            $session_id=$this->session->userdata('employee');
+            $que=$this->db->query("select * from user_login where id='$session_id'");
             $row=$que->row();
             if((!strcmp($old_pass, $password))&& (!strcmp($new_pass, $confirm_pass))){
-              $this->employee->change_pass($session_id,$new_pass);
+              $this->employee_model->changepass($session_id,$new_pass);
               echo "Password changed successfully !";
               }
                 else{
                 echo "Invalid";
               }
           }
-  
+          $this->load->view('changepass_view'); 
 
-        $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
-        foreach($type as $t){
-          $ut= array(
-                      'type'=>$t['type']
-          );
-          $types[]=$ut;
-        }
-        $usertype['types'] = $types;
-        $this->load->view('include/header',$usertype);
-        $this->load->view('changepass_view');
-        $this->load->view('include/footer');
-
-    }**/
-
-    public function changepass(){
-        $employeeRecord =  $this->session->userdata('employeeID');
-        $condition = array('employeeID' => $employeeRecord);
-        $array = $this->employee->read($condition);
-        foreach($array as $o){
-                    $password = $o['password'];
-                    $employeeID = $o['employeeID'];   
-        }
-        $rules = array(
-                    array('field'=>'password', 'label'=>'Password', 'rules'=>'required|matches['.$password.']'),
-                    array('field'=>'confirm_password', 'label'=>'New Password', 'rules'=>'required'),
-                    array('field'=>'new_password', 'label'=>'Re-enter New Password', 'rules'=>'required|matches[confirm_password]')
-        );
-        $this->form_validation->set_rules($rules);
-        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
-        if($this->form_validation->run()==FALSE){
-            $employee =  $this->session->userdata('employeeID');
-            $condition = array('employeeID' => $user);
-            $result_array = $this->employee->read($condition);
-            $data['d'] = $result_array;
-            $header_data['title'] = "CHANGE PASSWORD";
-            $this->load->view('include/header',$header_data);       
-            $this->load->view('changepass_view',$data);
-      $this->load->view('include/footer');
-        }else{
-            $employee =  $this->session->userdata('employeeID');
-            $change=array('employeeID'=>$employeeID,'password'=>$_POST['new_password']);
-            $this->employee->update($change);
-            redirect('process_improvement/dashboard');
         }
     }
 
-    
-}
     
 
 
