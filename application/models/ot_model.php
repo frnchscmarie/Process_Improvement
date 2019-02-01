@@ -8,11 +8,12 @@ class OT_model extends CI_Model {
     }
     
     function read($condition=null){
+    
         $this->db->select('*');
-        $this->db->from($this->table);
+        $this->db->from('ot');
         
         if(isset($condition))
-            $this->db->where($condition);
+            $this->db->where('employeeID', $condition);
         
         $query = $this->db->get();
         
@@ -35,6 +36,17 @@ class OT_model extends CI_Model {
     $this->db->from($this->table);
     $query = $this->db->get();
     return $query->num_rows();
+    }
+
+    function readall($id){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('employeeID',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
     }
 }
 ?>

@@ -367,6 +367,23 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
+    public function viewCalendar(){
+        $result_array = $this->leavedb->calendar();
+        $data['holiday'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('calendar',$data);
+        $this->load->view('include/footer');   
+    }
+
    public function viewMR(){
        $result_array = $this->mr->read();
         $data['mrRecord'] = $result_array; 
@@ -403,7 +420,8 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('property_view',$data);
         $this->load->view('include/footer');
         }
-      public function qrcode(){
+
+  public function qrcode(){
         $result_array = $this->mr->read();
         $data['mrRecord'] = $result_array; 
         $data1 = $_SESSION['username'];
@@ -590,7 +608,17 @@ class Process_Improvement extends CI_Controller {
     }
 
      public function viewOvertimeRegular(){
-     
+
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data= $this->ot->readall($info['id']);
+        $newdata['play'] = $data; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -601,10 +629,56 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('otregular_view');
+        $this->load->view('otregular_view',$newdata);
         $this->load->view('include/footer');
         
         
+    }
+
+    public function addOT(){
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data['id'] = $this->ot->read($info['id']);
+
+        $rules = array(
+                   array('field'=>'date_of_filing', 'label'=>'Date', 'rules'=>'required'),
+                   array('field'=>'auto_OT', 'label'=>'Authorized Time', 'rules'=>'required'),
+                   array('field'=>'rate', 'label'=>'Rate', 'rules'=>'required'),
+                   array('field'=>'aot_from', 'label'=>'Actual OT time start', 'rules'=>'required'),
+                   array('field'=>'aot_to', 'label'=>'Actual OT time end', 'rules'=>'required'),
+                   array('field'=>'hours', 'label'=>'Hours', 'rules'=>'required'),
+                   array('field'=>'minutes', 'label'=>'Minutes', 'rules'=>'required'),
+                   array('field'=>'task', 'label'=>'Tasks', 'rules'=>'required')
+                   
+                );
+            $this->form_validation->set_rules($rules);
+            if($this->form_validation->run()==FALSE){
+
+        }
+       else{
+            $otRecord=array(
+                'date_of_filing'=>$_POST['date_of_filing'],
+                'auto_OT'=>$_POST['auto_OT'],
+                'rate'=>$_POST['rate'],
+                'aot_from'=>$_POST['aot_from'],
+                'aot_to'=>$_POST['aot_to'],
+                'hours'=>$_POST['hours'],
+                'minutes'=>$_POST['minutes'],
+                'task'=>$_POST['task'],
+                'employeeID'=>$info['id']
+                
+            );
+            $data['ot']=$otRecord;
+            $this->ot->create($otRecord);
+            redirect('process_improvement/viewOvertimeRegular');
+            }
+
     }
 
 

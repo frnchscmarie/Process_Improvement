@@ -102,6 +102,11 @@
                     <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-user-secret"></i>TRAINING ADMIN</a>
                   </li>
 
+                  <li>
+                    <a href="<?php echo base_url('process_improvement/viewCalendar')?>"> <i class="fa fa-user-secret"></i>LEAVE CALENDAR</a>
+                  </li>
+
+
                 </ul>
                 <!-- end -->
                 <?php 
@@ -132,11 +137,7 @@
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
                   </li>
-                  <li><a><i class="fa fa-clock-o"></i> OVERTIME <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('process_improvement/viewOvertimeRegular')?>">REGULAR EMPLOYEE</a></li>
-                      <li><a href="<?php echo base_url('process_improvement/viewOvertimeContractual')?>">CONTRACTUAL EMPLOYEE</a></li>
-                    </ul>
+                  <li><a href="<?php echo base_url('process_improvement/viewOvertimeRegular')?>"><i class="fa fa-clock-o"></i>OVERTIME  </a>
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-user"></i>MR</a>
                   </li>

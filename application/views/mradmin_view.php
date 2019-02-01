@@ -36,13 +36,13 @@
 
                 <div class="form-group">
 
-                       <!--  <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" id="inputSuccess2" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
                         </div>
-                      </div> -->
+                      </div> 
 
-                     <!-- <div class="form-group">
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
                         <div class="col-md-3 col-sm-9 col-xs-12">
                          <input type="text" class="form-control"  required="required"for=lname" id="inputSuccess2" placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname">
@@ -96,16 +96,9 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="date" class="form-control has-feedback-left" required="required" for="date_purchased" id="inputSuccess2" placeholder="Date Purchased" name="date_purchased" value="<?php echo set_value('date_purchased'); ?>" id="date_purchased">
                         </div>
-                      </div> -->
-            
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Property Number</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control has-feedback-left"  required="required" for="property_no" id="inputSuccess2" placeholder="Property Number" name="property_no" value="<?php echo set_value('property_no'); ?>" id="property_no">
-                        </div>
-                      </div>
-
-                     <!-- <div class="form-group">
+                      </div> 
+          
+                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Classification No</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="number" class="form-control has-feedback-left" required="required" for="classification_no" id="inputSuccess2" placeholder="  Classification Number" name="classification_no" value="<?php echo set_value('classification_no'); ?>" id="classification_no">
@@ -131,7 +124,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="number" class="form-control has-feedback-left" required="required" for="mr_no" id="inputSuccess2" placeholder="  MR Number" name="mr_no" value="<?php echo set_value('mr_no'); ?>" id="mr_no">
                         </div>
-                      </div> -->
+                      </div> 
 
     <div class="">
     <label class="control-label col-sm-4">&nbsp;</label>
@@ -178,7 +171,8 @@
                       <thead>
   
                     <tr id="trHead">
-           <th >Employee ID</th>
+            <th >Property Number</th>
+            <th >Employee ID</th>
             <th >Employee Name</th>
             <th >Date Assigned</th>
             <th >Quantity</th>
@@ -186,7 +180,6 @@
             <th >Property Name</th>
             <th >Description</th>
             <th >Date Purchased</th>
-            <th >Property Number</th>
             <th >Classification Number</th>
             <th >Unit Value</th>
             <th >Total Value</th>
@@ -197,7 +190,7 @@
              <?php
         if($mrRecord!=null){
                 foreach($mrRecord as $p){  
-                    echo "<tr><td>".$p['employeeID']."</td><td>".$p['lname'].", ".$p['fname']." ".$p['mname']."</td><td>".$p['date_assigned']."</td><td>".$p['qty']."</td><td>".$p['unit']."</td><td>".$p['property_name']."</td><td>".$p['description']."</td><td>".$p['date_purchased']."</td><td>".$p['property_no']."</td><td>".$p['classification_no']."</td><td>".$p['unit_value']."</td><td>".$p['total_value']."</td><td>".$p['mr_no']."</td></tr>";
+                    echo "<tr><td>".$p['property_no']."</td><td>".$p['employeeID']."</td><td>".$p['lname'].", ".$p['fname']." ".$p['mname']."</td><td>".$p['date_assigned']."</td><td>".$p['qty']."</td><td>".$p['unit']."</td><td>".$p['property_name']."</td><td>".$p['description']."</td><td>".$p['date_purchased']."</td><td>".$p['classification_no']."</td><td>".$p['unit_value']."</td><td>".$p['total_value']."</td><td>".$p['mr_no']."</td></tr>";
                 }
         }
             ?>

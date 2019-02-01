@@ -2,6 +2,7 @@
 
 class Leavedb_model extends CI_Model {
     private $table = 'leavedb';
+    private $holiday = 'calendar';
     
     function createleave($leaveRecord){
         
@@ -36,6 +37,13 @@ class Leavedb_model extends CI_Model {
     $this->db->from($this->table);
     $query = $this->db->get();
     return $query->num_rows();
+    }
+
+    function calendar(){
+        $this->db->select('*');
+        $this->db->from($this->holiday);
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 }
 ?>

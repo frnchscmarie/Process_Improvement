@@ -21,33 +21,24 @@
   <div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/addEmployee'); 
+  <?php echo form_open('process_improvement/addOT'); 
   ?> 
               <form class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Filed</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
 
+                    
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Authorized OT Time</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <form class="form-horizontal">
-                          <fieldset>
-                            <div class="control-group">
-                              <div class="controls">
-                                <div class="input-prepend input-group">
-                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                                  <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />
-                                </div>
-                              </div>
-                            </div>
-                          </fieldset>
-                        </form>
+                         <input type="text" id="auto_OT" name="auto_OT" value="<?php echo set_value('auto_OT'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Authorized Time">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -55,7 +46,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">OT RATE</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="place" name="place" value="<?php echo set_value('place'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="RATE">
+                         <input type="text" id="rate" name="rate" value="<?php echo set_value('rate'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="RATE">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -64,7 +55,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Start</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="aot_from" id="aot_from" required="required" value="<?php echo set_value('aot_from') ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -72,7 +63,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Finish</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="aot_to" id="aot_to" required="required" value="<?php echo set_value('aot_to') ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -80,7 +71,8 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Hour</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="number" name="hours" id="hours" required="required" value="<?php echo set_value('hours') ?>" >
+                         
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -88,7 +80,7 @@
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Minute</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" for="no_of_days" name="no_of_days" id="no_of_days" required="required" placeholder=" Input no. of working days" class="form-control col-md-5 col-sm-2 col-xs-4" value="<?php echo set_value('no_of_days'); ?>" >
+                         <input type="number" for="minutes" name="minutes" id="minutes" required="required" placeholder=" Minutes" class="form-control col-md-5 col-sm-2 col-xs-4" value="<?php echo set_value('minutes'); ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -96,7 +88,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tasks to be Accomplished</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="date_of_filing" id="date_of_filing" required="required" value="" placeholder="Input task/s" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="task" id="task" required="required" value="<?php echo set_value('task'); ?>" placeholder="Input task/s" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -128,115 +120,9 @@
   <div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/viewEmployeeAdmin'); 
+  <?php echo form_open('process_improvement/viewOvertimeRegular'); 
   ?> 
-                       
-            </li>
-                    </ul>
-                      <!-- <ul class="nav navbar-right panel_toolbox">
-                        <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Overtime Application </a>
-                           <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                 <div class="modal-content">
-
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h3 class="modal-title" id="lineModalLabel">Add Overtime Application</h3>
-                                    </div>
-
-                                  <div class="modal-body">
-                                      <div>&nbsp;</div>
-                                        <div class="container">
-                                          <?php echo validation_errors(); ?>
-                                          <?php echo form_open('process_improvement/addEmployee');?> 
-
-                 <form id="demo-form" data-parsley-validate>
-                      <label for="fullname">Date Filed :</label>
-                      <input type="date" id="fullname" class="form-control" name="fullname" required />
-                      <div>&nbsp;</div>
-                     
-                        <label for="email">AUTHORIZED OT TIME</label><br>
-                      
-                       <div class="form-group">
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">FROM</span>
-                          </label>
-                          <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="date" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">TO</span>
-                          </label>
-                          <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="date" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">OT RATE</span>
-                          </label>
-                          <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                        <div>&nbsp;</div>
-                        <label for="email">ACTUAL OT TIME</label><br>
-                      
-                       <div class="form-group">
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Start</span>
-                          </label>
-                          <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="date" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Finish</span>
-                          </label>
-                          <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="date" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                          <div>&nbsp;</div>
-                         <div class="form-group">
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Hour</span>
-                          </label>
-                          <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="time" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-
-                          <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Minute</span>
-                          </label>
-                          <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="time" id="" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                         <div>&nbsp;</div>
-                        <label for="fullname">Tasks to be accomplished :</label>
-                      <input type="text" id="fullname" class="form-control" name="fullname" required />
-                  </form>
-
-                                            <div class="">
-                                              <label class="control-label col-sm-4">&nbsp;</label>
-                                            </div>
-  
-                            <div class="form-group">
-                                               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button class="btn btn-success" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('')?>" style="color: white;">Add</a></button>
-                                                <button type="submit" class="btn btn-success" value="submit">Cancel</button>
-
-                                               </div>
-                                            </div>
-    
-                                        </div>
-  
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-
-  <div class="container">
-  <?php echo validation_errors(); ?>
-  
-  <?php echo form_open('process_improvement/viewEmployeeAdmin'); 
-  ?> 
-                       
-            </li>
-                    </ul>-->
+           
                     <div class="clearfix"></div>
                   </div>
                       </li>
@@ -248,7 +134,7 @@
                       <thead>
   
                           <tr id="trHead">
-                            <th rowspan="3">Date of Filing</th>          
+                            <th rowspan="3">Date</th>          
                             <th rowspan="3">Authorized OT Time</th>
                             <th colspan="2">Actual OT Time</th>
                             <th colspan="4">OT Rate</th>
@@ -274,9 +160,17 @@
 
 
                        <tbody>
-                        <!--insert data here!-->
+                       <?php
+                       if($play!=null){
+                         foreach($play as $o){  
+                          echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['rate']."</td><td>".$o['hours']."</td><td>".$o['minutes']."</td><td>".$o['task']."</td>".'</tr>';
+                    
+                          }
+                        }else{
+                          echo 'walang laman';
+                        }
+            ?>
           
-                        
                       </tbody>
                      </table>
 
@@ -318,7 +212,7 @@
                 <thead>
   
                     <tr id="trHead">
-                      <th >Date of Filing</th>
+                      <th >Date</th>
                       <th >Status</th>
                       <th >Remarks</th>
                       <th >Action</th>
