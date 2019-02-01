@@ -39,7 +39,11 @@
                    
                 }
         }
+        else{
+            echo "No record";
+        }
             ?>
+        
         </tbody>
     </table>
     </div>

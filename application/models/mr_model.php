@@ -2,14 +2,15 @@
 
 class MR_model extends CI_Model {
     private $table = 'mr';
+    private $property = 'property';
     
     function createproperties($mrRecord){
-        $this->db->insert($this->table, $mrRecord);
+        $this->db->insert($this->property, $mrRecord);
     }
     
     function read($condition=null){
         $this->db->select('*');
-        $this->db->from($this->table);
+        $this->db->from($this->property);
         
         if(isset($condition))
             $this->db->where($condition);

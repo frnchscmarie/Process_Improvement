@@ -10,7 +10,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>MR Admin</h2>
+                    <h2>List of Properties</h2>
                      <ul class="nav navbar-right panel_toolbox">
                   
                       <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Property </a>
@@ -178,26 +178,18 @@
                       <thead>
   
                     <tr id="trHead">
-           <th >Employee ID</th>
-            <th >Employee Name</th>
-            <th >Date Assigned</th>
-            <th >Quantity</th>
-            <th >Unit</th>
-            <th >Property Name</th>
-            <th >Description</th>
-            <th >Date Purchased</th>
+           
             <th >Property Number</th>
-            <th >Classification Number</th>
-            <th >Unit Value</th>
-            <th >Total Value</th>
-            <th >MR Number</th>
+            <th >ACTION</th>
+
           </tr>
         </thead>
         <tbody>
              <?php
         if($mrRecord!=null){
                 foreach($mrRecord as $p){  
-                    echo "<tr><td>".$p['employeeID']."</td><td>".$p['lname'].", ".$p['fname']." ".$p['mname']."</td><td>".$p['date_assigned']."</td><td>".$p['qty']."</td><td>".$p['unit']."</td><td>".$p['property_name']."</td><td>".$p['description']."</td><td>".$p['date_purchased']."</td><td>".$p['property_no']."</td><td>".$p['classification_no']."</td><td>".$p['unit_value']."</td><td>".$p['total_value']."</td><td>".$p['mr_no']."</td></tr>";
+                    echo "<tr><td>".$p['property_no']."</td>".'
+                    <td><a href="'.base_url('process_improvement/qrcode/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
                 }
         }
             ?>

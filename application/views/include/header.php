@@ -89,10 +89,13 @@
                   </li>-->
                   <li><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>"> <i class="fa fa-user-secret"></i>EMPLOYEE ADMIN</a>
                   </li>
-            
+               
+                 <li>
+                  <a href="<?php echo base_url('process_improvement/viewProperties')?>"> <i class="fa fa-user-secret"></i>PROPERTY</a>
+                  </li>
           
                   <li>
-                  <a href="<?php echo base_url('process_improvement/viewProperties')?>"> <i class="fa fa-user-secret"></i>MR ADMIN</a>
+                  <a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-user-secret"></i>MR ADMIN</a>
                   </li>
                 
                   <li>

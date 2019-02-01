@@ -367,6 +367,25 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
+   public function viewMR(){
+       $result_array = $this->mr->read();
+        $data['mrRecord'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+
+        $this->load->view('include/header',$usertype);
+        $this->load->view('mradmin_view',$data);
+        $this->load->view('include/footer');
+        }
+
+
    public function viewProperties(){
        $result_array = $this->mr->read();
         $data['mrRecord'] = $result_array; 
@@ -379,27 +398,10 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
-        $this->load->view('include/header',$usertype);
-        $this->load->view('mradmin_view',$data);
-        $this->load->view('include/footer');
-        
 
-        
-           $get_current_path_to_front = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/'; 
-           $set_new_path_to_front = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode')) . '/';
-           $load_path = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode/')) . '/';
-           $params['data'] = '15-082-238'; //enter the data to be converted to qrcode
-           $params['size'] = 10;
-           $params['savename'] = $set_new_path_to_front.'15-082-238.png';
-           $config['cacheable']  = true; //boolean, the default is true
-           $config['cachedir']   = ''; //string, the default is application/cache/
-           $config['errorlog']   = ''; //string, the default is application/logs/
-           $config['quality']    = true; //boolean, the default is true
-           $config['size']     = ''; //interger, the default is 1024
-           $config['black']    = array(224,255,255); // array, default is array(255,255,255)
-           $config['white']    = array(70,130,180); // array, default is array(0,0,0)
-           $this->ciqrcode->generate($params);    
-        
+        $this->load->view('include/header',$usertype);
+        $this->load->view('property_view',$data);
+        $this->load->view('include/footer');
         }
       public function qrcode(){
         $result_array = $this->mr->read();
@@ -414,32 +416,16 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('mr_view',$data);
+        $this->load->view('property_view',$data);
         $this->load->view('include/footer');
       
-
-
         
-        echo '<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />';        
+/*        echo '<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />';   */     
     }
     public function addProperties(){
       
         $rules = array(
-                   array('field'=>'employeeID', 'label'=>'Employee ID', 'rules'=>'required'),
-                   array('field'=>'lname', 'label'=>' Last Name', 'rules'=>'required'),
-                   array('field'=>'fname', 'label'=>' First Name', 'rules'=>'required'),
-                   array('field'=>'mname', 'label'=>' Middle Name', 'rules'=>'required'),
-                   array('field'=>'date_assigned', 'label'=>'Date_assigned', 'rules'=>'required'),
-                   array('field'=>'qty', 'label'=>'qty', 'rules'=>'required'),
-                   array('field'=>'unit', 'label'=>'Unit', 'rules'=>'required'),
-                   array('field'=>'property_name', 'label'=>'property_name', 'rules'=>'required'),
-                   array('field'=>'description', 'label'=>'description', 'rules'=>'required'),
-                   array('field'=>'date_purchased', 'label'=>'Date Purchased', 'rules'=>'required'),
                    array('field'=>'property_no', 'label'=>'Property Number', 'rules'=>'required'),
-                   array('field'=>'classification_no', 'label'=>'Classification Number', 'rules'=>'required'),
-                   array('field'=>'unit_value', 'label'=>'Unit Value', 'rules'=>'required'),
-                   array('field'=>'total_value', 'label'=>'Total Value', 'rules'=>'required'),
-                   array('field'=>'mr_no', 'label'=>'MR Number', 'rules'=>'required')
                 );
             $this->form_validation->set_rules($rules);
             if($this->form_validation->run()==FALSE){
@@ -458,22 +444,24 @@ class Process_Improvement extends CI_Controller {
        else{
           
             $mrRecord=array(
-                'employeeID'=>$_POST['employeeID'],
-                'lname'=>$_POST['lname'],
-                'fname'=>$_POST['fname'],
-                'mname'=>$_POST['mname'],
-                'date_assigned'=>$_POST['date_assigned'],
-                'qty'=>$_POST['qty'],
-                'unit'=>$_POST['unit'],
-                'property_name'=>$_POST['property_name'],
-                'description'=>$_POST['description'],
-                'date_purchased'=>$_POST['date_purchased'],
                 'property_no'=>$_POST['property_no'],
-                'classification_no'=>$_POST['classification_no'],
-                'unit_value'=>$_POST['unit_value'],
-                'total_value'=>$_POST['total_value'],
-                'mr_no'=>$_POST['mr_no']
             );
+          
+           $get_current_path_to_front = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/'; 
+           $set_new_path_to_front = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode')) . '/';
+           $load_path = str_replace('\\', '/', realpath($get_current_path_to_front . '../../assets/qrcode/')) . '/';
+           $params['data'] = $_POST['property_no']; //enter the data to be converted to qrcode
+           $params['size'] = 40;
+           $params['savename'] = $set_new_path_to_front.$_POST['property_no'].'.png';
+           $config['cacheable']  = true; //boolean, the default is true
+           $config['cachedir']   = ''; //string, the default is application/cache/
+           $config['errorlog']   = ''; //string, the default is application/logs/
+           $config['quality']    = true; //boolean, the default is true
+           $config['size']     = ''; //interger, the default is 1024
+           $config['black']    = array(224,255,255); // array, default is array(255,255,255)
+           $config['white']    = array(70,130,180); // array, default is array(0,0,0)
+           $this->ciqrcode->generate($params);    
+
             $this->mr->createproperties($mrRecord);
             redirect('process_improvement/viewProperties');
             }
@@ -637,23 +625,6 @@ class Process_Improvement extends CI_Controller {
         
         
     }
-    public function viewMR(){
-        $result_array = $this->mr->read();
-        $data['mr'] = $result_array; 
-        $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
-        foreach($type as $t){
-          $ut= array(
-                      'type'=>$t['type']
-          );
-          $types[]=$ut;
-        }
-        $usertype['types'] = $types;
-        $this->load->view('include/header',$usertype);
-        $this->load->view('mr_view',$data);
-        $this->load->view('include/footer');   
-    }
-
 
     public function viewSVLeave(){
      
