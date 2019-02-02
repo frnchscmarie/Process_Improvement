@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2019 at 10:57 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Feb 02, 2019 at 01:19 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `calendar`
+--
+
+CREATE TABLE `calendar` (
+  `id` int(100) NOT NULL,
+  `dates` date NOT NULL,
+  `holiday` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employee`
 --
 
@@ -40,22 +52,24 @@ CREATE TABLE `employee` (
   `email` varchar(50) NOT NULL,
   `promo_date` date NOT NULL,
   `civil_stat` varchar(20) NOT NULL,
-  `cp_no` int(20) NOT NULL,
+  `cp_no` varchar(20) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `type` varchar(30) NOT NULL
+  `type` varchar(30) NOT NULL,
+  `supervisorID` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`) VALUES
-('01', 'Janelyn', 'Gellado', '', '6', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', 1234567, 'Janelyn', 'admin', ''),
-('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', 45633, 'Chesca', 'employee', ''),
-('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', 12355, 'Anda', 'superadmin', ''),
-('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', 2147483647, 'Noel', '12345', 'employee'),
-('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', 12344, 'Julius', '12345', 'employee');
+INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
+('01', 'Janelyn', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '1234567', 'Janelyn', 'admin', '', ''),
+('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', 'employee', '', ''),
+('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', ''),
+('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', ''),
+('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', '12344', 'Julius', '12345', 'employee', ''),
+('06', 'Lovely', 'Dayo', 'Grace', '14', '2019-02-05', '2019-02-06', 'Department HEad', 'xxxxxxxxx', '2019-02-04', 'Single', '12345678900', 'Lovely', '12345', 'depthead', '');
 
 -- --------------------------------------------------------
 
@@ -115,7 +129,8 @@ INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
 ('02', 'Chesca', 'employee', 'employee'),
 ('03', 'Anda', 'superadmin', 'superadmin'),
 ('04', 'Noel', '12345', 'employee'),
-('05', 'Julius', '12345', 'employee');
+('05', 'Julius', '12345', 'employee'),
+('06', 'Lovely', '12345', 'depthead');
 
 -- --------------------------------------------------------
 
@@ -138,16 +153,9 @@ CREATE TABLE `mr` (
   `classification_no` varchar(50) NOT NULL,
   `unit_value` varchar(50) NOT NULL,
   `total_value` varchar(50) NOT NULL,
-  `mr_no` varchar(50) NOT NULL
+  `mr_no` varchar(50) NOT NULL,
+  `qrdata` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mr`
---
-
-INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty`, `unit`, `property_name`, `description`, `date_purchased`, `property_no`, `classification_no`, `unit_value`, `total_value`, `mr_no`) VALUES
-('08', 'sdfa', 'fadsg', 'fgad', '0000-00-00', 'dsgdg', '21', 'rfweag', 'dgsahd', '0002-03-04', 'sfag', '4543', '433', '3454', '654654'),
-('1234656', 'jkdxcn', 'FFCVGBHJNKM', 'KJHKJH', '1111-11-11', '12', '12', 'GOAT', 'CGVHBJNKM', '1111-11-11', '456', '6363', '63', '22', '522');
 
 -- --------------------------------------------------------
 
@@ -156,8 +164,10 @@ INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty
 --
 
 CREATE TABLE `ot` (
+  `id` int(100) NOT NULL,
   `employeeID` varchar(50) NOT NULL,
-  `filing_date` date NOT NULL,
+  `date_of_filing` date NOT NULL,
+  `auto_OT` varchar(100) NOT NULL,
   `aot_from` varchar(20) NOT NULL,
   `aot_to` varchar(20) NOT NULL,
   `rate` varchar(20) NOT NULL,
@@ -168,6 +178,34 @@ CREATE TABLE `ot` (
   `status` text NOT NULL,
   `remarks` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ot`
+--
+
+INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `aot_to`, `rate`, `hours`, `minutes`, `task`, `authorized_by`, `status`, `remarks`) VALUES
+(1, '02', '2019-02-01', '1231', '03:02', '16:12', '123', '123123', '123131', '12231', '', '', ''),
+(2, '02', '2019-02-01', 'xcvxcvcxv', '03:42', '02:34', 'xcvxcvxcvxcv', '3454545', '3534535', '34535', '', '', ''),
+(3, '02', '2019-02-01', 'xbattalion', '15:43', '14:43', 'dsfsdfdsfsd', '234567890', '23456789', 'zxczxczxasda', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `property`
+--
+
+CREATE TABLE `property` (
+  `id` int(50) NOT NULL,
+  `property_no` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `property`
+--
+
+INSERT INTO `property` (`id`, `property_no`) VALUES
+(8, '15-094-423'),
+(9, '12345');
 
 -- --------------------------------------------------------
 
@@ -211,6 +249,12 @@ CREATE TABLE `training_sched` (
 --
 
 --
+-- Indexes for table `calendar`
+--
+ALTER TABLE `calendar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
@@ -238,19 +282,47 @@ ALTER TABLE `login`
 -- Indexes for table `mr`
 --
 ALTER TABLE `mr`
-  ADD PRIMARY KEY (`date_assigned`);
+  ADD PRIMARY KEY (`property_no`);
 
 --
 -- Indexes for table `ot`
 --
 ALTER TABLE `ot`
-  ADD PRIMARY KEY (`filing_date`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `property`
+--
+ALTER TABLE `property`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `training`
 --
 ALTER TABLE `training`
   ADD PRIMARY KEY (`title`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `calendar`
+--
+ALTER TABLE `calendar`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ot`
+--
+ALTER TABLE `ot`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `property`
+--
+ALTER TABLE `property`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -121,10 +121,28 @@
                       <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
+                      <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
+                       </li>
+
                       <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
                       </li>
                 </ul>
                 <!-- end -->
+                <?php
+              }
+                else if($usertype['type']=='depthead')
+                {
+                ?>
+                <!--START ( DEPT HEAD)-->
+                <ul class="nav side-menu">
+                      <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                      </li>  
+
+                      <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
+                      </li>
+                </ul>
+
+             
                 <?php 
                 }
                 else if($usertype['type']=="employee")
