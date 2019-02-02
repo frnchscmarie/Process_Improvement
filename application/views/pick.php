@@ -1,3 +1,5 @@
+<!-- pick -->
+
  <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -21,8 +23,22 @@
           <div>&nbsp;</div>
           
 <div>
-<div class="" style="width: 32%; height: 398px; border: 3px solid gray; position: absolute; margin-left: 3%;"> </div>
- <table  class="table table-striped table-bordered" style="width: 60%; align: center; margin-left: 37%;">
+  <div class="" style="width: 32%; margin-left: 3%;">
+<img src="<?php echo base_url('assets/css/build/images/sampleuser.png'); ?>" alt="..." class="img-circle profile_img" style=" border: 3px solid gray;">
+ <div class="form-group" style="position:; margin-top: 5%; margin-left: 18%;">
+  <?php echo form_open('process_improvement/profilepic'); ?> 
+          <form>
+                <input type="file" name="image" style="margin-left: 6%;">
+                <div>&nbsp;</div>
+
+                 <button class="btn btn-primary" type="button" style="margin-left: 12%;" name="upload"><a href="<?php echo base_url('process_improvement/')?>" type="submit" style="color: white;">UPLOAD IMAGE</a></button>
+          </form>                  
+        
+           </div>
+
+ </div>
+
+ <table  class="table table-striped table-bordered" style="width: 60%; align: center; margin-left: 37%; margin-top: -30%;">
           <?php foreach ($info as $f){
                 $id=$f['id'];
                 $fname=$f['fname'];
@@ -103,13 +119,6 @@
       
        </div>
 
-        <div class="form-group">
-              <div class="">
-                 <button class="btn btn-primary" type="button" style="margin-left: 12%;"><a href="<?php echo base_url('process_improvement/viewLeave')?>" style="color: white;">UPLOAD IMAGE</a></button>
-                                  
-              </div>
-           </div>
-
        </div>
         </div>
         </div>
@@ -123,4 +132,3 @@
 
 </body>
 </html>
-
