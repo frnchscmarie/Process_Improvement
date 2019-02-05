@@ -43,13 +43,7 @@
                       </div>
                       <div>&nbsp;</div>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">OT RATE</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="rate" name="rate" value="<?php echo set_value('rate'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="RATE">
-                        </div>
-                      </div>
-                      <div>&nbsp;</div>
+                    
 
                       <label class=" col-md-12 col-sm-12 col-xs-12">ACTUAL OT TIME </label>
                       <div class="form-group">
@@ -64,6 +58,15 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Finish</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="aot_to" id="aot_to" required="required" value="<?php echo set_value('aot_to') ?>" >
+                        </div>
+                      </div>
+                      <div>&nbsp;</div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">OT RATE</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <!-- <input type="text" id="rate" name="rate" value="<?php echo set_value('rate'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="RATE" onchange="showradiobutton()"> -->
+                         
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -163,7 +166,7 @@
                        <?php
                        if($play!=null){
                          foreach($play as $o){  
-                          echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['rate']."</td><td>".$o['hours']."</td><td>".$o['minutes']."</td><td>".$o['task']."</td>".'</tr>';
+                          echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['hours_weekdays']."</td><td>".$o['minutes_weekdays']."</td><td>".$o['hours_weekends']."</td><td>".$o['minutes_weekends']."</td><td>".$o['task']."</td>".'</tr>';
                     
                           }
                         }else{

@@ -84,6 +84,21 @@ class Process_Improvement extends CI_Controller {
       redirect(base_url(), 'refresh');
   }
 
+   public function changepass(){
+
+   $this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required');
+   $this->form_validation->set_rules('new_pass', 'New Password', 'trim|required');
+   $this->form_validation->set_rules('confrim_pass', 'Confirm Password', 'trim|required|matches[new_pass]');
+
+   if($this->form_validation->run() == false)
+        {
+          $data['title']= "Change Password";
+          $this->load->view('include/header' ,$data); 
+          $this->load->view('changepass_view'); 
+          $this->load->view('include/footer');
+
+        }
+}
   public function dashboard(){
         $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
@@ -717,27 +732,7 @@ class Process_Improvement extends CI_Controller {
         
     }
 
-  public function changepass()
-        {
-          if($this->input->post('change_pass'))
-          {
-            $old_pass=$this->input->post('old_pass');
-            $new_pass=$this->input->post('new_pass');
-            $confirm_pass=$this->input->post('confirm_pass');
-            $session_id=$this->session->userdata('employee');
-            $que=$this->db->query("select * from user_login where id='$session_id'");
-            $row=$que->row();
-            if((!strcmp($old_pass, $password))&& (!strcmp($new_pass, $confirm_pass))){
-              $this->employee_model->changepass($session_id,$new_pass);
-              echo "Password changed successfully !";
-              }
-                else{
-                echo "Invalid";
-              }
-          }
-          $this->load->view('changepass_view'); 
-
-        }
+ 
     }
 
     
