@@ -24,24 +24,24 @@
     <link href="<?php echo base_url('assets/css/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css'); ?>" rel="stylesheet">
      <!-- bootstrap-wysiwyg -->
-    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <link href="../assets/css/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
     <!-- Select2 -->
-    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="../assets/css/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <!-- Switchery -->
-    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <link href="../assets/css/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- starrr -->
-    <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <link href="../assets/css/vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../assets/css/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="<?php echo base_url('assets/css/build/css/custom.min.css'); ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/build/css/custom.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/css/build/css/custom.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/css/build/css/custom.css'); ?>" rel="stylesheet">
 
-    <script src="<?php echo base_url('assets/js/multiple_selection.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/search.js'); ?>"></script>
-  <script src="<?php echo base_url('assets/js/select.js'); ?>"></script>
-   <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
+<!--     <script src="<?php echo base_url('/assets/js/multiple_selection.js'); ?>"></script>
+    <script src="<?php echo base_url('/assets/js/search.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/js/select.js'); ?>"></script> -->
+   <script src="<?php echo base_url('/assets/js/validation.js'); ?>"></script>
   </head>
 
   <body class="nav-md">

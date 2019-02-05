@@ -65,11 +65,44 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">OT RATE</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <!-- <input type="text" id="rate" name="rate" value="<?php echo set_value('rate'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="RATE" onchange="showradiobutton()"> -->
-                         
+                           <select class="form-control" value="<?php echo set_value('rate'); ?>" onchange="showotrate()" id="rate">
+                            <option value="1.25">1.25</option>
+                            <option value="1.50">1.50</option>
+                          </select>
                         </div>
                       </div>
                       <div>&nbsp;</div>
+
+                        <!--hidden forms-->
+                        <div class="form-group" style="display: none;" id="1.25_a">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
+                        </div>
+                      </div>
+
+                      <div class="form-group" style="display: none;" id="1.25_b">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="specify">
+                        </div>
+                      </div>
+
+                      <div class="form-group" style="display: none;" id="1.50_a">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="specify">
+                        </div>
+                      </div>
+
+                      <div class="form-group" style="display: none;" id="1.50_b">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
+                        </div>
+                      </div>
+                     <div>&nbsp;</div>
+                    <!-- /hidden forms-->
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Hour</label>

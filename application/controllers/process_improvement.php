@@ -85,19 +85,41 @@ class Process_Improvement extends CI_Controller {
   }
 
    public function changepass(){
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                   'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+
 
    $this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required');
    $this->form_validation->set_rules('new_pass', 'New Password', 'trim|required');
    $this->form_validation->set_rules('confrim_pass', 'Confirm Password', 'trim|required|matches[new_pass]');
 
-   if($this->form_validation->run() == false)
+   if($this->form_validation->run())
         {
-          $data['title']= "Change Password";
-          $this->load->view('include/header' ,$data); 
-          $this->load->view('changepass_view'); 
-          $this->load->view('include/footer');
+        $new_pass = $this->input->post('new_pass');
+
+        if($this->employee->changepass($info['id'], $new_pass)){
+        }
 
         }
+    $this->load->view('include/header' ,$usertype);
+    $this->load->view('changepass_view'); 
+    $this->load->view('include/footer');
 }
   public function dashboard(){
         $data['username'] = $this->session->userdata('username');            
@@ -502,7 +524,7 @@ class Process_Improvement extends CI_Controller {
 
 
     public function updateProperties(){
-        
+    
             $data1 = $_SESSION['username'];
             $type= $this->employee->read($data1);
             foreach($type as $t){
@@ -511,9 +533,10 @@ class Process_Improvement extends CI_Controller {
               );
               $types[]=$ut;
             }
+            
             $usertype['types'] = $types;
-            $this->load->view('include/header',$usertype);
-            $this->load->view('updatePropertyForm',$data);
+          /*  $this->load->view('include/header',$usertype);*/
+            $this->load->view('updatePropertyForm',$data1);
             $this->load->view('include/footer');
         
     }
