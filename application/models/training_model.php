@@ -20,8 +20,9 @@ class Training_model extends CI_Model {
             return false;
           }
     
-    function update($newRecord){
-        $this->db->replace($this->table,$newRecord);
+    function update_training($title,$newRecord){
+        $this->db->where('title', $title);
+        $this->db->update($this->table,$newRecord);
     }
     
     function del($where_array){

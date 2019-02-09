@@ -53,3 +53,4 @@ function showotrate()
 	$('#1.50_b').hide();
 }
 }
+

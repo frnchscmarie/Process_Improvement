@@ -100,7 +100,7 @@
                 foreach($mrRecord as $p){
                 $spaghetti = $p['property_no'];  
                     echo "<tr><td>".$p['property_no']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateProperties/?'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil">EDIT</i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateProperties/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil">EDIT</i></a></td></tr>';
                 }
         }
         else{

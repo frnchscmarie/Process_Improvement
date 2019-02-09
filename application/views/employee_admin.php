@@ -29,8 +29,7 @@
   <div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/addEmployee'); 
-  ?> 
+  <?php echo form_open('process_improvement/addEmployee'); ?> 
               <form class="form-horizontal form-label-left">
 
                       <div class="form-group">
@@ -38,7 +37,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" id="inputSuccess2" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
                         </div>
-                      </div>
+                      </div><div>&nbsp;</div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
@@ -51,7 +50,7 @@
                         <div class="col-md-3 col-sm-9 col-xs-12">
                          <input type="text" class="form-control" for="mname" id="inputSuccess2" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname">
                         </div>
-                      </div>
+                      </div><div>&nbsp;</div>
 
                       <div class = "form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Username</label>
@@ -60,12 +59,21 @@
                         </div>
 
                       </div>
-                      <div class = "form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
+                      <div>&nbsp;</div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Usertype</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control has-feedback-left"  required="required"for="type" id="inputSuccess2" placeholder="Employee Usertype" name="type" value="<?php echo set_value('type'); ?>" id="type">
+                         <select class="form-control" value="<?php echo set_value('type'); ?>"  id="type">
+                            <option value="Employee">Employee</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Department Head">Department Head</option>
+                            <option value="Admin">Admin</option>
+                          </select>
                         </div>
-                      </div>
+                    </div>
+                      <div>&nbsp;</div>
+                      
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">PG Level</label>
@@ -73,6 +81,7 @@
                          <input type="text" class="form-control has-feedback-left"  required="required"for="pg_level" id="inputSuccess2" placeholder=" PG Level" name="pg_level" value="<?php echo set_value('pg_level'); ?>" id="pg_level">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Birthdate</label>
@@ -80,6 +89,7 @@
                          <input type="date" class="form-control has-feedback-left" required="required" for="birthday" id="inputSuccess2" placeholder=" Birthdate" name="birthday" value="<?php echo set_value('birthday'); ?>" id="birthday">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
             
             
                      <div class="form-group">
@@ -88,6 +98,7 @@
                          <input type="date" class="form-control has-feedback-left" required="required" for="date_hired" id="inputSuccess2" placeholder="Date Hired" name="date_hired" value="<?php echo set_value('date_hired'); ?>" id="date_hired">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
                     
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>
@@ -95,6 +106,7 @@
                          <input type="text" class="form-control has-feedback-left"  required="required" for="position" id="inputSuccess2" placeholder="Position" name="position" value="<?php echo set_value('position'); ?>" id="position">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
@@ -102,6 +114,7 @@
                           <input type="text" class="form-control has-feedback-left" required="required" for="email" id="inputSuccess2" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>" id="email">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Promotion</label>
@@ -109,6 +122,7 @@
                           <input type="date" class="form-control has-feedback-left" required="required" for="promo_date" id="inputSuccess2" placeholder="Last Promotion Date" name="promo_date" value="<?php echo set_value('promo_date'); ?>" id="promo_date">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
             
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status</label>
@@ -116,6 +130,7 @@
                           <input type="text" class="form-control has-feedback-left"  required="required" for="civil_stat" id="inputSuccess2" placeholder="Civil Status" name="civil_stat" value="<?php echo set_value('civil_stat'); ?>" id="civil_stat">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number</label>

@@ -43,7 +43,14 @@ class Leavedb_model extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->holiday);
         $query = $this->db->get();
-        return $query->num_rows();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function createholiday($holiday){
+        $this->db->insert($this->holiday, $holiday);
     }
 }
 ?>

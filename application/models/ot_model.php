@@ -3,7 +3,7 @@
 class OT_model extends CI_Model {
     private $table = 'ot';
     
-    function create($otRecord){
+    function createot($otRecord){
         $this->db->insert($this->table, $otRecord);
     }
     

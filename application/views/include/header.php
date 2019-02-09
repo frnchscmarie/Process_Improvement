@@ -102,7 +102,7 @@
                     <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-user-secret"></i>TRAINING ADMIN</a>
                   </li>
 
-                  <li>
+                   <li>
                     <a href="<?php echo base_url('process_improvement/viewCalendar')?>"> <i class="fa fa-user-secret"></i>LEAVE CALENDAR</a>
                   </li>
 

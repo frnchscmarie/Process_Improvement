@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2019 at 01:19 PM
+-- Generation Time: Feb 09, 2019 at 10:45 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -33,6 +33,15 @@ CREATE TABLE `calendar` (
   `dates` date NOT NULL,
   `holiday` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `calendar`
+--
+
+INSERT INTO `calendar` (`id`, `dates`, `holiday`) VALUES
+(1, '2019-12-25', 'Christmas'),
+(2, '2019-01-01', 'New year'),
+(3, '2019-11-01', 'All Saints Day');
 
 -- --------------------------------------------------------
 
@@ -64,7 +73,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
-('01', 'Janelyn', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '1234567', 'Janelyn', 'admin', '', ''),
+('01', 'Janelyn', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643759', 'Janelyn', 'admin', '', ''),
 ('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', 'employee', '', ''),
 ('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', ''),
 ('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', ''),
@@ -153,9 +162,15 @@ CREATE TABLE `mr` (
   `classification_no` varchar(50) NOT NULL,
   `unit_value` varchar(50) NOT NULL,
   `total_value` varchar(50) NOT NULL,
-  `mr_no` varchar(50) NOT NULL,
-  `qrdata` varchar(100) NOT NULL
+  `mr_no` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mr`
+--
+
+INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty`, `unit`, `property_name`, `description`, `date_purchased`, `property_no`, `classification_no`, `unit_value`, `total_value`, `mr_no`) VALUES
+('02', 'Cortez', 'Franchesca Marie', 'Cadondon', '2019-02-14', '23', '12', 'Property', 'New', '2019-02-07', '12345', '123', '123', '', '123');
 
 -- --------------------------------------------------------
 
@@ -170,9 +185,10 @@ CREATE TABLE `ot` (
   `auto_OT` varchar(100) NOT NULL,
   `aot_from` varchar(20) NOT NULL,
   `aot_to` varchar(20) NOT NULL,
-  `rate` varchar(20) NOT NULL,
-  `hours` varchar(20) NOT NULL,
-  `minutes` varchar(20) NOT NULL,
+  `hours_weekends` varchar(50) NOT NULL,
+  `minutes_weekends` varchar(50) NOT NULL,
+  `hours_weekdays` varchar(50) NOT NULL,
+  `minutes_weekdays` varchar(50) NOT NULL,
   `task` text NOT NULL,
   `authorized_by` text NOT NULL,
   `status` text NOT NULL,
@@ -183,10 +199,14 @@ CREATE TABLE `ot` (
 -- Dumping data for table `ot`
 --
 
-INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `aot_to`, `rate`, `hours`, `minutes`, `task`, `authorized_by`, `status`, `remarks`) VALUES
-(1, '02', '2019-02-01', '1231', '03:02', '16:12', '123', '123123', '123131', '12231', '', '', ''),
-(2, '02', '2019-02-01', 'xcvxcvcxv', '03:42', '02:34', 'xcvxcvxcvxcv', '3454545', '3534535', '34535', '', '', ''),
-(3, '02', '2019-02-01', 'xbattalion', '15:43', '14:43', 'dsfsdfdsfsd', '234567890', '23456789', 'zxczxczxasda', '', '', '');
+INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `aot_to`, `hours_weekends`, `minutes_weekends`, `hours_weekdays`, `minutes_weekdays`, `task`, `authorized_by`, `status`, `remarks`) VALUES
+(1, '02', '2019-02-01', '1231', '03:02', '16:12', '123123', '123131', '', '', '12231', '', '', ''),
+(2, '02', '2019-02-01', 'xcvxcvcxv', '03:42', '02:34', '3454545', '3534535', '', '', '34535', '', '', ''),
+(3, '02', '2019-02-01', 'xbattalion', '15:43', '14:43', '234567890', '23456789', '', '', 'zxczxczxasda', '', '', ''),
+(4, '02', '2019-02-08', 'ewqee', '13:12', '15:23', '23', '23', '2', '23', '23', '', '', ''),
+(5, '02', '2019-02-08', '2:00 - 3:00', '02:04', '14:31', '3', '23', '1232132', '3', '23', '', '', ''),
+(6, '02', '2019-02-08', '2:00 - 3:00', '14:00', '15:00', '00', '00', '1', '00', '12231', '', '', ''),
+(7, '02', '2019-02-08', '6:00 - 8:00', '18:00', '20:00', '', '', '2', '00', '12345', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -205,7 +225,8 @@ CREATE TABLE `property` (
 
 INSERT INTO `property` (`id`, `property_no`) VALUES
 (8, '15-094-423'),
-(9, '12345');
+(9, '12345'),
+(10, '15-037-062');
 
 -- --------------------------------------------------------
 
@@ -230,6 +251,10 @@ CREATE TABLE `training` (
 
 INSERT INTO `training` (`employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
 ('02', 'Chesca', '12121', '2019-01-03', '2019-01-10', '131', '131', '13'),
+('04', 'Noel', 'jane', '2019-02-07', '2019-02-07', '12', 'fhbs', 'bridge-brooklyn-bridge-buildings-534757.jpg'),
+('02', 'Chesca', 'qwerty', '2019-02-07', '2019-02-07', '12', 'fhbs', ''),
+('02', 'Chesca', 'sdfasfd', '0442-04-03', '0232-03-31', '32r5', 'dfgsdg', 'bridge-brooklyn-bridge-buildings-534757.jpg'),
+('02', 'Chesca', 'sfsaf', '2019-02-15', '2019-02-15', '12', 'dfgsdg', ''),
 ('04', 'Noel ', 'weqweq', '2019-01-19', '0000-00-00', '1231', '123', '13'),
 ('02', 'Chesca', 'werewrwe', '2019-01-04', '2019-01-15', '23423423', '235235235', '22342');
 
@@ -310,19 +335,19 @@ ALTER TABLE `training`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ot`
 --
 ALTER TABLE `ot`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

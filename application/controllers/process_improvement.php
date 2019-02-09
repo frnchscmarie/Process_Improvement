@@ -57,7 +57,7 @@ class Process_Improvement extends CI_Controller {
               $info;
             }       
             $data['success'] = true;  
-            redirect('process_improvement/EmployeeProfile', 'refresh');
+            redirect('process_improvement/dashboard', 'refresh');
         }
         else
         {
@@ -404,26 +404,11 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-    public function viewCalendar(){
-        $result_array = $this->leavedb->calendar();
-        $data['holiday'] = $result_array; 
-        $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
-        foreach($type as $t){
-          $ut= array(
-                      'type'=>$t['type']
-          );
-          $types[]=$ut;
-        }
-        $usertype['types'] = $types;
-        $this->load->view('include/header',$usertype);
-        $this->load->view('calendar',$data);
-        $this->load->view('include/footer');   
-    }
+    
 
    public function viewMR(){
-       $result_array = $this->mr->read();
-        $data['mrRecord'] = $result_array; 
+        $result_array = $this->mr->readmr();
+        $data['records'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -433,6 +418,7 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+
 
         $this->load->view('include/header',$usertype);
         $this->load->view('mradmin_view',$data);
@@ -523,24 +509,32 @@ class Process_Improvement extends CI_Controller {
     }
 
 
-    public function updateProperties(){
-    
-            $data1 = $_SESSION['username'];
-            $type= $this->employee->read($data1);
-            foreach($type as $t){
-              $ut= array(
-                          'type'=>$t['type']
-              );
-              $types[]=$ut;
-            }
-            
+    public function updateProperties($property_no){
+
+          $data1 = $_SESSION['username'];
+          $type= $this->employee->read($data1);
+          foreach($type as $t){
+          $ut= array(
+         'type'=>$t['type']
+          );
+          $types[]=$ut;
+         }
+         $usertype['types'] = $types;      
+         $mrRecord['property_no']=$property_no;
+         $condition = array('property_no' => $property_no);
+         $oldRecord = $this->mr->read($condition);
+
+         foreach($oldRecord as $o){
+                $data['property_no']=$o['property_no'];
+              }
+
             $usertype['types'] = $types;
-          /*  $this->load->view('include/header',$usertype);*/
-            $this->load->view('updatePropertyForm',$data1);
+            $this->load->view('include/header',$usertype);
+            $this->load->view('updatePropertyForm',$data);
             $this->load->view('include/footer');
-        
     }
-       public function viewTrainingAdmin(){
+
+    public function viewTrainingAdmin(){
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -558,6 +552,7 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('include/footer');
         
     }
+
     public function viewTraining(){
         $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
@@ -627,23 +622,57 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-
     public function updateTraining(){
-        
-            $data1 = $_SESSION['username'];
-            $type= $this->employee->read($data1);
-            foreach($type as $t){
-              $ut= array(
-                          'type'=>$t['type']
-              );
-              $types[]=$ut;
-            }
-            $usertype['types'] = $types;
-            $this->load->view('include/header',$usertype);
-            $this->load->view('updateTrainingForm',$data);
-            $this->load->view('include/footer');
-        
-    }
+
+         $trainingRecord['title']=$title;
+         $condition = array('title' => $title);
+         $oldRecord = $this->training->read($condition);
+
+         foreach($oldRecord as $o){
+                $data['title']=$o['title'];
+                $data['inc_from']=$o['inc_from'];
+                $data['inc_to']=$o['inc_to'];
+                $data['no_of_hours']=$o['no_of_hours'];
+                $data['conducted_by']=$o['conducted_by'];
+                $data['attachments']=$o['attachments'];
+              }
+         $rules = array(
+              array('field'=>'title', 'label'=>'Title', 'rules'=>'required'),
+                  );
+
+            $this->form_validation->set_rules($rules);
+            
+            if($this->form_validation->run()==FALSE){
+
+              $data1 = $_SESSION['username'];
+                    $type= $this->employee->read($data1);
+                    foreach($type as $t){
+                      $ut= array(
+                                  'type'=>$t['type']
+                      );
+                      $types[]=$ut;
+                    }
+                    $usertype['types'] = $types;
+                    $this->load->view('include/header',$usertype);
+                    $this->load->view('updateTrainingForm',$data);
+                    $this->load->view('include/footer');
+             }
+
+           else{
+          
+                $newRecord=array(
+                    'title'=>$_POST['title'],
+                    'inc_from'=>$_POST['inc_from'],
+                    'inc_to'=>$_POST['inc_to'],
+                    'no_of_hours'=>$_POST['no_of_hours'],
+                    'conducted_by'=>$_POST['conducted_by'],
+                    'attachments'=>$_POST['attachments']
+                     );
+                    
+                    $this->training->update_training($title,$newRecord);
+                    redirect('process_improvement/viewTraining');
+                 }
+        }
 
      public function viewOvertimeRegular(){
 
@@ -655,8 +684,9 @@ class Process_Improvement extends CI_Controller {
             );
             $info;
         } 
-        $data= $this->ot->readall($info['id']);
-        $newdata['play'] = $data; 
+
+        $result_array = $this->ot->read($info['id']);
+        $data['ot'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -667,31 +697,23 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('otregular_view',$newdata);
+        $this->load->view('otregular_view',$data);
         $this->load->view('include/footer');
         
         
     }
 
     public function addOT(){
-        $data['username'] = $this->session->userdata('username');            
-        $userinfo = $this->employee->read($data['username']);
-        foreach($userinfo as $i){
-          $info = array(
-              'id' => $i['id'],
-            );
-            $info;
-        } 
-        $data['id'] = $this->ot->read($info['id']);
-
+        
         $rules = array(
                    array('field'=>'date_of_filing', 'label'=>'Date', 'rules'=>'required'),
                    array('field'=>'auto_OT', 'label'=>'Authorized Time', 'rules'=>'required'),
-                   array('field'=>'rate', 'label'=>'Rate', 'rules'=>'required'),
                    array('field'=>'aot_from', 'label'=>'Actual OT time start', 'rules'=>'required'),
                    array('field'=>'aot_to', 'label'=>'Actual OT time end', 'rules'=>'required'),
-                   array('field'=>'hours', 'label'=>'Hours', 'rules'=>'required'),
-                   array('field'=>'minutes', 'label'=>'Minutes', 'rules'=>'required'),
+                   array('field'=>'hours_weekdays', 'label'=>'Hours Weekdays'),
+                   array('field'=>'minutes_weekdays', 'label'=>'Minutes Weekdays'),
+                   array('field'=>'hours_weekends', 'label'=>'Hours Weekends'),
+                   array('field'=>'minutes_weekends', 'label'=>'Minutes Weekends'),
                    array('field'=>'task', 'label'=>'Tasks', 'rules'=>'required')
                    
                 );
@@ -700,42 +722,29 @@ class Process_Improvement extends CI_Controller {
 
         }
        else{
+              $data['username'] = $this->session->userdata('username');            
+              $userinfo = $this->employee->read($data['username']);
+              foreach($userinfo as $i){
+              $info = array(
+                'id' => $i['id'],
+              );
+              $info;
+            }       
             $otRecord=array(
                 'date_of_filing'=>$_POST['date_of_filing'],
                 'auto_OT'=>$_POST['auto_OT'],
-                'rate'=>$_POST['rate'],
                 'aot_from'=>$_POST['aot_from'],
                 'aot_to'=>$_POST['aot_to'],
-                'hours'=>$_POST['hours'],
-                'minutes'=>$_POST['minutes'],
+                'hours_weekdays'=>$_POST['hours_weekdays'],
+                'minutes_weekdays'=>$_POST['minutes_weekdays'],
+                'hours_weekends'=>$_POST['hours_weekends'],
+                'minutes_weekends'=>$_POST['minutes_weekends'],
                 'task'=>$_POST['task'],
                 'employeeID'=>$info['id']
-                
             );
-            $data['ot']=$otRecord;
-            $this->ot->create($otRecord);
+            $this->ot->createot($otRecord);
             redirect('process_improvement/viewOvertimeRegular');
             }
-
-    }
-
-
-     public function viewOvertimeContractual(){
-     
-        $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
-        foreach($type as $t){
-          $ut= array(
-                      'type'=>$t['type']
-          );
-          $types[]=$ut;
-        }
-        $usertype['types'] = $types;
-        $this->load->view('include/header',$usertype);
-        $this->load->view('otcontractual_view');
-        $this->load->view('include/footer');
-        
-        
     }
 
     public function viewSVLeave(){
@@ -755,8 +764,89 @@ class Process_Improvement extends CI_Controller {
         
     }
 
- 
+
+public function addpropertyinfo(){
+
+  $newRecord=array(
+    'employeeID'=>$_POST['employeeID'],
+    'lname'=>$_POST['lname'],
+    'fname'=>$_POST['fname'],
+    'mname'=>$_POST['mname'],
+    'date_assigned'=>$_POST['date_assigned'],
+    'qty'=>$_POST['qty'],
+    'unit'=>$_POST['unit'],
+    'property_name'=>$_POST['property_name'],
+    'description'=>$_POST['description'],
+    'date_purchased'=>$_POST['date_purchased'],
+    'property_no'=>$_POST['property_no'],
+    'classification_no'=>$_POST['classification_no'],
+    'unit_value'=>$_POST['unit_value'],
+    'mr_no'=>$_POST['mr_no'],
+    );
+                    
+    $this->mr->createproperty($newRecord);
+    redirect('process_improvement/viewMR');
+}
+
+public function addHoliday(){
+
+  $rules = array(
+                   array('field'=>'holiday_name', 'label'=>'Holiday Name', 'rules'=>'required'),
+                   array('field'=>'holiday_date', 'label'=>'Holiday Date', 'rules'=>'required')
+                 );
+            $this->form_validation->set_rules($rules);
+            if($this->form_validation->run()==FALSE){
+               }
+       else{
+              $data['username'] = $this->session->userdata('username');            
+              $userinfo = $this->employee->read($data['username']);
+              foreach($userinfo as $i){
+              $info = array(
+                'id' => $i['id'],
+              );
+              $info;
+            }
+
+            $holiday = array(
+              'holiday'=>$_POST['holiday_name'],
+              'dates'=>$_POST['holiday_date']
+            );
+            $this->leavedb->createholiday($holiday);
+            redirect('process_improvement/viewCalendar');
+            }
     }
+
+    public function viewCalendar(){
+
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+
+        $result_array = $this->leavedb->calendar($info['id']);
+        $data['holiday'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('calendar_view',$data);
+        $this->load->view('include/footer');   
+    }
+
+  
+
+ 
+}
 
     
 

@@ -1,49 +1,45 @@
 <div class="right_col" role="main">
   <div class="">
     <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Overtime List</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                      <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Overtime </a>
-
-<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      <h3 class="modal-title" id="lineModalLabel">OVERTIME APPLICATION</h3>
-    </div>
-    <div class="modal-body">
-    <div>&nbsp;</div>
-  <div class="container">
-  <?php echo validation_errors(); ?>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Overtime List</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Overtime </a>
+                    <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                              <h3 class="modal-title" id="lineModalLabel">OVERTIME APPLICATION</h3>
+                          </div>
+                            <div class="modal-body">
+                              <div>&nbsp;</div>
+                                <div class="container">
+                                  <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/addOT'); 
-  ?> 
-              <form class="form-horizontal form-label-left">
+                                  <?php echo form_open('process_improvement/addOT'); ?> 
+                                    <form class="form-horizontal form-label-left">
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
-                        </div>
-                      </div>
-                      <div>&nbsp;</div>
-
-                    
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date </label>
+                                          <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                                          </div>
+                                    </div>
+                                        <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Authorized OT Time</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="auto_OT" name="auto_OT" value="<?php echo set_value('auto_OT'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Authorized Time">
+                         <input type="time" id="auto_OT" name="auto_OT" value="<?php echo set_value('auto_OT'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Authorized Time">
                         </div>
                       </div>
                       <div>&nbsp;</div>
 
-                    
+
 
                       <label class=" col-md-12 col-sm-12 col-xs-12">ACTUAL OT TIME </label>
                       <div class="form-group">
@@ -63,63 +59,36 @@
                       <div>&nbsp;</div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">OT RATE</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                           <select class="form-control" value="<?php echo set_value('rate'); ?>" onchange="showotrate()" id="rate">
-                            <option value="1.25">1.25</option>
-                            <option value="1.50">1.50</option>
-                          </select>
-                        </div>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">RATE</label>
+                        <label class="control-label col-md-5 col-sm-5 col-xs-12">1.25(weekdays)</label>
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">1.50(weekend)</label>
                       </div>
-                      <div>&nbsp;</div>
-
-                        <!--hidden forms-->
-                        <div class="form-group" style="display: none;" id="1.25_a">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="display: none;" id="1.25_b">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="specify">
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="display: none;" id="1.50_a">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="specify">
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="display: none;" id="1.50_b">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
-                        </div>
-                      </div>
-                     <div>&nbsp;</div>
-                    <!-- /hidden forms-->
+                      <div>&nbsp;</div>                      
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Hour</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="number" name="hours" id="hours" required="required" value="<?php echo set_value('hours') ?>" >
-                         
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Hour/s</label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekdays" id="hours_weekdays"  value="<?php echo set_value('hours_weekdays') ?>" >
+                         </div>
+
+
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekends" id="hours_weekends" value="<?php echo set_value('hours_weekends') ?>" >
                         </div>
                       </div>
-                      <div>&nbsp;</div>
+                      <div>&nbsp;</div><br />
                       
-                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Minute</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="number" for="minutes" name="minutes" id="minutes" required="required" placeholder=" Minutes" class="form-control col-md-5 col-sm-2 col-xs-4" value="<?php echo set_value('minutes'); ?>" >
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Minute/s</label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="minutes_weekdays" id="minutes_weekdays"  value="<?php echo set_value('minutes_weekdays') ?>" >
+                         </div>
+
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="minutes_weekends" id="minutes_weekends"  value="<?php echo set_value('minutes_weekends') ?>" >
                         </div>
                       </div>
-                      <div>&nbsp;</div>
+                      <div>&nbsp;</div><br />
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tasks to be Accomplished</label>
@@ -129,29 +98,22 @@
                       </div>
                       <div>&nbsp;</div>
 
-
-                      
-                      
-    <div class="">
-    <label class="control-label col-sm-4">&nbsp;</label>
   
-    </div>
-  
-   <div class="form-group">
+                        <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewLeave')?>" style="color: white;">Cancel</a></button>
+                          <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewOvertimeRegular')?>" style="color: white;">Cancel</a></button>
                           
                           <button type="submit" class="btn btn-success" value="submit">Submit</button>
                         </div>
-      </div>
+                       </div>
     
-  </div>
+                      </div>
   
-</div>
-</div>
-</div>
-</div>
-</form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
 
   <div class="container">
   <?php echo validation_errors(); ?>
@@ -197,15 +159,13 @@
 
                        <tbody>
                        <?php
-                       if($play!=null){
-                         foreach($play as $o){  
+                       if($ot!=null){
+                         foreach($ot as $o){  
                           echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['hours_weekdays']."</td><td>".$o['minutes_weekdays']."</td><td>".$o['hours_weekends']."</td><td>".$o['minutes_weekends']."</td><td>".$o['task']."</td>".'</tr>';
                     
                           }
-                        }else{
-                          echo 'walang laman';
                         }
-            ?>
+                       ?>
           
                       </tbody>
                      </table>
@@ -273,4 +233,59 @@
 
 
 
+ <script>
+$(document).ready(function(){
  
+ function load_unseen_notification(view = '')
+ {
+  $.ajax({
+   url:"fetch.php",
+   method:"POST",
+   data:{view:view},
+   dataType:"json",
+   success:function(data)
+   {
+    $('.dropdown-menu').html(data.notification);
+    if(data.unseen_notification > 0)
+    {
+     $('.count').html(data.unseen_notification);
+    }
+   }
+  });
+ }
+ 
+ load_unseen_notification();
+ 
+ $('#comment_form').on('submit', function(event){
+  event.preventDefault();
+  if($('#subject').val() != '' && $('#comment').val() != '')
+  {
+   var form_data = $(this).serialize();
+   $.ajax({
+    url:"insert.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     $('#comment_form')[0].reset();
+     load_unseen_notification();
+    }
+   });
+  }
+  else
+  {
+   alert("Both Fields are Required");
+  }
+ });
+ 
+ $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+ });
+ 
+ setInterval(function(){ 
+  load_unseen_notification();; 
+ }, 5000);
+ 
+});
+</script>
