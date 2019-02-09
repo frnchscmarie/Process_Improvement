@@ -32,6 +32,7 @@
                           <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" placeholder=" Employee ID" name="employeeID" value="<?php echo $employeeID?>" id="employeeID">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
 
                       <div class="form-group">
@@ -46,6 +47,7 @@
                          <input type="text" class="form-control" for="mname" id="inputSuccess2" placeholder="Middle Name" name="mname" value="<?php echo $mname ?>" id="mname">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
             
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Birthdate</label>
@@ -53,6 +55,7 @@
                          <input type="date" class="form-control has-feedback-left" required="required" for="birthday" placeholder=" Birthdate" name="birthday" value="<?php echo $birthday ?>" id="birthday">
                         </div>
                       </div>
+                      <div>&nbsp;</div>  
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">PG Level</label>
@@ -60,6 +63,7 @@
                          <input type="text" class="form-control has-feedback-left"  required="required"for="pg_level" placeholder=" PG Level" name="pg_level" value="<?php echo $pg_level ?>" id="pg_level">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
                     
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Hired</label>
@@ -67,7 +71,7 @@
                          <input type="date" class="form-control has-feedback-left" required="required" for="date_hired"  placeholder="Date Hired" name="date_hired" value="<?php echo $date_hired ?>" id="date_hired">
                         </div>
                       </div>
-            
+                     <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>
@@ -75,6 +79,7 @@
                          <input type="text" class="form-control has-feedback-left"  required="required" for="position"  placeholder="Position" name="position" value="<?php echo $position ?>" id="position">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
@@ -82,6 +87,7 @@
                           <input type="text" class="form-control has-feedback-left" required="required" for="email" placeholder="Email" name="email" value="<?php echo $email ?>" id="email">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Promotion</label>
@@ -89,6 +95,7 @@
                           <input type="date" class="form-control has-feedback-left" required="required" for="promo_date" placeholder="Last Promotion Date" name="promo_date" value="<?php echo $promo_date ?>" id="promo_date">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status</label>
@@ -96,6 +103,7 @@
                           <input type="text" class="form-control has-feedback-left"  required="required" for="civil_stat" placeholder="Civil Status" name="civil_stat" value="<?php echo $civil_stat ?>" id="civil_stat">
                         </div>
                       </div>
+                      <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number</label>
