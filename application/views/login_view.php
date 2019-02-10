@@ -46,31 +46,30 @@ if(isset($_SESSION['username'])) {
 
 ?>
 
-              <h1>Login Form</h1>
+              <h1>IMS LOG IN</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" name="username" id="user" required />
               </div>
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="password" id="password" required />
               </div>
-              <div>
+              <div style="margin-left: 30%;">
                 <input class="btn btn-default submit" type="submit" value="Log In" name="submit"/>
-                <a class="reset_pass" href="#">Lost your password?</a>
+               
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
+               <!-- <p class="change_link">New to site?
                   <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+                </p>-->
 
                 <div class="clearfix"></div>
-                <br />
 
                 <div>
                   <h2><i class="fa fa-bank"></i> &nbsp;Retail Banking Systems Department</h2>
-                  <p>©2018 All Rights Reserved. Privacy and Terms</p>
+                  <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
             </form>
@@ -98,7 +97,7 @@ if(isset($_SESSION['username'])) {
 
               <div class="separator">
                 <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
+                  <a href="#signin" class="to_register"> Log In </a>
                 </p>
 
                 <div class="clearfix"></div>

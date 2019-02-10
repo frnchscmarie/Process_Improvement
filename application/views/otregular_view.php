@@ -140,7 +140,8 @@
                    <table id="datatable" class="table table-striped table-bordered">
 
                       <thead>
-                            <tr id="trHead">
+  
+                          <tr id="trHead">
                             <th rowspan="3">Date</th>          
                             <th rowspan="3">Authorized OT Time</th>
                             <th colspan="2">Actual OT Time</th>
