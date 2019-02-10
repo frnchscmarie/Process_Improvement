@@ -9,7 +9,7 @@ class Process_Improvement extends CI_Controller {
     $this->load->library('session');
     $this->load->helper(array('form', 'url'));
     // $this->load->library('form_validation'); 
-    $this->load->library(array('form_validation','ciqrcode')); 
+    $this->load->library(array('form_validation','ciqrcode','Pdf'));      
     // $this->load->library('ciqrcode');
 
     $this->load->model('employee_model','employee');
@@ -622,11 +622,11 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-    public function updateTraining(){
+    public function updateTraining($id){
 
-         $trainingRecord['title']=$title;
-         $condition = array('title' => $title);
-         $oldRecord = $this->training->read($condition);
+         $trainingRecord['id']=$id;
+         $condition = array('id' => $id);
+         $oldRecord = $this->training->read_training($condition);
 
          foreach($oldRecord as $o){
                 $data['title']=$o['title'];
@@ -636,15 +636,11 @@ class Process_Improvement extends CI_Controller {
                 $data['conducted_by']=$o['conducted_by'];
                 $data['attachments']=$o['attachments'];
               }
-         $rules = array(
-              array('field'=>'title', 'label'=>'Title', 'rules'=>'required'),
-                  );
 
-            $this->form_validation->set_rules($rules);
             
             if($this->form_validation->run()==FALSE){
 
-              $data1 = $_SESSION['username'];
+                    $data1 = $_SESSION['username'];
                     $type= $this->employee->read($data1);
                     foreach($type as $t){
                       $ut= array(
@@ -669,7 +665,7 @@ class Process_Improvement extends CI_Controller {
                     'attachments'=>$_POST['attachments']
                      );
                     
-                    $this->training->update_training($title,$newRecord);
+                    $this->training->update_training($id,$newRecord);
                     redirect('process_improvement/viewTraining');
                  }
         }

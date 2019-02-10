@@ -208,7 +208,7 @@
                       </tbody>
                      </table>
 <!--/table-->
-              <button style="margin-top: -10px; margin-left: 50%;"><i class="fa fa-print"></i> Print</button>
+              <button style="margin-top: -10px; margin-left: 50%;" class="print"><i class="fa fa-print"></i> Print</button>
 
     </div>
   </div>
@@ -261,3 +261,7 @@
 </div>
 </div>
 </body>
+
+<script type="text/javascript">
+ 
+</script>

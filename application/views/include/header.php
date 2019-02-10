@@ -41,7 +41,9 @@
 <!--     <script src="<?php echo base_url('/assets/js/multiple_selection.js'); ?>"></script>
     <script src="<?php echo base_url('/assets/js/search.js'); ?>"></script>
   <script src="<?php echo base_url('/assets/js/select.js'); ?>"></script> -->
-   <script src="<?php echo base_url('/assets/js/validation.js'); ?>"></script>
+   <script type="text/javascript" src="<?php echo base_url('/assets/js/validation.js'); ?>"></script>
+   <script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.PrintArea.js'); ?>"></script>
   </head>
 
   <body class="nav-md">

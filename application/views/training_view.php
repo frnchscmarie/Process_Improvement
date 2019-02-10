@@ -144,7 +144,7 @@
         if($training!=null){
                 foreach($training as $t){  
                     echo "<tr><td>".$t['title']."</td><td>".$t['inc_from']."</td><td>".$t['inc_to']."</td><td>".$t['no_of_hours']."</td><td>".$t['conducted_by']."</td><td>".$t['attachments']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateTraining/'.$t['title']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$t['title']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateTraining/'.$t['id']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$t['id']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
                     
                 }
         }

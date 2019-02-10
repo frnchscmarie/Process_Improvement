@@ -1,3 +1,5 @@
+
+
 <div class="right_col" role="main">
   <div class="">
     <div class="clearfix"></div>
@@ -126,7 +128,7 @@
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                <div class="x_content">
+                <div class="x_content" id="doPrint">
                    
                    <table id="datatable" class="table table-striped table-bordered">
                       <thead>
@@ -136,7 +138,8 @@
                             <th rowspan="3">Authorized OT Time</th>
                             <th colspan="2">Actual OT Time</th>
                             <th colspan="4">OT Rate</th>
-                            <th rowspan="3">Tasks to be Accomplished /<br>Actual Accomplishments<br>(Please attach additional sheet of necessary)</th>
+                            <th rowspan="3">Tasks to be Accomplished /<br>Actual Accomplishments<br></th>
+                            <th rowspan="3">Authorized By:</th>
                           </tr>
 
                           <tr id="trHead">
@@ -185,8 +188,7 @@
   </div>
 
               <div style="float: right; margin-top: 10px;">
-                <button type="submit" class="btn btn-success" value="submit">Submit</button>
-                <button type="submit" class="btn btn-success" value="submit">Clear</button>
+                <button class="btn btn-success"  onclick="printContent">Print</a>
               </div>
  </div>
 
@@ -220,7 +222,8 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a><a href="" class="btn btn-success btn-xs"><i class="fa fa-print"></i> Print</a></td>
+          <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>            
+            <a href="" class="btn btn-success btn-xs print"><i class="fa fa-print"></i> Print</a></td>
         </tr>
         </tbody>
     </table>
@@ -235,7 +238,6 @@
 
  <script>
 $(document).ready(function(){
- 
  function load_unseen_notification(view = '')
  {
   $.ajax({
@@ -282,10 +284,21 @@ $(document).ready(function(){
   $('.count').html('');
   load_unseen_notification('yes');
  });
+
  
  setInterval(function(){ 
   load_unseen_notification();; 
  }, 5000);
  
+
 });
+
+function printContent(x_content) {
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById(x_content).innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
+
 </script>

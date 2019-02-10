@@ -19,9 +19,21 @@ class Training_model extends CI_Model {
         else
             return false;
           }
+
+    function read_training($condition=null){
+        $this->db->select('*');
+        $this->db->from('training');
+        if(isset($condition))
+            $this->db->where($condition);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
     
-    function update_training($title,$newRecord){
-        $this->db->where('title', $title);
+    function update_training($id,$newRecord){
+        $this->db->where('id', $id);
         $this->db->update($this->table,$newRecord);
     }
     
