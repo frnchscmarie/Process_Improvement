@@ -1,6 +1,3 @@
-
-
-</body>
 <!DOCTYPE html>
 <body class="nav-md">
     <div class="container body">
@@ -119,12 +116,8 @@
                   </div>
                       </li>
                     </ul>
-                    <div class="clearfix"></div>
-                      <div class="x_content">
-                  
-                      <table id="datatable" class="table table-striped table-bordered col-md-12">
-                        <thead>
-    <div class="x_content">
+                  <div class="clearfix"></div>
+                  <div class="x_content">
                   <table id="datatable" class="table table-striped table-bordered">
                   <thead>
   
