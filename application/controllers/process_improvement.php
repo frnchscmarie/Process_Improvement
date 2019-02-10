@@ -692,6 +692,9 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+        $newresult_array = $this->employee->remployee($info['id']);
+        $data['name'] = $newresult_array;
+
         $this->load->view('include/header',$usertype);
         $this->load->view('otregular_view',$data);
         $this->load->view('include/footer');
