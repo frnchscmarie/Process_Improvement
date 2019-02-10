@@ -95,12 +95,7 @@
             <th >PG LEVEL</th>
             <td name="pl" id="pl"> <?php echo($pg)?></td>
           </tr>
-          
-          <tr id="trHead">
-            <th >OFFICE</th>
-            <td name="of" id="of"> </td>
-          </tr>
-          
+        
           <tr id="trHead">
             <th >CELLPHONE NUMBER</th>
             <td name="cp" id="cp"><?php echo($cp)?> </td>
