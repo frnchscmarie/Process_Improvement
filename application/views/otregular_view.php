@@ -128,9 +128,17 @@
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                <div class="x_content" id="doPrint">
-                   
+<!--pdf--> <div class="x_content" id="otform" style="margin-top: 3%;">
+                  <?php foreach($name as $n){
+                    $last = $n['lname'];
+                    $first = $n['fname'];
+                    $middle = $n['mname'];
+                  }
+
+                  ?>
+                   <label>Employee Name: <?php echo("$last, $first $middle")  ?></label>
                    <table id="datatable" class="table table-striped table-bordered">
+
                       <thead>
   
                           <tr id="trHead">
@@ -172,7 +180,7 @@
           
                       </tbody>
                      </table>
-
+</div>
 
      <div class="col-md-6" style="padding: 10px; text-align: center;">
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -188,7 +196,7 @@
   </div>
 
               <div style="float: right; margin-top: 10px;">
-                <button class="btn btn-success"  onclick="printContent">Print</a>
+                <button class="btn btn-success"  onclick="printContent('otform')">PRINT</a></button>
               </div>
  </div>
 
@@ -293,12 +301,20 @@ $(document).ready(function(){
 
 });
 
-function printContent(x_content) {
+/**function printContent(doPrint) {
             var restorepage = document.body.innerHTML;
             var printcontent = document.getElementById(x_content).innerHTML;
             document.body.innerHTML = printcontent;
             window.print();
             document.body.innerHTML = restorepage;
-        }
+        }**/
+
+  function printContent(el){
+  var restorepage = document.body.innerHTML;
+  var printcontent = document.getElementById(el).innerHTML;
+  document.body.innerHTML = printcontent;
+  window.print();
+ document.body.innerHTML = restorepage;
+}
 
 </script>
