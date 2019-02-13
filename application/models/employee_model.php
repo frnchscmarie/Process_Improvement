@@ -97,12 +97,26 @@ class Employee_model extends CI_Model {
            }  
       }
    
-    function change_pass($session_id,$new_pass)
+public function changepassword($data,$arg)
     {
-    $this->db->set('password',$new_pass);
-    $this->db->where('id',$session_id);
-    $this->db->update('login');
+         $this->db->update('register', $data,"`id` = $arg");
+            
     }
-
+    
+    public function error($msg)
+    {
+        return '<div id="error">'.$msg.'</div>';
 }
-?>
+
+public function supervisors(){
+    $this->db->select("*, CONCAT(sv_lastname, ',', sv_firstname) AS username");
+    $this->db->from('supervisor');
+    $query = $this->db->get();
+    if($query -> num_rows()>0){
+        return $query->result_array();
+    }
+    else{
+        return false;
+    }
+}
+}

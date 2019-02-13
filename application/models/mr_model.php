@@ -8,22 +8,33 @@ class MR_model extends CI_Model {
         $this->db->insert($this->property, $mrRecord);
     }
     
-    function read($condition=null){
+    function read1($condition=null){
         $this->db->select('*');
-        $this->db->from($this->property);
-        
-        if(isset($condition))
-            $this->db->where($condition);
-        
+        $this->db->from($this->mr);
         $query = $this->db->get();
-        
         if($query->num_rows()>0)
             return $query->result_array();
         else
             return false;
-          }
+    }
     
-    function update($newRecord){
+    function read($id){
+        $this->db->select('*');
+        $this->db->from($this->property);
+        foreach($id as $i){
+            $new = $i['mr'];
+        }
+        $where = "property_no != '$new'";
+        $this->db->where($where);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function update_mr($property_no, $newRecord){
+        $this->db->where('property_no', $property_no);
         $this->db->replace($this->table,$newRecord);
     }
 

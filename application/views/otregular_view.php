@@ -122,12 +122,15 @@
   
   <?php echo form_open('process_improvement/viewOvertimeRegular'); 
   ?> 
-           
+     <div class="x_panel">
+                  <div class="">
+          <div class="x_content" >
                     <div class="clearfix"></div>
                   </div>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
+                   
 <!--pdf--> <div class="x_content" id="otform" style="margin-top: 3%;">
                   <?php foreach($name as $n){
                     $last = $n['lname'];
@@ -147,7 +150,7 @@
                             <th colspan="2">Actual OT Time</th>
                             <th colspan="4">OT Rate</th>
                             <th rowspan="3">Tasks to be Accomplished /<br>Actual Accomplishments<br></th>
-                            <th rowspan="3">Authorized By:</th>
+                            <th rowspan="3">Authorized By: </th>
                           </tr>
 
                           <tr id="trHead">
@@ -167,15 +170,20 @@
 
                       </thead>
 
-
+                    <?php
+                     foreach($supervisor as $i){
+                      $name = $i['username'];
+                     }
+                      ?> 
                        <tbody>
                        <?php
                        if($ot!=null){
                          foreach($ot as $o){  
-                          echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['hours_weekdays']."</td><td>".$o['minutes_weekdays']."</td><td>".$o['hours_weekends']."</td><td>".$o['minutes_weekends']."</td><td>".$o['task']."</td>".'</tr>';
-                    
+                          echo "<tr><td>".$o['date_of_filing']."</td><td>".$o['auto_OT']."</td><td>".$o['aot_from']."</td><td>".$o['aot_to']."</td><td>".$o['hours_weekdays']."</td><td>".$o['minutes_weekdays']."</td><td>".$o['hours_weekends']."</td><td>".$o['minutes_weekends']."</td><td>".$o['task']."</td>";
                           }
+                        echo "<td>".$name."</td></tr>";
                         }
+                        
                        ?>
           
                       </tbody>
@@ -186,9 +194,9 @@
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                   <div class="form-group">
-                     <label class="control-label col-md-3 col-sm-3 col-xs-12">AUTHORIZED BY: </label>
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12">AUTHORIZED BY:</label>
                       <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" class="form-control" value="<?php echo $name?>" readonly="">
                       </div>
                   </div>
 

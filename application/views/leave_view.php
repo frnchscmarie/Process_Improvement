@@ -57,7 +57,7 @@
                         <div class="form-group" style="display: none;" id="vl_int">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
+                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
                         </div>
                       </div>
 
@@ -65,26 +65,26 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <div class="radio" style="display: none;" id="sick_leave">
                             <label>
-                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> In hospital
+                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="optionsRadios"> In hospital
                             </label>
                              <label>
-                              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Out Patient
+                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="optionsRadios"> Out Patient
                             </label>
                           </div>
                         </div>
                      <div>&nbsp;</div>
 
-                      <div class="form-group" style="display: none;" id="sick_leave_specify">
+                      <div class="form-group" style="display: none;" id="special_leave_priveledge">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate reason for admission/leave">
+                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate type of SLP">
                         </div>
                       </div>
 
                       <div class="form-group" style="display: none;" id="others">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Reason/s for leave">
+                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Reason/s for leave">
                         </div>
                       </div>
                     
@@ -175,7 +175,7 @@
 
 
 <!--first panel (TABLE) -->                      
-<div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" ">
+<div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >
                 <div class="x_panel">
                   <div class="">
                     <h4>LIST OF EMPLOYEE'S LEAVE</h4>
@@ -190,6 +190,7 @@
                           <th >Date Filled</th>
                           <th >Place</th>
                           <th >Type of Leave</th>
+                          <th >Leave Information</th>
                           <th >No. of Days</th>
                           <th colspan="2">Inclusive Dates</th>
                           <th >Approver</th>
@@ -201,7 +202,7 @@
                        <?php
                         if($leavedb!=null){
                           foreach($leavedb as $l){
-                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['place']."</td><td>".$l['type']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisor']."</td><td>".$l['status']."</td>".'</tr>';
+                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['place']."</td><td>".$l['type']."</td><td>".$l['type_info']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisor']."</td><td>".$l['status']."</td>".'</tr>';
                           }
                                 }
                                 ?>

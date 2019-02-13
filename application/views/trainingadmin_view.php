@@ -34,14 +34,13 @@
             <th >Number of Hours</th>
             <th >Conducted/Sponsored by<br>(Write in full)</th>
             <th >Attachments</th>
-            <th >Action</th>
           </tr>
         </thead>
         <tbody>
                        <?php
                        if($alltraining!=null){
                          foreach($alltraining as $a){  
-                            echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td>".$a['attachments']."</td>".'<td><a href="'.base_url('process_improvement/updateTraining/'.$a['title']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$a['title']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                            echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td>".$a['attachments']."</td>".'<td></tr>';
                     
                 }
         }

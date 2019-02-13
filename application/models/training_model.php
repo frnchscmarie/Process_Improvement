@@ -20,11 +20,10 @@ class Training_model extends CI_Model {
             return false;
           }
 
-    function read_training($condition=null){
+    function read_training($id){
         $this->db->select('*');
         $this->db->from('training');
-        if(isset($condition))
-            $this->db->where($condition);
+        $this->db->where('id',$id);
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();

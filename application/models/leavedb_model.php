@@ -39,10 +39,14 @@ class Leavedb_model extends CI_Model {
     return $query->num_rows();
     }
 
-    function calendar(){
+    function readholiday($id){
         $this->db->select('*');
         $this->db->from($this->holiday);
+        if(isset($condition))
+            $this->db->where($condition);
+        
         $query = $this->db->get();
+        
         if($query->num_rows()>0)
             return $query->result_array();
         else
@@ -51,6 +55,11 @@ class Leavedb_model extends CI_Model {
 
     function createholiday($holiday){
         $this->db->insert($this->holiday, $holiday);
+    }
+
+     function update_holiday($id,$newRecord){
+        $this->db->where('id', $id);
+        $this->db->update($this->holiday,$newRecord);
     }
 }
 ?>

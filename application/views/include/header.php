@@ -53,7 +53,7 @@
           <div class="left_col scroll-view">
 
             <div class="navbar nav_title" style="border: 0; margin-top: 5%;">
-              <img src="<?php echo base_url('assets/css/build/images/landbank.png'); ?>" alt="..." style="margin-left: 20%; width: 45%; height: 80%;" />
+              
             </div>
 
             <div class="clearfix"></div>
@@ -201,7 +201,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     
                      <li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"><i class="fa fa-user pull-right"></i> Profile</a></li>
-                    <li><a href="<?php echo base_url('process_improvement/changepass'); ?>"><i class="fa fa-lock pull-right"></i> Change Password</a></li>
+                    <li><a href="<?php echo base_url('process_improvement/changepassword'); ?>"><i class="fa fa-lock pull-right"></i> Change Password</a></li>
                     <li><a href="<?php echo base_url('process_improvement/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

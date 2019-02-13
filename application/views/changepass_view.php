@@ -19,28 +19,28 @@
                     <div class="clearfix"></div>
                     
 <!--input content here--> <div class="x_content">
-                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" style="margin-left: 15%">
+                             <form data-parsley-validate class="form-horizontal form-label-left" style="margin-left: 15%">
                                <div class="form-group">
                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Current Password: </label>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
-                                          <input type="password" class="form-control has-feedback-left" required="required" for="" placeholder="Current Password" name="old_pass" value="" id="oldpassword">
+                                          <input type="password" class="form-control has-feedback-left" required="required" for="" placeholder="Current Password" name="oldpassword" id="oldpassword">
                                       </div>
                                </div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">New Password: </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
-                             <input type="password" class="form-control has-feedback-left" required="required" for=""  placeholder="Enter new password" name="new_pass" value="<?php echo set_value('password'); ?>" id="password">
+                             <input type="password" class="form-control has-feedback-left" required="required" for=""  placeholder="Enter new password" name="newpassword" id="newpassword">
                          </div>
                       </div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Verify Password: </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input type="password" class="form-control has-feedback-left" required="required" for=""  placeholder="Re-enter new password" name="confirm_pass" value="<?php echo set_value('password'); ?>" id="change_pass">
+                            <input type="password" class="form-control has-feedback-left" required="required" for=""  placeholder="Re-enter new password" nname="confirmpassword" id="confirmpassword">
                           </div>
-                      </div>
-
+                      </div><span id='message'></span>
+                        
 
                       
   

@@ -6,7 +6,7 @@
       <div class="main_container">
         
         
-<?php echo form_open('process_improvement/updateTraining/'.$title);?> 
+<?php echo form_open('process_improvement/updateTraining/'.$id);?> 
 <div class="right_col" role="main">
           <div class="">
            
