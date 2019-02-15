@@ -86,7 +86,7 @@
                 <!--START -->
                 <ul class="nav side-menu">
                   
-                  <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                  <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                   </li>
                   <!--<li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i> PROFILE </a>
                   </li>-->
@@ -104,12 +104,6 @@
                   <li>
                     <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-comment-o"></i>TRAINING ADMIN</a>
                   </li>
-
-                   <li>
-                    <a href="<?php echo base_url('process_improvement/viewCalendar')?>"> <i class="fa fa-calendar"></i>LEAVE CALENDAR</a>
-                  </li>
-
-
                 </ul>
                 <!-- end -->
                 <?php 
@@ -121,7 +115,7 @@
                 ?>
                 <!--START ( SUPER ADMIN)-->
                 <ul class="nav side-menu">
-                      <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                      <li><a href="<?php echo base_url('process_improvement/dashboard_supervisor')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
                       <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
@@ -138,7 +132,7 @@
                 ?>
                 <!--START ( DEPT HEAD)-->
                 <ul class="nav side-menu">
-                      <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                      <li><a href="<?php echo base_url('process_improvement/dashboard_depthead')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
                       <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>

@@ -165,6 +165,55 @@ class Process_Improvement extends CI_Controller {
        $this->load->view('include/footer');
   }
 
+  public function dashboard_supervisor(){
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data['total'] = $this->training->read($info['id']);
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+       $this->load->view('include/header', $usertype);
+       $this->load->view('dashboard_supervisor', $data);
+       $this->load->view('include/footer');
+  }
+
+   public function dashboard_depthead(){
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data['total'] = $this->training->read($info['id']);
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+       $this->load->view('include/header', $usertype);
+       $this->load->view('dashboard_depthead', $data);
+       $this->load->view('include/footer');
+  }
+
+
 
     public function EmployeeProfile()
     {
