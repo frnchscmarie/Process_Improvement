@@ -137,5 +137,9 @@ public function supervisors(){
         $this->db->set('password', $new);
         $this->db->where('employeeID', $id);
         $this->db->update('employee');
+
+        $this->db->set('password', $new);
+        $this->db->where('id', $id);
+        $this->db->update('login');
     }
 }

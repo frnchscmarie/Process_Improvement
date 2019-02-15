@@ -808,16 +808,45 @@ class Process_Improvement extends CI_Controller {
                 'id' => $i['id'],
               );
               $info;
-            }       
+            }  
+
+            $hw;    
+            $mw;
+            $he;
+            $me; 
+            if($_POST['hours_weekdays']!=null){
+              $hw = $_POST['hours_weekdays'];
+            }else{
+              $hw = '00';
+            }
+
+            if($_POST['minutes_weekdays']!=null){
+              $mw = $_POST['minutes_weekdays'];
+            }else{
+              $mw = '00';
+            }
+
+            if($_POST['hours_weekends']!=null){
+              $he = $_POST['hours_weekends'];
+            }else{
+              $he = '00';
+            }
+
+            if($_POST['minutes_weekends']!=null){
+              $me = $_POST['minutes_weekends'];
+            }else{
+              $me = '00';
+            }
+
             $otRecord=array(
                 'date_of_filing'=>$_POST['date_of_filing'],
                 'auto_OT'=>$_POST['auto_OT'],
                 'aot_from'=>$_POST['aot_from'],
                 'aot_to'=>$_POST['aot_to'],
-                'hours_weekdays'=>$_POST['hours_weekdays'],
-                'minutes_weekdays'=>$_POST['minutes_weekdays'],
-                'hours_weekends'=>$_POST['hours_weekends'],
-                'minutes_weekends'=>$_POST['minutes_weekends'],
+                'hours_weekdays'=> $hw,
+                'minutes_weekdays'=>$mw,
+                'hours_weekends'=>$he,
+                'minutes_weekends'=>$me,
                 'task'=>$_POST['task'],
                 'employeeID'=>$info['id'],
                 'authorized_by'=>$_POST['super'],
