@@ -22,7 +22,7 @@
                </div>
                   <div class="x_content">
                     <br />
-<?php echo form_open('process_improvement/addpropertyinfo'); ?>  
+<?php echo form_open('process_improvement/assignProperties/' .$property_no); ?>  
         <div class="col-md-7" style="margin-top: -3%;padding: px; text-align: center; margin-left: 18%;"> 
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 <?php echo ('<img align= "center" style="margin-left: 18%;"src="'.base_url('/assets/qrcode/').$property_no.'.png" />'); ?>
@@ -30,7 +30,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Property No</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control has-feedback-left" required="required" for="property_no"placeholder="Property" name="property_no" value="<?php echo $property_no?>" id="property_no" readonly/>
+                          <input type="text" class="form-control has-feedback-left" required="required" for="property_no" placeholder="Property" name="property_no" value="<?php echo $property_no ?>" id="property_no" readonly/>
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -67,20 +67,16 @@
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantity</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control has-feedback-left" required="required" for="qty" placeholder=" Quantity" name="qty" value="<?php echo set_value('qty'); ?>" id="qty">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input type="text" class="form-control" required="required" for="qty" placeholder=" Quantity" name="qty" value="<?php echo set_value('qty'); ?>" id="qty">
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Unit </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input type="text" class="form-control " required="required" for="unit" placeholder="Unit" name="unit" value="<?php echo set_value('unit'); ?>" id="unit">
                         </div>
                       </div>
                       <div>&nbsp;</div>
             
-            
-                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Unit </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control has-feedback-left" required="required" for="unit" placeholder="Unit" name="unit" value="<?php echo set_value('unit'); ?>" id="unit">
-                        </div>
-                      </div>
-                     <div>&nbsp;</div>
 
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Property Name</label>
@@ -117,19 +113,16 @@
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Unit Value</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="number" class="form-control has-feedback-left" required="required" for="unit_value"  placeholder="  Unit Value" name="unit_value" value="<?php echo set_value('unit_value'); ?>" id="unit_value">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="number" class="form-control " required="required" for="unit_value"  placeholder="  Unit Value" name="unit_value" value="<?php echo set_value('unit_value'); ?>" id="unit_value">
+                            </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Total Value</label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="number" class="form-control " required="required" for="total_value"  placeholder="  Total Value" name="total_value" value="<?php echo set_value('total_value'); ?>" id="total_value">
                         </div>
+                        
                       </div>
                            <div>&nbsp;</div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Value</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="number" class="form-control has-feedback-left" required="required" for="total_value"  placeholder="  Total Value" name="total_value" value="<?php echo set_value('total_value'); ?>" id="total_value">
-                        </div>
-                      </div>
-                             <div>&nbsp;</div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">MR Number</label>

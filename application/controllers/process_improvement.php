@@ -3,108 +3,144 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Process_Improvement extends CI_Controller {
 
-  public function __construct(){
-        parent::__construct();
+    public function __construct()
+    {
+      parent::__construct();
 
-    $this->load->library('session');
-    $this->load->helper(array('form', 'url'));
-    // $this->load->library('form_validation'); 
-    $this->load->library(array('form_validation','ciqrcode','Pdf'));      
-    // $this->load->library('ciqrcode');
-
-    $this->load->model('employee_model','employee');
-    $this->load->model('leavedb_model','leavedb');
-    $this->load->model('mr_model','mr');
-    $this->load->model('ot_model','ot');
-    $this->load->model('training_model','training');
-    $this->load->model('trainingsched_model','trainingsched');
-    
+      $this->load->library('session');
+      $this->load->helper(array('form', 'url'));
+      // $this->load->library('form_validation'); 
+      $this->load->library(array('form_validation','ciqrcode','Pdf'));      
+      // $this->load->library('ciqrcode');
+      $this->load->model('employee_model','employee');
+      $this->load->model('leavedb_model','leavedb');
+      $this->load->model('mr_model','mr');
+      $this->load->model('ot_model','ot');
+      $this->load->model('training_model','training');
+      $this->load->model('trainingsched_model','trainingsched');  
     }
 
     public function index()
     { 
 
-          $data['employee'] = $this->employee->users();
-          $this->load->view('login_view', $data);
+      $data['employee'] = $this->employee->users();
+      $this->load->view('login_view', $data);
 
     }
 
-  public function login_validate(){
-    $this->form_validation->set_rules('username', 'Username', 'required');
-    $this->form_validation->set_rules('password', 'Password', 'required');
-    if($this->form_validation->run())
+    public function login_validate()
     {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-
-        if ($this->employee->can_login($username, $password))
+      $this->form_validation->set_rules('username', 'Username', 'required');
+      $this->form_validation->set_rules('password', 'Password', 'required');
+        if($this->form_validation->run())
         {
-          $session_data = array (
+          $username = $this->input->post('username');
+          $password = $this->input->post('password');
+
+            if ($this->employee->can_login($username, $password))
+            {
+              $session_data = array (
               'username' => $username,
               'password' => $password,
               'logged_in' => TRUE
               );
-              $this->session->set_userdata($session_data);
-              $data['username'] = $this->session->userdata('username');            
+                $this->session->set_userdata($session_data);
+                $data['username'] = $this->session->userdata('username');            
 
-              $userinfo = $this->employee->read($data['username']);
-              foreach($userinfo as $i){
-              $info = array(
-                'id' => $i['id'],
-                'username' => $i['username'],
-                'type'=> $i['type']
-              );
-              $info;
-            }       
-            $data['success'] = true;  
-            redirect('process_improvement/dashboard', 'refresh');
+                $userinfo = $this->employee->read($data['username']);
+                foreach($userinfo as $i)
+                {
+                  $info = array(
+                  'id' => $i['id'],
+                  'username' => $i['username'],
+                  'type'=> $i['type']
+                   );
+                  $info;
+                }       
+                    $data['success'] = true;  
+                    redirect('process_improvement/dashboard', 'refresh');
+            }
+                else
+                {
+                  echo "<script type='text/javascript'>alert('Wrong Username or Password');
+                    window.location='index';
+                    </script>";
+                }
         }
-        else
-        {
-         echo "<script type='text/javascript'>alert('Wrong Username or Password');
-                window.location='index';
-                </script>";
-        }
+                else
+                {
+                  $this->session->set_userdata('username','username');
+                  $this->index();
+                }
     }
-    else
+
+    public function logout()
     {
-       $this->session->set_userdata('username','username');
-       $this->index();
+        $this->load->driver('cache');
+        $this->session->sess_destroy();
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('headername');
+        $this->session->unset_userdata('logged_in');
+        $this->cache->clean();
+        ob_clean();
+        redirect(base_url(), 'refresh');
     }
-  }
 
-    public function logout(){
-      $this->load->driver('cache');
-      $this->session->sess_destroy();
-      $this->session->unset_userdata('username');
-      $this->session->unset_userdata('headername');
-      $this->session->unset_userdata('logged_in');
-      $this->cache->clean();
-      ob_clean();
-      redirect(base_url(), 'refresh');
-  }
+    public function changepassword() 
+    {
+       $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
 
-  function changepassword() {
-        
-      $this->load->view('changepass_view');
-    }
-    function submit_changepassword() {
-           if(md5($_POST['oldpassword'])==Session::get('password')){
-        $arg=$_POST['id'];
-        $data=array(
-          'password'=>md5($_POST['confirmpassword'])
-             );
-    
-     $this->model->changepassword($data,$arg);
-     $this->view->msg = $this->model->error("Your Password is updated Successfully.");
-    
-       }
-       else{
-        $this->view->msg = $this->model->error("You Entered an Invalid Password.");
-        
-      }
+        $this->load->view('include/header',$usertype);
+        $this->load->view('changepass_view');
+        $this->load->view('include/footer');  
       
     }
+    
+    public function submit_changepassword() 
+    {
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+
+        $oldpassword = $_POST['oldpassword'];
+        $success = $this->employee->passwordcheck($info['id']);
+        foreach($success as $i){
+          $password = array(
+            'password'=>$i['password']
+          );
+        }
+        if($password['password'] == $oldpassword){
+          $newpassword = $_POST['newpassword'];
+          $confirm = $_POST['confirmpassword'];
+          if($newpassword == $confirm){
+            $entered = $this->employee->updatepassword($newpassword, $info['id']);
+            redirect('process_improvement/dashboard');    
+          }else{
+            $message = "Passwords do not match. \\nPlease try again.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            redirect('process_improvement/changepassword', 'refresh');
+          }
+          
+        }else{
+          $message = "Username and/or Password are incorrect.\\nTry again.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+           redirect('process_improvement/changepassword', 'refresh');
+        }
+    }
+
   public function dashboard(){
         $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
@@ -389,16 +425,8 @@ class Process_Improvement extends CI_Controller {
 
 
    public function viewProperties(){
-        $result_array1 = $this->mr->readmr();
-        foreach($result_array1 as $newdata){
-          $allmr = array(
-          'mr'=>$newdata['property_no']            
-          );
-          $allmrs[]=$allmr;
-        }
-        $allnewmr['mr']=$allmrs;
-        $result_array = $this->mr->read($allnewmr['mr']);
-        $data['mrRecord'] = $result_array; 
+        $result_array1 = $this->mr->unassignedProp();
+        $data['mrRecord'] = $result_array1; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -492,7 +520,7 @@ class Process_Improvement extends CI_Controller {
          $usertype['types'] = $types;      
          $mrRecord['property_no']=$property_no;
          $condition = array('property_no' => $property_no);
-         $oldRecord = $this->mr->read1($condition);
+         $oldRecord = $this->mr->read($condition);
 
          foreach($oldRecord as $o){
                 $data['property_no']=$o['property_no'];
@@ -509,7 +537,7 @@ class Process_Improvement extends CI_Controller {
 
          $records['property_no']=$property_no;
          $condition = array('property_no' => $property_no);
-         $oldRecord = $this->mr->read1($condition['property_no']);
+         $oldRecord = $this->mr->read1($condition);
 
          foreach($oldRecord as $o){
                 $data['property_no']=$o['property_no'];
@@ -791,7 +819,9 @@ class Process_Improvement extends CI_Controller {
                 'hours_weekends'=>$_POST['hours_weekends'],
                 'minutes_weekends'=>$_POST['minutes_weekends'],
                 'task'=>$_POST['task'],
-                'employeeID'=>$info['id']
+                'employeeID'=>$info['id'],
+                'authorized_by'=>$_POST['super'],
+                'status'=>'Pending'
             );
             $this->ot->createot($otRecord);
             redirect('process_improvement/viewOvertimeRegular');
@@ -869,17 +899,15 @@ public function addHoliday(){
     }
 
     public function updateHoliday($id){
-
-         $holiday['id']=$id;
-         $condition = array('id' => $id);
-         $oldRecord = $this->calendar->readholiday($condition['id']);
-
-         foreach($oldRecord as $o){
-                $data['holiday']=$o['holiday'];
-                $data['dates']=$o['dates'];
+         $calendar = $this->leavedb->readholiday($id);
+         foreach($calendar as $o){
+          $holiday = array(
+                'holiday'=> $o['holiday'],
+                'dates' => $o['dates'],
+                'id' => $o['id']
+              );
               }  
               $rules = array(
-                  
                    array('field'=>'holiday', 'label'=>'Holiday Name', 'rules'=>'required'),
                   
                 );
@@ -898,7 +926,7 @@ public function addHoliday(){
                     }
                     $usertype['types'] = $types;
                     $this->load->view('include/header',$usertype);
-                    $this->load->view('updateHolidayForm',$data);
+                    $this->load->view('updateHolidayForm',$holiday);
                     $this->load->view('include/footer');
              }
           else{
@@ -906,10 +934,16 @@ public function addHoliday(){
              'holiday'=>$_POST['holiday'],
              'dates'=>$_POST['dates']
             );
-          $this->calendar->update_holiday($id,$newRecord);
+          $this->leavedb->update_holiday($id,$newRecord);
           redirect('process_improvement/viewCalendar');
           }
         }
+
+     public function delHoliday($id){
+        $where_array = array('id'=>$id);
+        $this->leavedb->delHoliday($where_array);
+        redirect('process_improvement/viewCalendar');
+          }
 
     public function viewCalendar(){
 
@@ -922,7 +956,7 @@ public function addHoliday(){
             $info;
         } 
 
-        $result_array = $this->leavedb->readholiday($info['id']);
+        $result_array = $this->leavedb->readallholidays();
         $data['holiday'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
@@ -936,6 +970,30 @@ public function addHoliday(){
         $this->load->view('include/header',$usertype);
         $this->load->view('calendar_view',$data);
         $this->load->view('include/footer');   
+    }
+
+    public function do_upload()
+    {
+      $type = explode('.', $_FILES["file"]["name"]);
+      $type = strtolower($type[count($type)-1]);
+      $url = "./assets/uploads/".uniqid(rand()).'.'.$type;
+      if(in_array($type, array("jpg", "jpeg", "gif", "png", "docx", "xls", "pdf")))
+        if(is_uploaded_file($_FILES["file"]["tmp_name"]))
+          if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
+            return $url;
+      return "";
+    }
+
+    public function profile_pic(){
+      if($_SERVER['REQUEST_METHOD']=='POST')
+            {
+              $url = $this->do_upload();
+              $user =  $this->session->userdata('username');
+              $condition = array('username' => $user);
+              $result_array = $this->Peter->read_ownerinfo($condition);
+              $this->Peter->update_ownerinfo($profilepic);
+              redirect('user/setting');
+      }
     }
 
   

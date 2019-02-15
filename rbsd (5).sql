@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2019 at 10:45 AM
+-- Generation Time: Feb 15, 2019 at 11:02 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -40,7 +40,6 @@ CREATE TABLE `calendar` (
 
 INSERT INTO `calendar` (`id`, `dates`, `holiday`) VALUES
 (1, '2019-12-25', 'Christmas'),
-(2, '2019-01-01', 'New year'),
 (3, '2019-11-01', 'All Saints Day');
 
 -- --------------------------------------------------------
@@ -73,8 +72,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
-('01', 'Janelyn', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643759', 'Janelyn', 'admin', '', ''),
-('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', 'employee', '', ''),
+('01', 'Janelyn Ann', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643758', 'Janelyn', 'admin', '', ''),
+('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', '123', '', ''),
 ('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', ''),
 ('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', ''),
 ('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', '12344', 'Julius', '12345', 'employee', ''),
@@ -101,6 +100,7 @@ CREATE TABLE `leavedb` (
   `date_of_filing` varchar(20) NOT NULL,
   `place` text NOT NULL,
   `type` text NOT NULL,
+  `type_info` varchar(100) NOT NULL,
   `inc_from` date NOT NULL,
   `inc_to` date NOT NULL,
   `recommendation` varchar(50) NOT NULL,
@@ -108,13 +108,6 @@ CREATE TABLE `leavedb` (
   `no_of_days` varchar(20) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `leavedb`
---
-
-INSERT INTO `leavedb` (`date_of_filing`, `place`, `type`, `inc_from`, `inc_to`, `recommendation`, `supervisor`, `no_of_days`, `status`) VALUES
-('09/17/2018', 'manila', 'Sick Leave', '0000-00-00', '0000-00-00', 'n/a', 'chesca', '1', 'approved');
 
 -- --------------------------------------------------------
 
@@ -139,7 +132,9 @@ INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
 ('03', 'Anda', 'superadmin', 'superadmin'),
 ('04', 'Noel', '12345', 'employee'),
 ('05', 'Julius', '12345', 'employee'),
-('06', 'Lovely', '12345', 'depthead');
+('06', 'Lovely', '12345', 'depthead'),
+('23', '43', '12345', 'Employee'),
+('232', '23', '12345', 'Employee');
 
 -- --------------------------------------------------------
 
@@ -170,7 +165,8 @@ CREATE TABLE `mr` (
 --
 
 INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty`, `unit`, `property_name`, `description`, `date_purchased`, `property_no`, `classification_no`, `unit_value`, `total_value`, `mr_no`) VALUES
-('02', 'Cortez', 'Franchesca Marie', 'Cadondon', '2019-02-14', '23', '12', 'Property', 'New', '2019-02-07', '12345', '123', '123', '', '123');
+('02', 'Cortez', 'Franchesca Marie', 'Cadondon', '2019-02-14', '23', '12', 'Property', 'New', '2019-02-07', '12345', '123', '123', '', '123'),
+('01', 'Gellado', 'Janelyn Ann', 'Dannug', '2019-02-09', '123', '1', 'PC', '3', '2019-02-14', '15-037-074', '3', '3', '3', '4');
 
 -- --------------------------------------------------------
 
@@ -226,7 +222,28 @@ CREATE TABLE `property` (
 INSERT INTO `property` (`id`, `property_no`) VALUES
 (8, '15-094-423'),
 (9, '12345'),
-(10, '15-037-062');
+(10, '15-037-062'),
+(11, '15-037-074');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supervisor`
+--
+
+CREATE TABLE `supervisor` (
+  `id` int(50) NOT NULL,
+  `sv_firstname` varchar(100) NOT NULL,
+  `sv_lastname` varchar(100) NOT NULL,
+  `sv_middlename` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supervisor`
+--
+
+INSERT INTO `supervisor` (`id`, `sv_firstname`, `sv_lastname`, `sv_middlename`) VALUES
+(1, 'Alexia', 'Armando', 'Mendoza');
 
 -- --------------------------------------------------------
 
@@ -235,6 +252,7 @@ INSERT INTO `property` (`id`, `property_no`) VALUES
 --
 
 CREATE TABLE `training` (
+  `id` int(100) NOT NULL,
   `employeeID` varchar(25) NOT NULL,
   `username` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
@@ -249,14 +267,8 @@ CREATE TABLE `training` (
 -- Dumping data for table `training`
 --
 
-INSERT INTO `training` (`employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
-('02', 'Chesca', '12121', '2019-01-03', '2019-01-10', '131', '131', '13'),
-('04', 'Noel', 'jane', '2019-02-07', '2019-02-07', '12', 'fhbs', 'bridge-brooklyn-bridge-buildings-534757.jpg'),
-('02', 'Chesca', 'qwerty', '2019-02-07', '2019-02-07', '12', 'fhbs', ''),
-('02', 'Chesca', 'sdfasfd', '0442-04-03', '0232-03-31', '32r5', 'dfgsdg', 'bridge-brooklyn-bridge-buildings-534757.jpg'),
-('02', 'Chesca', 'sfsaf', '2019-02-15', '2019-02-15', '12', 'dfgsdg', ''),
-('04', 'Noel ', 'weqweq', '2019-01-19', '0000-00-00', '1231', '123', '13'),
-('02', 'Chesca', 'werewrwe', '2019-01-04', '2019-01-15', '23423423', '235235235', '22342');
+INSERT INTO `training` (`id`, `employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
+(2, '02', 'Chesca', 'Title 3', '2019-02-19', '2019-02-08', '12', 'fhbs', 'abundance-assortment-basket-1458694.jpg');
 
 -- --------------------------------------------------------
 
@@ -322,10 +334,16 @@ ALTER TABLE `property`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `supervisor`
+--
+ALTER TABLE `supervisor`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `training`
 --
 ALTER TABLE `training`
-  ADD PRIMARY KEY (`title`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -335,7 +353,7 @@ ALTER TABLE `training`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ot`
@@ -347,7 +365,19 @@ ALTER TABLE `ot`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `supervisor`
+--
+ALTER TABLE `supervisor`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `training`
+--
+ALTER TABLE `training`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

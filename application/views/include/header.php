@@ -49,14 +49,15 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <div class="col-md-3 left_col">
+        <div class="col-md-3 left_col" style="position: fixed;">
           <div class="left_col scroll-view">
 
-            <div class="navbar nav_title" style="border: 0; margin-top: 5%;">
-              
+            <div class="navbar nav_title">
+              <a href="<?php echo base_url('process_improvement/dashboard'); ?>" class="site_title" ><i class="fa fa-institution" style="margin-left: 6%;"></i> <span >RBSD-IMS</span></a>
             </div>
 
             <div class="clearfix"></div>
+            <br/>
 
             <!-- menu profile quick info (left side) -->
             <div class="profile clearfix">
@@ -75,7 +76,7 @@
             <br />
 
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="margin-top: -10%;">
               <div class="menu_section" >
                 <?php foreach ($types as $usertype)
                 {
@@ -93,19 +94,19 @@
                   </li>
                
                  <li>
-                  <a href="<?php echo base_url('process_improvement/viewProperties')?>"> <i class="fa fa-user-secret"></i>PROPERTY</a>
+                  <a href="<?php echo base_url('process_improvement/viewProperties')?>"> <i class="fa fa-qrcode"></i>PROPERTY</a>
                   </li>
           
                   <li>
-                  <a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-user-secret"></i>MR ADMIN</a>
+                  <a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-desktop"></i>MR ADMIN</a>
                   </li>
                 
                   <li>
-                    <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-user-secret"></i>TRAINING ADMIN</a>
+                    <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-comment-o"></i>TRAINING ADMIN</a>
                   </li>
 
                    <li>
-                    <a href="<?php echo base_url('process_improvement/viewCalendar')?>"> <i class="fa fa-user-secret"></i>LEAVE CALENDAR</a>
+                    <a href="<?php echo base_url('process_improvement/viewCalendar')?>"> <i class="fa fa-calendar"></i>LEAVE CALENDAR</a>
                   </li>
 
 
@@ -179,6 +180,23 @@
 
             </div>
             <!-- /sidebar menu -->
+            <!-- menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a href="<?php echo base_url('process_improvement/EmployeeProfile'); ?>" data-toggle="tooltip" data-placement="top" title=" Profile" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+             
+
+              <a href="<?php echo base_url('process_improvement/changepassword'); ?>" data-toggle="tooltip" data-placement="top" title=" Change Password" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></a>
+         
+
+              <a href="<?php echo base_url(''); ?>" data-toggle="tooltip" data-placement="top" title=" Help" > <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
+             
+
+              <a href="<?php echo base_url('process_improvement/logout'); ?>" data-toggle="tooltip" data-placement="top" title="Log out" ><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+              
+              
+            </div>
+
+            <!-- /menu footer buttons -->
 
             
           </div>

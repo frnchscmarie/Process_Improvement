@@ -1,4 +1,17 @@
+<?php foreach($name as $n){
+    $last = $n['lname'];
+    $first = $n['fname'];
+    $middle = $n['mname'];
+  }
 
+?>
+
+
+<?php
+  foreach($supervisor as $i){
+    $name = $i['username'];
+    }
+?> 
 
 <div class="right_col" role="main">
   <div class="">
@@ -18,7 +31,6 @@
                               <h3 class="modal-title" id="lineModalLabel">OVERTIME APPLICATION</h3>
                           </div>
                             <div class="modal-body">
-                              <div>&nbsp;</div>
                                 <div class="container">
                                   <?php echo validation_errors(); ?>
   
@@ -98,7 +110,17 @@
                           <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="task" id="task" required="required" value="<?php echo set_value('task'); ?>" placeholder="Input task/s" >
                         </div>
                       </div>
+                      <div>&nbsp;</div><br />
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Authorized By</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="super" id="super" required="required" 
+                          value="<?php print_r($name)?>" readonly>
+                        </div>
+                      </div>
                       <div>&nbsp;</div>
+
 
   
                         <div class="form-group">
@@ -117,13 +139,12 @@
               </div>
             </form>
 
-  <div class="container">
+  <div class="">
   <?php echo validation_errors(); ?>
-  
   <?php echo form_open('process_improvement/viewOvertimeRegular'); 
   ?> 
      <div class="x_panel">
-                  <div class="">
+        <div class="">
           <div class="x_content" >
                     <div class="clearfix"></div>
                   </div>
@@ -132,13 +153,7 @@
                     <div class="clearfix"></div>
                    
 <!--pdf--> <div class="x_content" id="otform" style="margin-top: 3%;">
-                  <?php foreach($name as $n){
-                    $last = $n['lname'];
-                    $first = $n['fname'];
-                    $middle = $n['mname'];
-                  }
 
-                  ?>
                    <label>Employee Name: <?php echo("$last, $first $middle")  ?></label>
                    <table id="datatable" class="table table-striped table-bordered">
 
@@ -170,11 +185,6 @@
 
                       </thead>
 
-                    <?php
-                     foreach($supervisor as $i){
-                      $name = $i['username'];
-                     }
-                      ?> 
                        <tbody>
                        <?php
                        if($ot!=null){
@@ -308,14 +318,6 @@ $(document).ready(function(){
  
 
 });
-
-/**function printContent(doPrint) {
-            var restorepage = document.body.innerHTML;
-            var printcontent = document.getElementById(x_content).innerHTML;
-            document.body.innerHTML = printcontent;
-            window.print();
-            document.body.innerHTML = restorepage;
-        }**/
 
   function printContent(el){
   var restorepage = document.body.innerHTML;

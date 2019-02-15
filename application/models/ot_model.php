@@ -48,5 +48,24 @@ class OT_model extends CI_Model {
         else
             return false;
     }
+
+    function fetchnotif(){
+        $this->db->select('*')
+        ->join('employee', 'ot.employeeID = employee.employeeID');
+        $this->db->where('status', 'Pending');
+        $query = $this->db->get('pending'); 
+        return $query->result_array();
+    }
+
+    public function getemployee($id){
+        $this->db->select('*');
+        $this->db->where('employeeID', $id);
+        $query = $this->db->get('employee');
+        if($query->num_rows() > 0 )
+        {
+            return $query->result_array();
+        }
+    }
+
 }
 ?>

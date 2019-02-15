@@ -10,7 +10,8 @@ class MR_model extends CI_Model {
     
     function read1($condition=null){
         $this->db->select('*');
-        $this->db->from($this->mr);
+        $this->db->from($this->table);
+        $this->db->where($condition);
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();
@@ -18,13 +19,22 @@ class MR_model extends CI_Model {
             return false;
     }
     
-    function read($id){
+    function read($condition=null){
         $this->db->select('*');
         $this->db->from($this->property);
-        foreach($id as $i){
-            $new = $i['mr'];
-        }
-        $where = "property_no != '$new'";
+        $this->db->where($condition);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function unassignedProp(){
+        $this->db->select('*');
+        $this->db->from($this->property);
+        $where = "property_no NOT IN
+        (SELECT property_no FROM mr)";
         $this->db->where($where);
         $query = $this->db->get();
         if($query->num_rows()>0)

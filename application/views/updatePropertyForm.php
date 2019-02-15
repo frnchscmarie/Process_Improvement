@@ -22,7 +22,7 @@
                </div>
                   <div class="x_content">
                     <br />
-<?php echo form_open('process_improvement/updateMR/' .$property_no); ?>  
+<?php echo form_open('process_improvement/updateMR/'.$property_no); ?>  
 <br/>
         <div class="col-md-7" style="margin-top: -3%;padding: px; text-align: center; margin-left: 18%;"> 
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">

@@ -109,14 +109,33 @@ public function changepassword($data,$arg)
 }
 
 public function supervisors(){
-    $this->db->select("*, CONCAT(sv_lastname, ',', sv_firstname) AS username");
-    $this->db->from('supervisor');
-    $query = $this->db->get();
-    if($query -> num_rows()>0){
-        return $query->result_array();
+        $this->db->select("*, CONCAT(sv_lastname, ',', sv_firstname) AS username");
+        $this->db->from('supervisor');
+        $query = $this->db->get();
+        if($query -> num_rows()>0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }   
+
+    public function passwordcheck($id){
+        $this->db->select('password');
+        $this->db->from('employee');
+        $this->db->where('employeeID', $id);
+        $query = $this->db->get();
+        if($query -> num_rows()>0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
     }
-    else{
-        return false;
+
+    public function updatepassword($new, $id){
+        $this->db->set('password', $new);
+        $this->db->where('employeeID', $id);
+        $this->db->update('employee');
     }
-}
 }
