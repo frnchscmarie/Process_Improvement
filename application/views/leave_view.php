@@ -24,7 +24,7 @@
      <div>&nbsp;</div>
         <div class="container">
         <?php echo validation_errors(); ?>
-        <?php echo form_open('process_improvement/viewLeave'); 
+        <?php echo form_open('process_improvement/addLeave'); 
         ?> 
               <form class="form-horizontal form-label-left">
 
@@ -39,7 +39,7 @@
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Leave</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <select class="form-control" value="<?php echo set_value('type'); ?>" onchange="showradiobutton()" id="type">
+                         <select name="type" class="form-control" value="<?php echo set_value('type'); ?>" onchange="showradiobutton()" id="type">
                             <option value="Vacation Leave(Local)">Vacation Leave (Local)</option>
                             <option value="Vacation Leave(International)">Vacation Leave (International)</option>
                             <option value="Sick Leave">Sick Leave</option>
@@ -52,10 +52,11 @@
 
 
                         <!--hidden forms-->
-                        <div class="form-group" style="display: none;" id="vl_int">
+                        
+                   <!--  <div class="form-group" style="display: none;" id="vl_int">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
+                         <input type="text" id="desc_1" name="desc_1" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Place of Leave (International)">
                         </div>
                       </div>
 
@@ -63,10 +64,10 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <div class="radio" style="display: none;" id="sick_leave">
                             <label>
-                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="optionsRadios"> In hospital
+                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="desc_2"> In hospital
                             </label>
                              <label>
-                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="optionsRadios"> Out Patient
+                              <input type="radio" checked="" value="<?php echo set_value('type_info'); ?>" id="optionsRadios1" name="desc_2"> Out Patient
                             </label>
                           </div>
                         </div>
@@ -75,19 +76,17 @@
                       <div class="form-group" style="display: none;" id="special_leave_priveledge">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate type of SLP">
+                         <input type="text" id="desc_3" name="desc_3" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate type of SLP">
                         </div>
                       </div>
 
                       <div class="form-group" style="display: none;" id="others">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="" name="" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Reason/s for leave">
+                         <input type="text" id="desc_4" name="desc_4" value="<?php echo set_value('type_info'); ?>" required="required" class="form-control col-md-7 col-xs-12" placeholder="Indicate Reason/s for leave">
                         </div>
                       </div>
-                    
-
-
+ -->
                    <!--   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Where will leave be spent</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -101,7 +100,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >FROM</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="date" id="" name="" for="recommendation" required="required" class="form-control col-md-7 col-xs-12 center" value="<?php echo set_value('inc_from'); ?>">
+                         <input type="date" id="" name="inc_from" for="recommendation" required="required" class="form-control col-md-7 col-xs-12 center" value="<?php echo set_value('inc_from'); ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -109,7 +108,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">TO</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="date" id="" name="" for="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('inc_to'); ?>">
+                         <input type="date" id="" name="inc_to" for="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('inc_to'); ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -135,7 +134,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">AM,DC/SUPERVISOR</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="supervisor" name="supervisor" for="supervisor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('supervisorID') ?>">
+                         <input type="text" id="supervisor" name="supervisorID" for="supervisor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('supervisorID') ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -188,7 +187,6 @@
                       <thead>
                         <tr id="trHead">
                           <th >Date Filled</th>
-                          <th >Place</th>
                           <th >Type of Leave</th>
                           <th >Leave Information</th>
                           <th >No. of Days</th>
@@ -202,7 +200,7 @@
                        <?php
                         if($leavedb!=null){
                           foreach($leavedb as $l){
-                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['place']."</td><td>".$l['type']."</td><td>".$l['type_info']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisor']."</td><td>".$l['status']."</td>".'</tr>';
+                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['type']."</td><td>".$l['type_info']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisorID']."</td><td>".$l['status']."</td>".'</tr>';
                           }
                                 }
                                 ?>

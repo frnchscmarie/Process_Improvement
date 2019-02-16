@@ -472,15 +472,7 @@ class Process_Improvement extends CI_Controller {
     public function addLeave(){
         
         $rules = array(
-                   array('field'=>'date_of_filing', 'label'=>'Date of Filing', 'rules'=>'required'),
-                   array('field'=>'place', 'label'=>'Place', 'rules'=>'required'),
-                   array('field'=>'type', 'label'=>'Type of Leave', 'rules'=>'required'),
-                   array('field'=>'type_info', 'label'=>'Leave Info', 'rules'=>'required'),
-                   array('field'=>'no_of_days', 'label'=>'No. of Days', 'rules'=>'required'),
-                   array('field'=>'inc_from', 'label'=>'Inclusive Dates', 'rules'=>'required'),
-                   array('field'=>'inc_to', 'label'=>'Inclusive Dates', 'rules'=>'required'),
-                   array('field'=>'supervisor', 'label'=>'Approver', 'rules'=>'required'),
-                   array('field'=>'status', 'label'=>'Status', 'rules'=>'required'),
+                   array('field'=>'date_of_filing', 'label'=>'Date of Filing', 'rules'=>'required')
                 );
             $this->form_validation->set_rules($rules);
             if($this->form_validation->run()==FALSE){
@@ -497,18 +489,39 @@ class Process_Improvement extends CI_Controller {
             $this->load->view('include/footer');
         }
        else{
-          
+
+             $data1 = $_SESSION['username'];
             $leaveRecord=array(
+                'employeeID'=>$data1,
                 'date_of_filing'=>$_POST['date_of_filing'],
-                'place'=>$_POST['place'],
+                'type_info'=>"",
                 'type'=>$_POST['type'],
-                'type_info'=>$_POST['type_info'],
                 'no_of_days'=>$_POST['no_of_days'],
                 'inc_from' =>$_POST['inc_from'],
                 'inc_to' =>$_POST['inc_to'],
-                'supervisor'=>$_POST['supervisor'], 
-                'status'=>$_POST['status'],
+                'supervisorID'=>$_POST['supervisorID'], 
+                'status'=>""
                 
+            );
+            if(isset($_POST['desc_1']))
+            $leaveRecord = array(
+            
+                'type_info'=>$_POST['desc_1']
+            );
+           else if(isset($_POST['desc_2']))
+            $leaveRecord = array(
+            
+                'type_info'=>$_POST['desc_2']
+            );
+           else if(isset($POST_['desc_3']))
+            $leaveRecord = array(
+            
+                'type_info'=>$_POST['desc_3']
+            );
+           else if(isset($_POST['desc_4']))
+            $leaveRecord = array(
+            
+                'type_info'=>$_POST['desc_4']
             );
             $this->leavedb->createleave($leaveRecord);
             redirect('process_improvement/viewLeave');
