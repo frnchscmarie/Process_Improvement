@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2019 at 02:45 AM
+-- Generation Time: Feb 16, 2019 at 03:03 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -214,19 +214,7 @@ CREATE TABLE `ot` (
 --
 
 INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `aot_to`, `hours_weekends`, `minutes_weekends`, `hours_weekdays`, `minutes_weekdays`, `task`, `authorized_by`, `status`, `remarks`) VALUES
-(1, '02', '2019-02-01', '1231', '03:02', '16:12', '123123', '123131', '', '', '12231', '', '', ''),
-(2, '02', '2019-02-01', 'xcvxcvcxv', '03:42', '02:34', '3454545', '3534535', '', '', '34535', '', '', ''),
-(3, '02', '2019-02-01', 'xbattalion', '15:43', '14:43', '234567890', '23456789', '', '', 'zxczxczxasda', '', '', ''),
-(4, '02', '2019-02-08', 'ewqee', '13:12', '15:23', '23', '23', '2', '23', '23', '', '', ''),
-(5, '02', '2019-02-08', '2:00 - 3:00', '02:04', '14:31', '3', '23', '1232132', '3', '23', '', '', ''),
-(6, '02', '2019-02-08', '2:00 - 3:00', '14:00', '15:00', '00', '00', '1', '00', '12231', '', '', ''),
-(7, '02', '2019-02-08', '6:00 - 8:00', '18:00', '20:00', '', '', '2', '00', '12345', '', '', ''),
-(8, '02', '2019-02-15', '12:31', '12:31', '03:12', '', '', '', '', '12312312', 'Armando, Alexia', 'Pending', ''),
-(9, '02', '2019-02-15', '14:42', '14:22', '15:02', '', '', '00', '', '1312312', 'Armando, Alexia', 'Pending', ''),
-(10, '02', '2019-02-15', '00:32', '15:42', '15:03', '00', '00', '00', '00', 'edasdsfsd', 'Armando, Alexia', 'Pending', ''),
-(11, '02', '2019-02-15', '03:03', '03:04', '14:03', '32', '3232', '3', '32', '232', 'Armando, Alexia', 'Pending', ''),
-(13, '03', '2019-02-11', 'fsdf', 'fvxc', 'czxbxv', '00', '123', '32', '00', 'vcxvdf', 'dfgdf', 'dsfggs', 'sdfdsf'),
-(14, '03', '2019-02-06', '2ewq', 'sada', 'dasd', '00', '43', '32', '00', 'sdasd', 'dsfsd', 'das', 'dasads');
+(16, '02', '2019-02-16', '2:00 - 3:00', '14:00', '15:00', '00', '00', '1', '00', 'asdffregrfh', 'Armando, Alexia', 'Pending', '');
 
 --
 -- Triggers `ot`
@@ -254,7 +242,9 @@ CREATE TABLE `ot_notification` (
 
 INSERT INTO `ot_notification` (`id`, `employeeID`, `date_of_filing`) VALUES
 (13, '03', '2019-02-11'),
-(14, '03', '2019-02-06');
+(14, '03', '2019-02-06'),
+(15, '02', '2019-02-16'),
+(16, '02', '2019-02-16');
 
 -- --------------------------------------------------------
 
@@ -429,13 +419,13 @@ ALTER TABLE `credits`
 -- AUTO_INCREMENT for table `ot`
 --
 ALTER TABLE `ot`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ot_notification`
 --
 ALTER TABLE `ot_notification`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `property`
