@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2019 at 11:02 AM
+-- Generation Time: Feb 16, 2019 at 02:45 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -45,6 +45,24 @@ INSERT INTO `calendar` (`id`, `dates`, `holiday`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `credits`
+--
+
+CREATE TABLE `credits` (
+  `id` int(11) NOT NULL,
+  `employeeID` varchar(100) NOT NULL,
+  `lname` varchar(50) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `mname` varchar(50) NOT NULL,
+  `vacation` varchar(100) DEFAULT NULL,
+  `sick` varchar(100) NOT NULL,
+  `slp` varchar(100) NOT NULL,
+  `others` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employee`
 --
 
@@ -72,7 +90,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
-('01', 'Janelyn Ann', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643758', 'Janelyn', 'admin', '', ''),
+('01', 'Janelyn Ann', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643758', 'Janelyn', 'janelyn', '', ''),
 ('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', '123', '', ''),
 ('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', ''),
 ('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', ''),
@@ -104,7 +122,7 @@ CREATE TABLE `leavedb` (
   `inc_from` date NOT NULL,
   `inc_to` date NOT NULL,
   `recommendation` varchar(50) NOT NULL,
-  `supervisor` text NOT NULL,
+  `supervisorID` varchar(100) NOT NULL,
   `no_of_days` varchar(20) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -127,7 +145,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
-('01', 'Janelyn', 'admin', 'admin'),
+('01', 'Janelyn', 'janelyn', 'admin'),
 ('02', 'Chesca', 'employee', 'employee'),
 ('03', 'Anda', 'superadmin', 'superadmin'),
 ('04', 'Noel', '12345', 'employee'),
@@ -181,10 +199,10 @@ CREATE TABLE `ot` (
   `auto_OT` varchar(100) NOT NULL,
   `aot_from` varchar(20) NOT NULL,
   `aot_to` varchar(20) NOT NULL,
-  `hours_weekends` varchar(50) NOT NULL,
+  `hours_weekends` varchar(50) NOT NULL DEFAULT '00',
   `minutes_weekends` varchar(50) NOT NULL,
   `hours_weekdays` varchar(50) NOT NULL,
-  `minutes_weekdays` varchar(50) NOT NULL,
+  `minutes_weekdays` varchar(50) NOT NULL DEFAULT '00',
   `task` text NOT NULL,
   `authorized_by` text NOT NULL,
   `status` text NOT NULL,
@@ -202,7 +220,41 @@ INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `
 (4, '02', '2019-02-08', 'ewqee', '13:12', '15:23', '23', '23', '2', '23', '23', '', '', ''),
 (5, '02', '2019-02-08', '2:00 - 3:00', '02:04', '14:31', '3', '23', '1232132', '3', '23', '', '', ''),
 (6, '02', '2019-02-08', '2:00 - 3:00', '14:00', '15:00', '00', '00', '1', '00', '12231', '', '', ''),
-(7, '02', '2019-02-08', '6:00 - 8:00', '18:00', '20:00', '', '', '2', '00', '12345', '', '', '');
+(7, '02', '2019-02-08', '6:00 - 8:00', '18:00', '20:00', '', '', '2', '00', '12345', '', '', ''),
+(8, '02', '2019-02-15', '12:31', '12:31', '03:12', '', '', '', '', '12312312', 'Armando, Alexia', 'Pending', ''),
+(9, '02', '2019-02-15', '14:42', '14:22', '15:02', '', '', '00', '', '1312312', 'Armando, Alexia', 'Pending', ''),
+(10, '02', '2019-02-15', '00:32', '15:42', '15:03', '00', '00', '00', '00', 'edasdsfsd', 'Armando, Alexia', 'Pending', ''),
+(11, '02', '2019-02-15', '03:03', '03:04', '14:03', '32', '3232', '3', '32', '232', 'Armando, Alexia', 'Pending', ''),
+(13, '03', '2019-02-11', 'fsdf', 'fvxc', 'czxbxv', '00', '123', '32', '00', 'vcxvdf', 'dfgdf', 'dsfggs', 'sdfdsf'),
+(14, '03', '2019-02-06', '2ewq', 'sada', 'dasd', '00', '43', '32', '00', 'sdasd', 'dsfsd', 'das', 'dasads');
+
+--
+-- Triggers `ot`
+--
+DELIMITER $$
+CREATE TRIGGER `notification_ot` AFTER INSERT ON `ot` FOR EACH ROW INSERT INTO ot_notification (id, employeeID, date_of_filing) VALUES (NEW.id, NEW.employeeID, NEW.date_of_filing)
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ot_notification`
+--
+
+CREATE TABLE `ot_notification` (
+  `id` int(100) NOT NULL,
+  `employeeID` varchar(50) NOT NULL,
+  `date_of_filing` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ot_notification`
+--
+
+INSERT INTO `ot_notification` (`id`, `employeeID`, `date_of_filing`) VALUES
+(13, '03', '2019-02-11'),
+(14, '03', '2019-02-06');
 
 -- --------------------------------------------------------
 
@@ -292,6 +344,12 @@ ALTER TABLE `calendar`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `credits`
+--
+ALTER TABLE `credits`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
@@ -328,6 +386,12 @@ ALTER TABLE `ot`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ot_notification`
+--
+ALTER TABLE `ot_notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `property`
 --
 ALTER TABLE `property`
@@ -353,13 +417,25 @@ ALTER TABLE `training`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `credits`
+--
+ALTER TABLE `credits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ot`
 --
 ALTER TABLE `ot`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `ot_notification`
+--
+ALTER TABLE `ot_notification`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `property`
