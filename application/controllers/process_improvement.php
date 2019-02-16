@@ -58,7 +58,7 @@ class Process_Improvement extends CI_Controller {
                   $info;
                 }       
                     $data['success'] = true;  
-                    redirect('process_improvement/dashboard', 'refresh');
+                    redirect('process_improvement/viewCalendar', 'refresh');
             }
                 else
                 {
