@@ -409,12 +409,73 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('include/footer');   
     }
 
+    public function viewLeaveCredits(){
+     
+        $result_array = $this->credits->readcredits();
+        $data['leavecredits'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('employee_admin',$data);
+        $this->load->view('include/footer');   
+    }
+
+    public function addLeaveCredits(){
+
+       $rules = array(
+                   array('field'=>'employeeID', 'label'=>'EmployeeID', 'rules'=>'required'),
+                   array('field'=>'lname', 'label'=>'Last Name', 'rules'=>'required'),
+                   array('field'=>'fname', 'label'=>'First Name', 'rules'=>'required'),
+                   array('field'=>'mname', 'label'=>'Middle Name', 'rules'=>'required'),
+                   array('field'=>'vacation', 'label'=>'Vacation Leave', 'rules'=>'required'),
+                   array('field'=>'sick', 'label'=>'Sick Leave', 'rules'=>'required'),
+                   array('field'=>'slp', 'label'=>'Special Leave Priveledge', 'rules'=>'required'),
+                   array('field'=>'others', 'label'=>'Others', 'rules'=>'required')
+           );
+            $this->form_validation->set_rules($rules);
+            if($this->form_validation->run()==FALSE){
+            $data1 = $_SESSION['username'];
+            $type= $this->employee->read($data1);
+            foreach($type as $t){
+              $ut= array(
+                          'type'=>$t['type']
+              );
+              $types[]=$ut;
+            }
+            $usertype['types'] = $types;
+            $this->load->view('include/header',$usertype);
+            $this->load->view('include/footer');
+        }
+       else{
+            $leaveCreditsRecord=array(
+                'employeeID'=>$_POST['employeeID'],
+                'lname'=>$_POST['lname'],
+                'fname'=>$_POST['fname'],
+                'mname'=>$_POST['mname'],
+                'vacation'=>$_POST['vacation'],
+                'sick'=>$_POST['sick'],
+                'slp'=>$_POST['slp'],
+                'others'=>$_POST['others']
+
+            );
+            $this->employee->createleavecredits($leaveCreditsRecord);
+            redirect('process_im\provement/viewEmployeeAdmin');
+    }
+}
     public function addLeave(){
         
         $rules = array(
                    array('field'=>'date_of_filing', 'label'=>'Date of Filing', 'rules'=>'required'),
                    array('field'=>'place', 'label'=>'Place', 'rules'=>'required'),
                    array('field'=>'type', 'label'=>'Type of Leave', 'rules'=>'required'),
+                   array('field'=>'type_info', 'label'=>'Leave Info', 'rules'=>'required'),
                    array('field'=>'no_of_days', 'label'=>'No. of Days', 'rules'=>'required'),
                    array('field'=>'inc_from', 'label'=>'Inclusive Dates', 'rules'=>'required'),
                    array('field'=>'inc_to', 'label'=>'Inclusive Dates', 'rules'=>'required'),
@@ -441,6 +502,7 @@ class Process_Improvement extends CI_Controller {
                 'date_of_filing'=>$_POST['date_of_filing'],
                 'place'=>$_POST['place'],
                 'type'=>$_POST['type'],
+                'type_info'=>$_POST['type_info'],
                 'no_of_days'=>$_POST['no_of_days'],
                 'inc_from' =>$_POST['inc_from'],
                 'inc_to' =>$_POST['inc_to'],

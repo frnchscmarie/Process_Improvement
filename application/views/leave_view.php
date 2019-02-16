@@ -16,8 +16,7 @@
 <!--MODAL-->
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
+    <div class="modal-content"><div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
       <h3 class="modal-title" id="lineModalLabel">LEAVE APPLICATION</h3>
     </div>
@@ -32,8 +31,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Filing</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <!-- <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo('date'); ?>" >-->
-                         <label><?php echo date('m-d-Y'); ?></label>
+                         <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo('date'); ?>" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -137,7 +135,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">AM,DC/SUPERVISOR</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="supervisor" name="supervisor" for="supervisor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('supervisor'); ?>">
+                         <input type="text" id="supervisor" name="supervisor" for="supervisor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('supervisorID') ?>">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -151,28 +149,30 @@
                   <button type="submit" class="btn btn-success" value="submit">Submit</button>
               </div>
            </div>
-    
-  </div>
+</form>
 </div>
+</div>
+</div>
+</div>
+</div>
+
+
 <!--/MODAL-->
 
 
-</div>
-</div>
-</div>
-</form>
 
-  <div class="container">
+
+<div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/addLeave'); 
+  <?php echo form_open('process_improvement/viewLeave'); 
   ?> 
                        
             </li>
                     </ul>
                     <div class="clearfix"></div>
-    </div>
 
+</div>
 
 <!--first panel (TABLE) -->                      
 <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >
@@ -254,15 +254,8 @@
             
      
 </div>
+</li>
+</ul>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</body>
-
-<script type="text/javascript">
- 
-</script>

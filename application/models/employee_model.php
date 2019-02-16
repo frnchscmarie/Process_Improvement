@@ -2,6 +2,7 @@
 
 class Employee_model extends CI_Model {
     private $table = 'employee';
+    private $leavecredits ='credits';
     
     function createemployee($employeeRecord){
 
@@ -106,7 +107,7 @@ public function changepassword($data,$arg)
     public function error($msg)
     {
         return '<div id="error">'.$msg.'</div>';
-}
+    }
 
 public function supervisors(){
         $this->db->select("*, CONCAT(sv_lastname, ',', sv_firstname) AS username");
@@ -142,4 +143,23 @@ public function supervisors(){
         $this->db->where('id', $id);
         $this->db->update('login');
     }
+
+    public function createleavecredits($leaveCreditsRecord){
+
+        $this->db->insert($this->leavecredits, $leaveCreditsRecord);
+       
+    }
+
+    function readcredits($condition=null){
+        $this->db->select('*');
+        $this->db->from('credits');
+        if(isset($condition))
+            $this->db->where('id', $condition);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
 }

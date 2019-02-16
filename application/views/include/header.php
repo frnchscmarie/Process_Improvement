@@ -219,13 +219,19 @@
                 </li>
 
 <!--start of notif-->
-<li role="presentation" class="dropdown open">
-  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
+<li role="presentation" class="dropdown" id="notif_tag">
+  <!-- <a  class="dropdown-toggle info-number"  aria-expanded="true">
     <i class="fa fa-envelope-o"></i>
     <span class="badge bg-green">1</span>
+  </a> -->
+  <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true" id="notif_head">
+  <!-- <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" id="notif_head"> -->
+    <!-- <i class="fa fa-envelope-o"></i>
+    <span class="badge bg-green" ></span> -->
+    
   </a>
-  <ul id="menu1" class="dropdown-menu list-unstyled msg_list " role="menu">
-    <li>
+  <ul id="notification_tab" class="dropdown-menu list-unstyled msg_list " role="menu">
+   <!--  <li>
       <a> 
         <span>
         <span>FOR APPROVAL</span>
@@ -234,7 +240,7 @@
 
         <span class="message">Ms. Cortez has requested a leave of absence! Please give your remarks.</span>
       </a>
-    </li>
+    </li> -->
 
   </ul>
 </li>
@@ -245,3 +251,51 @@
             </nav>
           </div>
         </div>
+
+<!-- notification -->
+<!--  -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    //notif
+    $.ajax({
+      type: "POST",
+      url: "<?php echo site_url('login/header_user') ?>",
+      success: function(data){
+        console.log("userlevel");
+        var user = JSON.parse(data);
+        console.log(user["type"][0]["type"]);
+        if((user["type"][0]["type"] != "depthead")&&user["type"][0]["type"] != "superadmin"){
+          $("#notif_tag").hide();
+        }
+      }
+    });
+    //ot
+    $.ajax({
+      type: "POST",
+      url: "<?php echo site_url('notification_controller/ot_notification') ?>",      
+      success: function(data){
+        console.log("notification");
+        console.log(data);
+        var notifs = JSON.parse(data);
+        var count = Object.keys(notifs["ot_notification"]).length;
+        console.log(notifs);
+        console.log(count);
+        // console.log(notifs["ot_notification"][0]["employee_name"]);
+        var notif_head = '<i class="fa fa-envelope-o"></i>'
+                      +'<span class="badge bg-green" >'+count+'</span>';
+        $("#notif_head").html(notif_head);
+        for(var a=0; a<count; a++){
+            var notif ='<li><a><span><span>FILED AN OVER TIME</span>'
+                  +'<span class="time">'+notifs["ot_notification"][a]["date_of_filing"]+'</span>'
+                  +'</span><span class="message">'+notifs["ot_notification"][a]["employee_name"]+' has requested an over time! Please give your remarks.</span></a></li>';
+            
+            $("#notification_tab").append(notif);
+
+        }        
+      }
+    });
+    //leave
+   
+  });
+</script>

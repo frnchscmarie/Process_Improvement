@@ -17,7 +17,7 @@
                       </ul>
 
    <!--contents for LEAVE-->
-   <div id="myTabContent" class="tab-content">
+<div id="myTabContent" class="tab-content">
    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
 
                      <div class="x_title">
@@ -31,7 +31,7 @@
                                   <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                     <h3 class="modal-title" id="lineModalLabel">Add Employee</h3>
                                 </div>
-                                  <div class="modal-body">
+                                <div class="modal-body">
                                   <div>&nbsp;</div>
                                     <div class="container">
                                     <?php echo validation_errors(); ?>
@@ -176,23 +176,22 @@
                                             <button type="submit" class="btn btn-success" value="submit">Submit</button>
                                           </div>
                                         </div>
-                                        </div>
                                       </form>
-                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
 
 
-  <div class="container">
+<div class="container">
   <?php echo validation_errors(); ?>
   
   <?php echo form_open('process_improvement/viewEmployeeAdmin'); 
-  ?> 
-                       
-            </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                      </li>
-                    </ul>
+  ?></div>
                     <div class="clearfix"></div>
                       <div class="x_content">
                       <p class="text-muted font-13 m-b-30">
@@ -236,101 +235,103 @@
 <!--LEAVE CREDIT-->
 <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-                  <div class="x_title">
+            <div class="x_title">
                     <h2>Leave Credit Management</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Leave Credits</a>
-                          <div class="modal fade" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                  <ul class="nav navbar-right panel_toolbox">
+                      <li><a data-toggle="modal" data-target="#squarespaceModal2" class="butt5" ><i class="fa fa-plus"></i> Add Leave Credits</a>
+                        <div class="modal fade" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                  <div class="modal-header">
+                                   <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                     <h3 class="modal-title" id="lineModalLabel">Add Leave Credits</h3>
-                                </div>
-                                  <div class="modal-body">
-                                  <div>&nbsp;</div>
-                                    <div class="container">
-                                    <?php echo validation_errors(); ?>
-                                    <?php echo form_open('process_improvement/'); ?> 
-                                      <form class="form-horizontal form-label-left">
+                                  </div>
+                                    <div class="modal-body">
+                                        <div>&nbsp;</div>
+                                          <div class="container">
+                                              <?php echo validation_errors(); ?>
+                                              <?php echo form_open('process_improvement/addLeaveCredits'); ?> 
+                                            <form class="form-horizontal form-label-left">
                                         
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID </label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
+                                              <div class="form-group">
+                                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                      <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
+                                                    </div>
+                                              </div>
+                                              <div>&nbsp;</div>
 
-                                        <div class = "form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="text" class="form-control has-feedback-left"  required="required"for="username" placeholder="Employee Username" name="username" value="<?php echo set_value('username'); ?>" id="username">
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
+                                                  <div class="col-md-3 col-sm-9 col-xs-12">
+                                                    <input type="text" class="form-control"  required="required"for="lname" placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname">
+                                              </div>
+                                            
+                                              <div class="col-md-3 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname">
+                                                </div>
+                              
+                                              <div class="col-md-3 col-sm-9 col-xs-12">
+                                                  <input type="text" class="form-control" for="mname" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname">
+                                              </div>
                                             </div>
-                                        </div>
-                                        <div>&nbsp;</div>
+                                            <div>&nbsp;</div>
 
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">VACATION LEAVE</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="text" class="form-control has-feedback-left"  required="required"for="pg_level" placeholder="PG Level" name="pg_level" value="<?php echo set_value('pg_level'); ?>" id="pg_level">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">VACATION LEAVE</label>
+                                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="number" class="form-control has-feedback-left"  required="required"for="vacation" placeholder="Vacation Leave" name="vacation" value="<?php echo set_value('vacation'); ?>" id="vacation">
+                                                  </div>
+                                              </div>
+                                              <div>&nbsp;</div>
 
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">SICK LEAVE</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="date" class="form-control has-feedback-left" required="required" for="birthday" placeholder=" Birthdate" name="birthday" value="<?php echo set_value('birthday'); ?>" id="birthday">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">SICK LEAVE</label>
+                                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="number" class="form-control has-feedback-left" required="required" for="sick" placeholder=" Sick Leave" name="sick" value="<?php echo set_value('sick'); ?>" id="sick">
+                                                  </div>
+                                              </div>
+                                              <div>&nbsp;</div>
             
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">SPECIAL PRIVILEGE LEAVE</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="date" class="form-control has-feedback-left" required="required" for="date_hired" placeholder="Date Hired" name="date_hired" value="<?php echo set_value('date_hired'); ?>" id="date_hired">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">SPECIAL LEAVE PRIVILEGE </label>
+                                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="number" class="form-control has-feedback-left" required="required" for="slp" placeholder="Special Leave Privilege" name="slp" value="<?php echo set_value('slp'); ?>" id="slp">
+                                                  </div>
+                                              </div>
+                                              <div>&nbsp;</div>
 
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">OTHERS</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="date" class="form-control has-feedback-left" required="required" for="date_hired" placeholder="Date Hired" name="date_hired" value="<?php echo set_value('date_hired'); ?>" id="date_hired">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
-        
-              
-                                        <div class="">
-                                          <label class="control-label col-sm-4">&nbsp;</label>
-  
-                                        </div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">OTHERS</label>
+                                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="number" class="form-control has-feedback-left" required="required" for="others" placeholder="Others" name="others" value="<?php echo set_value('others'); ?>" id="others">
+                                                  </div>
+                                              </div>
+                                              <div>&nbsp;</div>
   
                                         <div class="form-group">
                                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                             <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>" style="color: white;">Cancel</a></button>
-                          
                                             <button type="submit" class="btn btn-success" value="submit">Submit</button>
                                           </div>
                                         </div>
-                                        </div>
                                       </form>
-                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 
 
   <div class="container">
   <?php echo validation_errors(); ?>
-  <?php echo form_open('process_improvement/'); 
+  <?php echo form_open('process_improvement/viewEmployeeAdmin'); 
   ?> 
-                       
-            </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                      </li>
-                    </ul>
+                       </div>
                     <div class="clearfix"></div>
                       <div class="x_content">
                       <p class="text-muted font-13 m-b-30">
@@ -346,11 +347,18 @@
             <th >Sick Leave</th>
             <th >Special Leave Privilege</th>
             <th >Others</th>
+            <th >ACTION</th>
           </tr>
         </thead>
         <tbody>
             <?php
-        
+              if($leavecredits!=null){
+                foreach($leavecredits as $l){  
+                    echo "<tr><td>".$l['employeeID']."</td><td>".$l['lname'].", ".$l['fname']." ".$l['mname']."</td><td>".$l['vacation']."</td><td>".$l['sick']."</td><td>".$l['slp']."</td><td>".$l['others']."</td>".'
+                    <td><a href="'.base_url('process_improvement/updateLeaveCredits/'.$l['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delLeaveCredits/'.$l['employeeID']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    
+                }
+        }
             ?>
         </tbody>
     </table>
@@ -365,4 +373,4 @@
                   </div>
                 </div>
               </div>
-            </div>
+          

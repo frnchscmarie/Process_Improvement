@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-
+    // global $user_access = "";
+    // private static $user_access = "";
     public function index()
     {
         $this->form_validation->set_rules('username','Username','required', array('required' => 'Invalid Username or Password.'));
@@ -26,7 +27,15 @@ class Login extends CI_Controller {
         
         if($result_array){
             foreach($result_array as $row){
-                $this->session->set_userdata('username', $row['username']);
+                // $user_access = $row['fname'];
+                $sess_array = array(
+                    'username'  =>  $row['username']                    
+                );
+
+                // $this->session->set_userdata('type', $row['type']);
+                // $this->session->set_userdata('username', $row['username']);
+                $this->session->set_userdata($sess_array);
+                
             
             }
             return true;
@@ -41,5 +50,22 @@ class Login extends CI_Controller {
         session_unset();
         session_destroy();
         redirect(base_url('login'));
+    }
+  
+    public function header_user(){
+        // session_start();
+        $this->load->model('notification_model','estudyante');
+        // $result_array = $this->estudyante->read_ot_notification();
+        $result_array = $this->estudyante->get_type($this->session->userdata('username'));
+        if($result_array){
+            foreach($result_array as $i){
+              $info = array(
+                'type' => $i['type']                
+              );
+              $type[]=$info;
+            }        
+            $types['type'] = $type;
+        }
+        echo json_encode($types);
     }
 }
