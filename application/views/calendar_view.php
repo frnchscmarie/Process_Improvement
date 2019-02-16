@@ -91,7 +91,7 @@
         if($holiday!=null){
                 foreach($holiday as $h){  
                     echo "<tr><td>".$h['holiday']."</td><td>".$h['dates']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateHoliday/'.$h['id']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delHoliday/'.$h['id']).'"class="btn btn-danger btn-xs" ><i class="fa fa-trash-o"></i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateHoliday/'.$h['id']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delHoliday/'.$h['id']).'"class="btn btn-danger btn-xs" onclick="deleteme(id); return false;"><i class="fa fa-trash-o"></i></a></td></tr>';
                     
                 }
         }
@@ -108,3 +108,12 @@
      </div>
  </div>
 </div>
+<script type="text/javascript">
+  function deleteme(id)
+ {
+ if(confirm("Are you sure you want to delete this holiday?")){
+ window.location.href='process_improvement/delHoliday?del_id=' +$id+'';
+ return true;
+ }
+ } 
+</script>

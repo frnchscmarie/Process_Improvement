@@ -180,10 +180,8 @@
                   <div class="">
                     <h4>LIST OF EMPLOYEE'S LEAVE</h4>
                   </div>
-                  <div class="x_content" >
-
+<!--xcontent--> <div class="x_content" >
                     <br />
-<!--table start-->
                     <table id="datatable" class="table table-striped table-bordered" >
                       <thead>
                         <tr id="trHead">
@@ -208,12 +206,10 @@
                                 ?>
                       </tbody>
                      </table>
-<!--/table-->
               <button style="margin-top: -10px; margin-left: 50%;" class="print"><i class="fa fa-print"></i> Print</button>
 
-    </div>
-  </div>
-<!--/first panel (TABLE)-->
+    </div><!--/xcontent-->
+  </div><!--/panel-->
 
 
 
@@ -256,6 +252,8 @@
 </div>
 </li>
 </ul>
+</div>
+</div>
 </div>
 </div>
 </div>
