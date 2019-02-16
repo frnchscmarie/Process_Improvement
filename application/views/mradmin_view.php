@@ -61,7 +61,7 @@
      <div class="container" style="margin-left: 26%;">    
 
      
-         <?php echo ('<img align= "center" style="margin-left: 18%;"src="'.base_url('/assets/qrcode/').$property_no.'.png" />'); ?>
+        <?php echo ('<img align= "center" style="margin-left: 18%;"src="'.base_url('/assets/qrcode/').$property_no.'.png" />'); ?>
      </div>
     </div>
 </div>
