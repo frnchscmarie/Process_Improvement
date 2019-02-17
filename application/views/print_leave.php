@@ -1,3 +1,20 @@
+<?php 
+foreach ($print as $k){
+}
+
+?>
+
+<?php 
+foreach ($employee as $p) {
+}
+?>
+
+<?php
+foreach ($supervisor as $s){
+  
+}
+?>
+
 <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -31,15 +48,15 @@
 
 
                             <tr id="trHead">
-                            <th colspan="4">Employee Name: </th>  
-                             <th colspan="4">Date: </th>         
+                            <th colspan="4">Employee Name: <?php echo $p['lname'].", ".$p['fname']." ".$p['mname'];?> </th>  
+                             <th colspan="4">Date: <?php echo $k['date_of_filing'] ?></th>         
                           </tr>
 
                           <tr id="trHead">
-                            <th colspan="2">Office/Department: </th>  
-                            <th rowspan="">Position: </th>          
-                            <th rowspan="">ID NO.: </th>
-                            <th colspan="">PG: </th>
+                            <th colspan="2">Office/Department:  TMG/RBSD </th>  
+                            <th rowspan="">Position: <?php echo $p['position']?> </th>          
+                            <th rowspan="">ID NO.: <?php echo $p['employeeID']?></th>
+                            <th colspan="">PG: <?php echo $p['pg_level']?></th>
                           </tr>
 
                             <tr id="trHead">
@@ -47,17 +64,17 @@
                             </tr>
 
                             <tr id="trHead">
-                            <th colspan="1" >Type of Leave: </th>  
+                            <th colspan="1" >Type of Leave: <?php echo $k['type']?></th>  
                             <th colspan="4" >Where will leave be spent</th>                 
                             </tr>
 
                              <tr id="trHead">
-                              <th colspan="1" >No. of working days applied for: </th>  
-                              <th colspan="4" rowspan="2" >(pls echo PLACE hehehe)</th>                 
+                              <th colspan="1" >No. of working days applied for: <?php echo $k['no_of_days']?></th>  
+                              <th colspan="4" rowspan="2" ><?php echo $k['type_info']?></th>                 
                             </tr>
 
                               <tr id="trHead">
-                              <th colspan="1" >Inclusive Dates: </th>  
+                              <th colspan="1" >Inclusive Dates: <?php echo $k['inc_from']." to ".$k['inc_to']?></th>  
                                              
                             </tr>
 
@@ -66,13 +83,13 @@
 
                             <tr id="trHead">
                             <th colspan="1.5" >Balance of Leave as of: (date)</th>  
-                            <th colspan="4" >Recommendation: </th>   
+                            <th colspan="4" >Recommendation: <?php echo $k['status']?></th>   
 
                             </tr>
 
                           <tr id="trHead">    
                             <th colspan="" >VL: </th>  
-                            <th rowspan="3" colspan="6">Supervisor: </th> 
+                            <th rowspan="3" colspan="6">Supervisor: <?php echo $s['sv_lastname'].", ". $s['sv_firstname'];?></th> 
                              </tr>
 
                             <tr id="trHead">
@@ -105,7 +122,7 @@
 
                           <tr id="trHead" >
 
-                           <th colspan="5" rowspan="2" style="text-align: center;">GRACE OFELIA LOVELY VA. DAYO<br/><small>VP/HEAD, RBSD</small></th>
+                           <th colspan="5" rowspan="2" style="text-align: center;"><br />GRACE OFELIA LOVELY VA. DAYO<br/><small>VP/HEAD, RBSD</small></th>
                          </tr>
 
                       </thead>

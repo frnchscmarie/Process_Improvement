@@ -71,5 +71,16 @@ class Leavedb_model extends CI_Model {
     function delHoliday($where_array){
         $this->db->delete($this->holiday,$where_array);
     }
+
+    function leaveread($id){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
 }
 ?>

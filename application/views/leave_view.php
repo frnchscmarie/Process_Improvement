@@ -222,7 +222,7 @@
                        <?php
                         if($leavedb!=null){
                           foreach($leavedb as $l){
-                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['type']."</td><td>".$l['type_info']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisorID']."</td><td>".$l['status']."</td>".'<td><a href="'.base_url('process_improvement/printleave').'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td></tr>';
+                            echo "<tr><td>".$l['date_of_filing']."</td><td>".$l['type']."</td><td>".$l['type_info']."</td><td>".$l['no_of_days']."</td><td>".$l['inc_from']."</td><td>".$l['inc_to']."</td><td>".$l['supervisorID']."</td><td>".$l['status']."</td>".'<td><a href="'.base_url('process_improvement/printleave/'.$l['id']).'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td></tr>';
                           }
                                 }
                                 ?>

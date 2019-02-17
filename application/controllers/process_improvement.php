@@ -391,8 +391,8 @@ class Process_Improvement extends CI_Controller {
         redirect('process_improvement/viewEmployeeAdmin');
           }
 
-    public function printleave(){
-      $data['username'] = $this->session->userdata('username');            
+    public function printleave($id){
+        $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
         foreach($userinfo as $i){
           $info = array(
@@ -400,16 +400,22 @@ class Process_Improvement extends CI_Controller {
             );
             $info;
         } 
-        $data['total'] = $this->training->read($info['id']);
         $data1 = $_SESSION['username'];
-        $type= $this->employee->read($data1);
+        $type= $this->employee->remployee($info['id']);
         foreach($type as $t){
           $ut= array(
-                      'type'=>$t['type']
+            'type'=>$t['type'],
+            'supervisorID' => $t['supervisorID']
           );
           $types[]=$ut;
         }
+        $supervisor= $this->employee->getSV($ut['supervisorID']);
+        $data['supervisor']=$supervisor;
         $usertype['types'] = $types;
+        $data['employee'] = $type;
+        $printing = $this->leavedb->leaveread($id);
+        $data['print'] = $printing;
+
        $this->load->view('include/header', $usertype);
        $this->load->view('print_leave', $data);
        $this->load->view('include/footer');
@@ -551,7 +557,7 @@ class Process_Improvement extends CI_Controller {
                 'inc_from' =>$_POST['inc_from'],
                 'inc_to' =>$_POST['inc_to'],
                 'supervisorID'=>$_POST['supervisorID'], 
-                'status'=>"disapprove" 
+                'status'=>"pending" 
             );
 
             
@@ -1152,6 +1158,8 @@ public function addHoliday(){
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+        $data['types'] = $types;
+        $data['total'] = $this->training->read($info['id']);
         $this->load->view('include/header',$usertype);
         $this->load->view('calendar_view',$data);
         $this->load->view('include/footer');   
