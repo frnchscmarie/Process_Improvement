@@ -374,3 +374,26 @@
                 </div>
               </div>
           
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#squarespaceModal2").on('shown.bs.modal', function(e){
+        $(window).load(function() { 
+          $.ajax({
+                  method:'POST',
+                  url:"base_url('fetchemployee')",
+                  success:function(data){ 
+                  },
+                  error: function (error) {
+                      alert("Failed to load.. Kindly try again!!");
+                  }
+           });
+      });
+    });
+  })
+
+
+</script>
+
+base_url('fetchemployee')

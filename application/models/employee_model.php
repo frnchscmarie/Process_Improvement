@@ -3,6 +3,7 @@
 class Employee_model extends CI_Model {
     private $table = 'employee';
     private $leavecredits ='credits';
+    private $super = 'supervisor';
     
     function createemployee($employeeRecord){
 
@@ -155,6 +156,17 @@ public function supervisors(){
         $this->db->from('credits');
         if(isset($condition))
             $this->db->where('id', $condition);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    public function getSV($id){
+        $this->db->select('*');
+        $this->db->from('supervisor');
+        $this->db->where('id',$id);
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();
