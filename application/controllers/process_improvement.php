@@ -424,11 +424,30 @@ class Process_Improvement extends CI_Controller {
         $type= $this->employee->read($data1);
         foreach($type as $t){
           $ut= array(
-                      'type'=>$t['type']
+            'type'=>$t['type']
           );
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $supervisorinfo = $this->employee->remployee($info['id']);
+
+        foreach ($supervisorinfo as $sv) {
+          $use = array(
+            'supervisorID'=>$sv['supervisorID']
+          );
+        }
+        $supervisorname = $this->employee->getSV($use['supervisorID']);
+        $data['supervisor'] = $supervisorname;
+
         $this->load->view('include/header',$usertype);
         $this->load->view('leave_view',$data);
         $this->load->view('include/footer');   
@@ -495,62 +514,50 @@ class Process_Improvement extends CI_Controller {
     }
 }
     public function addLeave(){
-        
-        $rules = array(
-                   array('field'=>'date_of_filing', 'label'=>'Date of Filing', 'rules'=>'required')
-                );
-            $this->form_validation->set_rules($rules);
-            if($this->form_validation->run()==FALSE){
-            $data1 = $_SESSION['username'];
-            $type= $this->employee->read($data1);
-            foreach($type as $t){
-              $ut= array(
-                          'type'=>$t['type']
-              );
-              $types[]=$ut;
-            }
-            $usertype['types'] = $types;
-            $this->load->view('include/header',$usertype);
-            $this->load->view('include/footer');
-        }
-       else{
-
-             $data1 = $_SESSION['username'];
-            $leaveRecord=array(
-                'employeeID'=>$data1,
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $data1 = $_SESSION['username'];
+        if($_POST['desc_1']!=null){
+            $type_info = $_POST['desc_1'];
+           }
+            
+           else if(isset($_POST['desc_2'])){
+            $type_info = $_POST['desc_2'];
+           }
+            
+           else if($_POST['desc_3']!=null){
+            $type_info = $_POST['desc_3'];
+           }
+            
+           else if($_POST['desc_4']!=null){
+            $type_info = $_POST['desc_4'];
+           }else if(isset($_POST['desc_5'])){
+            $type_info = $_POST['desc_5'];
+           }else{
+            $type_info = "Inside the Country";
+           }
+        $leaveRecord=array(
+                'employeeID'=>$info['id'],
                 'date_of_filing'=>$_POST['date_of_filing'],
-                'type_info'=>"",
                 'type'=>$_POST['type'],
+                'type_info'=>$type_info,
                 'no_of_days'=>$_POST['no_of_days'],
                 'inc_from' =>$_POST['inc_from'],
                 'inc_to' =>$_POST['inc_to'],
                 'supervisorID'=>$_POST['supervisorID'], 
-                'status'=>""
-                
+                'status'=>"disapprove" 
             );
-            if(isset($_POST['desc_1']))
-            $leaveRecord = array(
+
             
-                'type_info'=>$_POST['desc_1']
-            );
-           else if(isset($_POST['desc_2']))
-            $leaveRecord = array(
-            
-                'type_info'=>$_POST['desc_2']
-            );
-           else if(isset($POST_['desc_3']))
-            $leaveRecord = array(
-            
-                'type_info'=>$_POST['desc_3']
-            );
-           else if(isset($_POST['desc_4']))
-            $leaveRecord = array(
-            
-                'type_info'=>$_POST['desc_4']
-            );
             $this->leavedb->createleave($leaveRecord);
             redirect('process_improvement/viewLeave');
-            }
+            
     }
 
     
