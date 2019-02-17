@@ -53,12 +53,12 @@
 
                              <tr id="trHead">
                               <th colspan="1" >No. of working days applied for: </th>  
-                              <th colspan="4" >INCASE</th>                 
+                              <th colspan="4" rowspan="2" >(pls echo PLACE hehehe)</th>                 
                             </tr>
 
                               <tr id="trHead">
                               <th colspan="1" >Inclusive Dates: </th>  
-                              <th colspan="4" >INCASE</th>                 
+                                             
                             </tr>
 
                             <tr id="trHead">
