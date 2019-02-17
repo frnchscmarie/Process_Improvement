@@ -219,7 +219,7 @@
         if($employee!=null){
                 foreach($employee as $c){  
                     echo "<tr><td>".$c['employeeID']."</td><td>".$c['lname'].", ".$c['fname']." ".$c['mname']."</td><td>".$c['pg_level']."</td><td>".$c['birthday']."</td><td>".$c['date_hired']."</td><td>".$c['position']."</td><td>".$c['email']."</td><td>".$c['promo_date']."</td><td>".$c['civil_stat']."</td><td>".$c['cp_no']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateEmployee/'.$c['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delEmployee/'.$c['employeeID']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateEmployee/'.$c['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delEmployee/'.$c['employeeID']).'"class="btn btn-danger btn-xs" onclick="deleteme(id); return false;"><i class="fa fa-trash-o"></i></a></td></tr>';
                     
                 }
         }
@@ -394,6 +394,14 @@
   })
 
 
+  function deleteme(id)
+ {
+ if(confirm("Are you sure you want to delete this employee?")){
+ window.location.href='process_improvement/delEmployee?del_id=' +$id+'';
+ return true;
+ }
+ } 
 </script>
+
 
 base_url('fetchemployee')
