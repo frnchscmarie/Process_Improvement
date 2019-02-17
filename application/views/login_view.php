@@ -22,13 +22,13 @@
     <link href="<?php echo base_url('assets/css/build/css/custom.min.css'); ?>" rel="stylesheet">
   </head>
 
-  <body class="login">
-    <div>
+  <body class="login" style="background-color: #2A3F54;">
+    <div >
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
+      <div class="login_wrapper" >
+        <div class="animate form login_form"   style="background-color: #fccf4d; padding: 10%; border-radius: 3%; box-shadow: 5px 8px 10px 3px #132f2b; ">
+          <section class="login_content" >
             <form method="post" action="<?php echo base_url(); ?>process_improvement/login_validate"> 
 
 <?php
@@ -45,7 +45,7 @@ if(isset($_SESSION['username'])) {
 }
 
 ?>
-
+      <div style="color: black;">
               <h1>IMS LOG IN</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" name="username" id="user" required />
@@ -53,21 +53,22 @@ if(isset($_SESSION['username'])) {
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="password" id="password" required />
               </div>
-              <div style="margin-left: 30%;">
+              <div style="margin-left: 25%;">
                 <input class="btn btn-default submit" type="submit" value="Log In" name="submit"/>
                
               </div>
+        </div>
 
-              <div class="clearfix"></div>
+              <div class="clearfix" ></div>
 
-              <div class="separator">
+              <div class=""   style="color: black;">
                <!-- <p class="change_link">New to site?
                   <a href="#signup" class="to_register"> Create Account </a>
                 </p>-->
 
-                <div class="clearfix"></div>
+                <div class="clearfix">&nbsp;</div>
 
-                <div>
+                <div style="color: black;">
                   <h2><i class="fa fa-bank"></i> &nbsp;Retail Banking Systems Department</h2>
                   <p>©2018 All Rights Reserved.</p>
                 </div>
