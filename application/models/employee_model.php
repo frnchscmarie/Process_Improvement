@@ -10,7 +10,7 @@ class Employee_model extends CI_Model {
         $this->db->insert($this->table, $employeeRecord);
         $data = array( 
         'id'=>$_POST['employeeID'],
-        'username'=>$_POST['username'],
+        'username'=>$_POST['employeeID'],
         'type'=>$_POST['type'],
         'password'=> '12345'
         );
@@ -151,11 +151,9 @@ public function supervisors(){
        
     }
 
-    function readcredits($condition=null){
+    function readcredits(){
         $this->db->select('*');
         $this->db->from('credits');
-        if(isset($condition))
-            $this->db->where('id', $condition);
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();
@@ -172,6 +170,19 @@ public function supervisors(){
             return $query->result_array();
         else
             return false;
+    }
+
+    public function getinfo($employeeID){
+        $this->db->select('*');
+        $this->db->from('employee');
+        $this->db->where('employeeID', $employeeID);
+        $query = $this->db->get();
+        if($query -> num_rows()>0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
     }
 
 }

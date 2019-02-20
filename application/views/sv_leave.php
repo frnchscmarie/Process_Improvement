@@ -1,3 +1,11 @@
+<?php 
+// foreach($leave as $l){
+// echo $l['date_of_filing']; 
+// }
+
+?>
+
+
 <div class="right_col" role="main">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -26,20 +34,30 @@
                      </div>
                     <table id="" class="">
                       <tbody>
-  
+                          
                           <tr id="trHead">
-                            <th >Date Filed:</th>
-                            <!--<td>11/15/2018</td>--> 
+                            <th >Employee ID:</th>                           
+                            <td><?php if(isset($leave[0]['employeeID'])) { echo $leave[0]['employeeID']; }?></td> 
                           </tr> 
 
                           <tr id="trHead">
-                            <th >Where will leave be spent:</th>
-                            <!--<td>Paris, France</td>--> 
+                            <th >Employee Name:</th>                           
+                            <td><?php if(isset($leave[0]['employeeID'])) { echo $leave[0]['lname'].', '.$leave[0]['fname']; }?></td> 
+                          </tr> 
+                          
+                          <tr id="trHead">
+                            <th >Date Filed:</th>                           
+                            <td><?php if(isset($leave[0]['date_of_filing'])) { echo $leave[0]['date_of_filing']; }?></td> 
+                          </tr> 
+
+                          <tr id="trHead">
+                            <th >Where will leave be spent:></th>
+                            <td><?php if(isset($leave[0]['type_info'])) { echo $leave[0]['type_info']; }?></td> 
                           </tr>
 
                           <tr id="trHead">
                             <th >Type of Leave:</th>
-                            <!--<td>Vacation Leave</td>-->
+                            <td><?php if(isset($leave[0]['type'])) { echo $leave[0]['type']; }?></td>
                           </tr>  
 
                           <tr id="trHead">
@@ -52,25 +70,29 @@
                           <tr id="trHead"><th >INCLUSIVE DATES </th></tr> 
                           <tr id="trHead">
                             <th >FROM: </th>
-                            <!--<td> 12/10/2018</td>-->
+                            <td><?php if(isset($leave[0]['inc_from'])) { echo $leave[0]['inc_from']; }?></td>
                           </tr> 
                           <tr id="trHead">
                             <th >TO: </th>
-                            <!--<td> 12/17/2018</td>-->
+                            <td><?php if(isset($leave[0]['inc_to'])) { echo $leave[0]['inc_to']; }?></td>                            
                           </tr>   
 
                           <tr id="trHead"><th >COMMUTATION </th></tr> 
                             
                             <tr id="trHead">
                             <th >No. of working days applied for:</th>
-                            <!--<td> 1</td>-->  
+                            <td><?php if(isset($leave[0]['no_of_days'])) { echo $leave[0]['no_of_days']; }?></td>                                                        
                           </tr>
                             
               
                           <tr id="trHead"><th >RECOMMENDATIONS </th></tr> 
                           <tr id="trHead">
-                            <th ><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> APPROVE </a></th>
-                           <th ><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> DISAPPROVE </a></th>
+                           <th><button class="btn btn-success btn-xs leaveapprove" id="leaveapprove"><i class="fa fa-eye"></i> APPROVE </button>
+                           </th><th><button class="btn btn-success btn-xs leavedisapprove" id="leavedisapprove"><i class="fa fa-eye"></i> DISAPPROVE </button></th>
+                            <!-- <th><a class="btn btn-success btn-xs" id="leaveapprove"><i class="fa fa-eye"></i> APPROVE </a></th> -->
+                           <!-- <th><a class="btn btn-success btn-xs" id="leavedisapprove"><i class="fa fa-eye"></i> DISAPPROVE </a></th> -->
+                           <!-- <th ><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> APPROVE </a></th>
+                           <th ><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> DISAPPROVE </a></th> -->
                           </tr>   
                       </tbody>
                      </table>
@@ -187,10 +209,10 @@
                             <th >Action</th>
                           </tr>
                         </thead>
-                        <tbody>
-                         <td></td>
-                         <td></td>
-                         <td></td>
+                        <tbody>                         
+                         <td><?php if(isset($ot[0]['date_of_filing'])) { echo $ot[0]['date_of_filing']; }?></td>
+                          <td><?php if(isset($ot[0]['employeeID'])) { echo $ot[0]['employeeID']; }?></td>
+                          <td><?php if(isset($ot[0]['employeeID'])) { echo $ot[0]['lname'].', '.$ot[0]['fname']; }?></td>
                          <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> VIEW </a></td>
                        </tbody>
         
@@ -226,7 +248,33 @@
 
 
                        <tbody>
-          
+                        <tr>
+                          <td><?php if(isset($ot[0]['date_of_filing'])) { echo $ot[0]['date_of_filing']; }?></td>
+                          <td><?php if(isset($ot[0]['auto_OT'])) { echo $ot[0]['auto_OT']; }?></td>
+                          <td><?php if(isset($ot[0]['auto_OT'])) { echo $ot[0]['auto_OT']; }?></td>
+                          <td><?php if(isset($ot[0]['auto_OT'])) { echo $ot[0]['auto_OT']; }?></td>
+                          <td><?php if(isset($ot[0]['task'])) { echo $ot[0]['task']; }?></td>
+                          
+                          <!-- <td>Vacation Leave</td>
+                          <td>7</td>
+                          <td>08/10/2018</td>
+                          <td>08/17/2018</td>
+                          <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View </a></td> -->
+                        </tr>
+                        <tr>
+                          <td><?php if(isset($ot[0]['aot_from'])) { echo $ot[0]['aot_from']; }?></td>
+                          <td><?php if(isset($ot[0]['aot_to'])) { echo $ot[0]['aot_to']; }?></td>
+                          <td></td>
+                          <td></td>
+                          
+                        </tr>
+                        <tr>
+                          <td><?php if(isset($ot[0]['hours_weekends'])) { echo $ot[0]['hours_weekends']; }?></td>
+                          <td><?php if(isset($ot[0]['minutes_weekends'])) { echo $ot[0]['minutes_weekends']; }?></td>
+                          <td><?php if(isset($ot[0]['hours_weekends'])) { echo $ot[0]['hours_weekends']; }?></td>
+                          <td><?php if(isset($ot[0]['minutes_weekends'])) { echo $ot[0]['minutes_weekends']; }?></td>
+                          
+                        </tr>
                          <!--<tr>
                           <td>11/15/2018</td>
                           <td>15-037-044</td>
@@ -242,10 +290,10 @@
                       <tfoot>
                         <tr id="trHead">
                           <th colspan="4" style="text-align: right;">TOTAL</th>
+                       <!--    <th > </th>
                           <th > </th>
                           <th > </th>
-                          <th > </th>
-                          <th > </th>
+                          <th > </th> -->
                           <th colspan="1"></th><!--space only-->
                         </tr>
                       </tfoot>
@@ -386,3 +434,33 @@
                 </div>
               </div>
             </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(document).on('click', '.leavedisapprove', function(){
+      var id = <?php echo $leave[0]["id"]; ?>;
+        $.ajax({
+          url: "<?php echo site_url('process_improvement/disapproveleave') ?>",
+          type: "POST",
+          data: {id:id},
+          success: function(data){
+            console.log(data);
+            alert("Leave Disapproved!");
+          }
+        });    
+    });    
+    $(document).on('click', '.leaveapprove', function(){      
+        var id = <?php echo $leave[0]["id"]; ?>;
+        $.ajax({
+          url: "<?php echo site_url('process_improvement/approveleave') ?>",
+          type: "POST",
+          data: {id:id},
+          success: function(data){
+            alert("Leave Approved!");
+          }
+        });
+      
+    });   
+  });
+
+</script>

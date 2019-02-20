@@ -82,5 +82,40 @@ class Leavedb_model extends CI_Model {
         else
             return false;
     }
+
+    function getdata($id){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+    function getOT($id){
+        $query = $this->db->query("SELECT * FROM ot JOIN employee WHERE ot.employeeID = employee.employeeID AND ot.id = '$id'");
+        return $query->result_array();
+    } 
+    function getLeave($id){
+        $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id'");
+        return $query->result_array();
+    } 
+    function approveleave($id){
+        $this->db->set('status','approved');
+        $this->db->where('id', $id);
+        $this->db->update('leavedb');
+
+        $this->db->where('id', $id);
+        $this->db->delete('leaved_notification');
+    }
+    function diapproveleave($id){
+        $this->db->set('status','disapproved');
+        $this->db->where('id', $id);
+        $this->db->update('leavedb');
+        
+        $this->db->where('id', $id);
+        $this->db->delete('leaved_notification');
+    }
 }
 ?>

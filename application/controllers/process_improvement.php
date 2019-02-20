@@ -289,6 +289,9 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $data['supervisor'] = $this->employee->supervisors();
+        $ra = $this->employee->readcredits();
+        $data['leavecredit'] = $ra; 
+
         $this->load->view('include/header',$usertype);
         $this->load->view('employee_admin',$data);
         $this->load->view('include/footer');
@@ -302,7 +305,7 @@ class Process_Improvement extends CI_Controller {
                 'lname'=>$_POST['lname'],
                 'fname'=>$_POST['fname'],
                 'mname'=>$_POST['mname'],
-                'username'=>$_POST['username'],
+                'username'=>$_POST['employeeID'],
                 'type'=>$_POST['type'],
                 'password'=> '12345',
                 'pg_level'=>$_POST['pg_level'],
@@ -461,8 +464,8 @@ class Process_Improvement extends CI_Controller {
 
     public function viewLeaveCredits(){
      
-        $result_array = $this->credits->readcredits();
-        $data['leavecredits'] = $result_array; 
+        $result_array = $this->employee->readcredits();
+        $data['leavecredit'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -473,37 +476,11 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
         $this->load->view('include/header',$usertype);
-        $this->load->view('employee_admin',$data);
+        $this->load->view('leave_credits',$data);
         $this->load->view('include/footer');   
     }
 
     public function addLeaveCredits(){
-
-       $rules = array(
-                   array('field'=>'employeeID', 'label'=>'EmployeeID', 'rules'=>'required'),
-                   array('field'=>'lname', 'label'=>'Last Name', 'rules'=>'required'),
-                   array('field'=>'fname', 'label'=>'First Name', 'rules'=>'required'),
-                   array('field'=>'mname', 'label'=>'Middle Name', 'rules'=>'required'),
-                   array('field'=>'vacation', 'label'=>'Vacation Leave', 'rules'=>'required'),
-                   array('field'=>'sick', 'label'=>'Sick Leave', 'rules'=>'required'),
-                   array('field'=>'slp', 'label'=>'Special Leave Priveledge', 'rules'=>'required'),
-                   array('field'=>'others', 'label'=>'Others', 'rules'=>'required')
-           );
-            $this->form_validation->set_rules($rules);
-            if($this->form_validation->run()==FALSE){
-            $data1 = $_SESSION['username'];
-            $type= $this->employee->read($data1);
-            foreach($type as $t){
-              $ut= array(
-                          'type'=>$t['type']
-              );
-              $types[]=$ut;
-            }
-            $usertype['types'] = $types;
-            $this->load->view('include/header',$usertype);
-            $this->load->view('include/footer');
-        }
-       else{
             $leaveCreditsRecord=array(
                 'employeeID'=>$_POST['employeeID'],
                 'lname'=>$_POST['lname'],
@@ -516,8 +493,7 @@ class Process_Improvement extends CI_Controller {
 
             );
             $this->employee->createleavecredits($leaveCreditsRecord);
-            redirect('process_im\provement/viewEmployeeAdmin');
-    }
+            redirect('process_improvement/viewLeaveCredits');
 }
     public function addLeave(){
         $data['username'] = $this->session->userdata('username');            
@@ -668,6 +644,32 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
+
+    public function editProperties($property_no){
+
+          $data1 = $_SESSION['username'];
+          $type= $this->employee->read($data1);
+          foreach($type as $t){
+          $ut= array(
+         'type'=>$t['type']
+          );
+          $types[]=$ut;
+         }
+         $usertype['types'] = $types;      
+         $mrRecord['property_no']=$property_no;
+         $condition = array('property_no' => $property_no);
+         $oldRecord = $this->mr->read($condition);
+
+         foreach($oldRecord as $o){
+                $data['property_no']=$o['property_no'];
+              }
+
+            $usertype['types'] = $types;
+            $this->load->view('include/header',$usertype);
+            $this->load->view('editPropertyForm',$data);
+            $this->load->view('include/footer');
+
+          }
 
     public function assignProperties($property_no){
 
@@ -1019,8 +1021,27 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-    public function viewSVLeave(){
-     
+    public function viewSVLeave($id=null){
+        if($id != null){
+        // $getvalues = $this->leavedb->getdata($id);
+        $getvalues = $this->leavedb->getLeave($id);
+        $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        // print_r($data);
+        $this->load->view('include/header',$usertype);
+        $this->load->view('sv_leave',$data);
+        $this->load->view('include/footer');          
+        } else{
+        //   $getvalues = $this->leavedb->getdata($id);
+        // $data['leave'] = $getvalues;
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -1033,7 +1054,53 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('include/header',$usertype);
         $this->load->view('sv_leave');
         $this->load->view('include/footer');
-        
+        }      
+    }
+    public function viewOT($id=null){
+        if($id != null){
+        // $getvalues = $this->leavedb->getdata($id);
+        $getvalues = $this->leavedb->getOT($id);
+        $data['ot'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        // print_r($data);
+        $this->load->view('include/header',$usertype);
+        $this->load->view('sv_leave',$data);
+        $this->load->view('include/footer');          
+        } else{
+        //   $getvalues = $this->leavedb->getdata($id);
+        // $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);
+        $this->load->view('sv_leave');
+        $this->load->view('include/footer');
+        }      
+    }
+
+    public function approveleave(){
+        $id = $_POST['id'];
+        $result_array = $this->leavedb->approveleave($id);
+        redirect('process_improvement/viewcalendar');
+    }
+    public function disapproveleave(){
+        $id = $_POST['id'];
+        $datas = $this->leavedb->diapproveleave($id);
+        redirect('process_improvement/viewcalendar');
     }
 
 
@@ -1189,7 +1256,18 @@ public function addHoliday(){
       }
     }
 
-  
+  public function getemployeename(){
+    $employeeID = $this->input->post('employeeID');
+    $infos = $this->employee->getinfo($employeeID);
+    foreach($infos as $i){
+      $info = array(
+        'lname'=>$i['lname'],
+        'fname'=>$i['fname'],
+        'mname'=>$i['mname']
+      );
+    }
+    echo json_encode($info);
+  }
 
  
 }

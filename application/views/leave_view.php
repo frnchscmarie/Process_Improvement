@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -16,7 +17,8 @@
 <!--MODAL-->
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content"><div class="modal-header">
+    <div class="modal-content">
+      <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
       <h3 class="modal-title" id="lineModalLabel">LEAVE APPLICATION</h3>
     </div>
@@ -228,7 +230,7 @@
                                 ?>
                       </tbody>
                      </table>
-              <button style="margin-top: -10px; margin-left: 50%;" class="print"><i class="fa fa-print"></i> Print</button>
+           
 
     </div><!--/xcontent-->
   </div><!--/panel-->
@@ -266,6 +268,10 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</body>
 
 
 <script type="text/javascript">

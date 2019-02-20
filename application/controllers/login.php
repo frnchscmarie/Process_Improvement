@@ -34,9 +34,7 @@ class Login extends CI_Controller {
 
                 // $this->session->set_userdata('type', $row['type']);
                 // $this->session->set_userdata('username', $row['username']);
-                $this->session->set_userdata($sess_array);
-                
-            
+                $this->session->set_userdata($sess_array);                                        
             }
             return true;
         }

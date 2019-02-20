@@ -53,14 +53,14 @@
           <div class="left_col scroll-view">
 
             <div class="navbar nav_title">
-              <a href="<?php echo base_url('process_improvement/dashboard'); ?>" class="site_title" ><i class="fa fa-institution" style="margin-left: 6%;"></i> <span >RBSD-IMS</span></a>
+              <a href="<?php echo base_url('process_improvement/dashboard'); ?>" class="site_title" ><i class="fa fa-institution" style="margin-left: 5%;"></i> <span >RBSD-IMS</span></a>
             </div>
 
             <div class="clearfix"></div>
             <br/>
 
             <!-- menu profile quick info (left side) -->
-            <div class="profile clearfix">
+            <div class="profile clearfix" style="margin-top: -10%;">
                 <div class="profile_pic">
                  <a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <img src="<?php echo base_url('assets/css/build/images/sampleuser.png'); ?>" alt="..." class="img-circle profile_img"> </a>
                 </div>
@@ -80,7 +80,7 @@
               <div class="menu_section" >
                 <?php foreach ($types as $usertype)
                 {
-                    if($usertype['type']=='admin')
+                    if($usertype['type']=='Admin')
                     {
                 ?>
                 <!--START -->
@@ -104,18 +104,22 @@
                   <li>
                     <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-comment-o"></i>TRAINING ADMIN</a>
                   </li>
+
+                  <li>
+                    <a href="<?php echo base_url('process_improvement/viewLeaveCredits')?>"> <i class="fa fa-comment-o"></i>LEAVE CREDITS</a>
+                  </li>
                 </ul>
                 <!-- end -->
                 <?php 
                   }
                 
 
-                else if($usertype['type']=='superadmin')
+                else if($usertype['type']=='Supervisor')
                 {
                 ?>
                 <!--START ( SUPER ADMIN)-->
                 <ul class="nav side-menu">
-                      <li><a href="<?php echo base_url('process_improvement/dashboard_supervisor')?>"> <i class="fa fa-home"></i> HOME </a>
+                      <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
                       <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
@@ -127,12 +131,12 @@
                 <!-- end -->
                 <?php
               }
-                else if($usertype['type']=='depthead')
+                else if($usertype['type']=='Department Head')
                 {
                 ?>
                 <!--START ( DEPT HEAD)-->
                 <ul class="nav side-menu">
-                      <li><a href="<?php echo base_url('process_improvement/dashboard_depthead')?>"> <i class="fa fa-home"></i> HOME </a>
+                      <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
                       <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
@@ -142,13 +146,13 @@
              
                 <?php 
                 }
-                else if($usertype['type']=="employee")
+                else if($usertype['type']=="Employee")
                 {
                   ?>
                   <ul class="nav side-menu">
                   <!--<li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i>PROFILE</a>
                   </li>-->
-                  <li><a href="<?php echo base_url('process_improvement/dashboard')?>"> <i class="fa fa-home"></i> HOME </a>
+                  <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
                   </li>
@@ -258,6 +262,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     //notif
+    var count_notif_all = 0; 
     $.ajax({
       type: "POST",
       url: "<?php echo site_url('login/header_user') ?>",
@@ -265,37 +270,58 @@
         console.log("userlevel");
         var user = JSON.parse(data);
         console.log(user["type"][0]["type"]);
-        if((user["type"][0]["type"] != "depthead")&&user["type"][0]["type"] != "superadmin"){
+        if((user["type"][0]["type"] != "Supervisor")&&(user["type"][0]["type"] != "Department Head")){
           $("#notif_tag").hide();
         }
       }
     });
-    //ot
+    //notif
     $.ajax({
-      type: "POST",
-      url: "<?php echo site_url('notification_controller/ot_notification') ?>",      
-      success: function(data){
-        console.log("notification");
-        console.log(data);
-        var notifs = JSON.parse(data);
-        var count = Object.keys(notifs["ot_notification"]).length;
-        console.log(notifs);
-        console.log(count);
-        // console.log(notifs["ot_notification"][0]["employee_name"]);
-        var notif_head = '<i class="fa fa-envelope-o"></i>'
-                      +'<span class="badge bg-green" >'+count+'</span>';
-        $("#notif_head").html(notif_head);
-        for(var a=0; a<count; a++){
-            var notif ='<li><a><span><span>FILED AN OVER TIME</span>'
-                  +'<span class="time">'+notifs["ot_notification"][a]["date_of_filing"]+'</span>'
-                  +'</span><span class="message">'+notifs["ot_notification"][a]["employee_name"]+' has requested an over time! Please give your remarks.</span></a></li>';
-            
-            $("#notification_tab").append(notif);
+      // alert("saas");
+        type: "POST",
+        url: "<?php echo site_url('notification_controller/all_notification') ?>",      
+        success: function(data){
+          console.log(data);         
+          if(data != "null"){
+            var notifs = JSON.parse(data);
+            var count = Object.keys(notifs["ot_notification"]).length;
+            // var notifs = JSON.parse(data);
+            var count2 = Object.keys(notifs["leave_notification"]).length;
+            var count_notif_all = count + count2;
+            if(count_notif_all != 0){
+              var notif_head = '<i class="fa fa-envelope-o"></i>'
+                                +'<span class="badge bg-green" >'+count_notif_all+'</span>';
+                  $("#notif_head").html(notif_head);
+            } else{
+              var notif_head = '<i class="fa fa-envelope-o"></i>';
+                  $("#notif_head").html(notif_head);
+            }       
+            console.log(notifs);
+            console.log(count);   
+            for(var a=0; a<count; a++){
+              count_notif_all++;
+                var notif ="<li><a href='#' id='ot"+a+"'><span><span>FILED AN OVER TIME</span>"
+                      +"<span class='time'>"+notifs["ot_notification"][a]["date_of_filing"]+"</span>"
+                      +"</span><span class='message'>"+notifs["ot_notification"][a]["employee_name"]+" has requested an over time! Please give your remarks.</span></a></li>";                                      
+                $("#notification_tab").append(notif);
+                var url = notifs["ot_notification"][a]["id"];
+                $("#ot"+a).attr("href","<?php echo base_url('process_improvement/viewOT/'); ?>" + url);                  
 
-        }        
-      }
-    });
-    //leave
-   
+            }             
+            console.log(notifs);
+            console.log(count);                   
+        for(var a=0; a<count2; a++){
+              count_notif_all++;
+                var notif ='<li><a href = "#" id="leave'+a+'"><span><span>FILED A LEAVE</span>'
+                      +'<span class="time">'+notifs["leave_notification"][a]["date_of_filing"]+'</span>'
+                      +'</span><span class="message">'+notifs["leave_notification"][a]["employee_name"]+' has requested an over time! Please give your remarks.</span></a></li>';
+                $("#notification_tab").append(notif);
+                var url2 = notifs["leave_notification"][a]["id"];
+                $("#leave"+a).attr("href","<?php echo base_url('process_improvement/viewSVLeave/'); ?>" + url2);     
+              }
+          }
+        }
+      });
   });
 </script>
+

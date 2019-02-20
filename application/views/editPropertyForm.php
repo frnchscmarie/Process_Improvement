@@ -11,12 +11,12 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h3>Assign Property</h3>
+                      <h3>Edit Details Property</h3>
                         <div class="clearfix"></div>
                     </div>
                         <div class="x_content">
                         <br />
-                        <?php echo form_open('process_improvement/assignProperties/' .$property_no); ?>  
+                        <?php echo form_open('process_improvement/editProperties/' .$property_no); ?>  
                           <div class="col-md-7" style="margin-top: -3%;padding: px; text-align: center; margin-left: 18%;"> 
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <?php echo ('<img align= "center" style="margin-left: 18%;"src="'.base_url('/assets/qrcode/').$property_no.'.png" />'); ?>
@@ -40,13 +40,13 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for=lname"placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname">
+                         <input type="text" class="form-control"  required="required" for=lname"placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname" readonly>
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname">
+                         <input type="text" class="form-control"  required="required" for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname" readonly>
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="mname" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mnamee">
+                         <input type="text" class="form-control"  required="required" for="mname" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname" readonly>
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -145,12 +145,41 @@
     </div>
 </body>
 
-
-
 <script type="text/javascript">
   $(document).ready(function(){
     $("#employeeID").change(function(){
-          alert("hehehe");
-        });
+      var employeeID = $(this).val();
+      if(employeeID == '')
+        {
+          $('#lname').prop('disabled', true);
+          $('#fname').prop('disabled', true);
+          $('#mname').prop('disabled', true);
+        }
+      else
+        {
+          $('#lname').prop('disabled', true);
+          $('#fname').prop('disabled', true);
+          $('#mname').prop('disabled', true);
+          var empID = new Array();
+            $.ajax({
+              url:"<?php echo base_url() ?>process_improvement/getemployeename",
+              type: "POST",
+              data: {'employeeID' : employeeID},
+              dataType: 'json',
+                success: function(data){
+                  $('#lname').attr("value", data['lname']);
+                  $('#fname').attr("value", data['fname']);
+                  $('#mname').attr("value", data['mname']);
+                },
+                error: function(){
+                  alert('Employee ID is not valid');
+                  $('#lname').attr("value", "NO DATA");
+                  $('#fname').attr("value", "NO DATA");
+                  $('#mname').attr("value", "NO DATA");
+                }
+            });
+        }
+    });
+
   })
 </script>

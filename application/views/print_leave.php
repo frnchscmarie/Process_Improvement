@@ -48,14 +48,14 @@ foreach ($supervisor as $s){
 
 
                             <tr id="trHead">
-                            <th colspan="4">Employee Name: <?php echo $p['lname'].", ".$p['fname']." ".$p['mname'];?> </th>  
-                             <th colspan="4">Date: <?php echo $k['date_of_filing'] ?></th>         
+                            <th colspan="4">EMPLOYEE NAME: <?php echo $p['lname'].", ".$p['fname']." ".$p['mname'];?> </th>  
+                             <th colspan="4">DATE: <?php echo $k['date_of_filing'] ?></th>         
                           </tr>
 
                           <tr id="trHead">
-                            <th colspan="2">Office/Department:  TMG/RBSD </th>  
-                            <th rowspan="">Position: <?php echo $p['position']?> </th>          
-                            <th rowspan="">ID NO.: <?php echo $p['employeeID']?></th>
+                            <th colspan="2">OFFICE/DEPARTMENT:  TMG/RBSD </th>  
+                            <th rowspan="">POSITION: <?php echo $p['position']?> </th>          
+                            <th rowspan="">ID NO. : <?php echo $p['employeeID']?></th>
                             <th colspan="">PG: <?php echo $p['pg_level']?></th>
                           </tr>
 
@@ -64,17 +64,17 @@ foreach ($supervisor as $s){
                             </tr>
 
                             <tr id="trHead">
-                            <th colspan="1" >Type of Leave: <?php echo $k['type']?></th>  
-                            <th colspan="4" >Where will leave be spent</th>                 
+                            <th colspan="1" >TYPE OF LEAVE: <?php echo $k['type']?></th>  
+                            <th colspan="4" >WHERE WILL LEAVE BE SPENT</th>                 
                             </tr>
 
                              <tr id="trHead">
-                              <th colspan="1" >No. of working days applied for: <?php echo $k['no_of_days']?></th>  
+                              <th colspan="1" >NO. OF WORKING DAYS APPLIED FOR: <?php echo $k['no_of_days']?></th>  
                               <th colspan="4" rowspan="2" ><?php echo $k['type_info']?></th>                 
                             </tr>
 
                               <tr id="trHead">
-                              <th colspan="1" >Inclusive Dates: <?php echo $k['inc_from']." to ".$k['inc_to']?></th>  
+                              <th colspan="1" >INCLUSIVE DATES: <?php echo $k['inc_from']." TO ".$k['inc_to']?></th>  
                                              
                             </tr>
 
@@ -82,8 +82,8 @@ foreach ($supervisor as $s){
                             <th colspan="5" style="text-align: center;">DETAILS OF ACTION ON APPLICATION</th> </tr>
 
                             <tr id="trHead">
-                            <th colspan="1.5" >Balance of Leave as of: (date)</th>  
-                            <th colspan="4" >Recommendation: <?php echo $k['status']?></th>   
+                            <th colspan="1.5" >BALANCE OF LEAVE AS OF: (date)</th>  
+                            <th colspan="4" >RECOMMENDATION: <?php echo $k['status']?></th>   
 
                             </tr>
 
@@ -97,7 +97,7 @@ foreach ($supervisor as $s){
                           </tr>
 
                            <tr id="trHead">
-                            <th colspan="" >Total Days: </th>  
+                            <th colspan="" >TOTAL DAYS: </th>  
                           </tr>
 
                           <tr id="trHead">
@@ -107,17 +107,17 @@ foreach ($supervisor as $s){
 
 
                          <tr id="trHead">
-                              <th colspan="1" >Days with pay/ ML with full pay: </th>   
+                              <th colspan="1" >DAYS WITH PAY/ML WITH FULL PAY: </th>   
                               <th colspan="6" rowspan="3"></th>  
                           </tr>
                         
 
                           <tr id="trHead">
-                            <th colspan="1" >Days witohout pay/ ML with proportionate pay: </th>    
+                            <th colspan="1" >Days WITHOUT PAY/ML WITH PROPORTIONAL PAY: </th>    
                           </tr>
 
                              <tr id="trHead">
-                              <th colspan="1" >Others: </th>  
+                              <th colspan="1" >OTHERS: </th>  
                             </tr>
 
                           <tr id="trHead" >
@@ -135,8 +135,8 @@ foreach ($supervisor as $s){
       <!--/xcontent--></div>
           <!--/panel--></div>
 
-<div style="float: right; margin-top: 10px;">
-               <button class="btn btn-success"><a href="<?php echo base_url('process_improvement/viewLeave')?>">BACK</a></button>
+<div style="margin-left: 44%; margin-top: 10px;">
+               <button class="btn btn-success"><a href="<?php echo base_url('process_improvement/viewLeave')?>" style="color: white;">BACK</a></button>
                 <button class="btn btn-success"  onclick="printContent('leaveform')">PRINT</button>
 </div>
 

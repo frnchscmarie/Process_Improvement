@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2019 at 03:03 AM
+-- Generation Time: Feb 20, 2019 at 01:40 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -39,8 +39,10 @@ CREATE TABLE `calendar` (
 --
 
 INSERT INTO `calendar` (`id`, `dates`, `holiday`) VALUES
-(1, '2019-12-25', 'Christmas'),
-(3, '2019-11-01', 'All Saints Day');
+(6, '2019-02-05', 'Chinese New Year'),
+(9, '2019-06-12', 'Independence Day'),
+(12, '2019-08-21', 'Ninoy Aquino Day'),
+(51, '2019-02-25', 'People Power');
 
 -- --------------------------------------------------------
 
@@ -59,6 +61,14 @@ CREATE TABLE `credits` (
   `slp` varchar(100) NOT NULL,
   `others` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `credits`
+--
+
+INSERT INTO `credits` (`id`, `employeeID`, `lname`, `fname`, `mname`, `vacation`, `sick`, `slp`, `others`) VALUES
+(1, '02', 'Cortez', 'Franchesca Marie', 'Cadondon', '212', '1313', '13', '13'),
+(2, '02', 'Cortez', 'Franchesca Marie', 'Cadondon', '24', '423', '4234', '32');
 
 -- --------------------------------------------------------
 
@@ -82,7 +92,7 @@ CREATE TABLE `employee` (
   `username` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
   `type` varchar(30) NOT NULL,
-  `supervisorID` varchar(30) NOT NULL
+  `supervisorID` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -90,12 +100,18 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
-('01', 'Janelyn Ann', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643758', 'Janelyn', 'janelyn', '', ''),
-('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', '123', '', ''),
-('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', ''),
-('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', ''),
-('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', '12344', 'Julius', '12345', 'employee', ''),
-('06', 'Lovely', 'Dayo', 'Grace', '14', '2019-02-05', '2019-02-06', 'Department HEad', 'xxxxxxxxx', '2019-02-04', 'Single', '12345678900', 'Lovely', '12345', 'depthead', '');
+('01', 'Janelyn Ann', 'Gellado', '', '8', '1999-08-08', '2019-01-02', 'OJT', 'janelynanngellado@gmail.com', '2019-01-08', 'single', '09774643758', 'Janelyn', 'admin', '', '20'),
+('02', 'Franchesca Marie', 'Cortez', 'Cadondon', '5', '1998-11-12', '2019-01-02', 'OJT', 'chesca@gmail.com', '2019-01-08', 'single', '09774643759', 'Chesca', '123', 'Employee', '20'),
+('03', 'Xandra', 'Bello', '', '6', '1999-01-30', '2019-01-02', 'OJT1', 'xandra@gmail.com', '2019-01-08', 'single', '12355', 'Anda', 'superadmin', '', '20'),
+('04', 'Noel', 'Benusa', 'Dannug', '6', '1998-11-18', '2018-12-11', 'OJT1', 'noelbenusad@gmail.com', '2019-01-25', 'Single', '2147483647', 'Noel', '12345', 'employee', '20'),
+('05', 'Julius Rabbi', 'Liscano', 'Apas', '6', '1999-07-30', '2019-01-29', 'Trainee', 'yot.liscano', '2019-01-29', 'Single', '12344', 'Julius', '12345', 'employee', '20'),
+('06', 'Lovely', 'Dayo', 'Grace', '14', '2019-02-05', '2019-02-06', 'Department Head', 'xxxxxxxxx', '2019-02-04', 'Single', '12345678900', 'Lovely', '12345', '', '20'),
+('09', 'Franchessy', 'Orias', 'Marie', '6', '2019-02-16', '2019-02-12', 'employee', 'chesca.cortez@gmail.com', '2019-02-14', 'Married', '1234567890', 'chengky', '12345', 'Employee', '20'),
+('10', 'Angela', 'Mercado', 'Apas', '6', '2019-02-13', '2019-02-21', 'Supervisor', 'chesca.cortez@yahoo.com', '2019-02-28', 'Married', '12349', 'Angela', '12345', 'Employee', '20'),
+('11', 'Herchell', 'Forteo', 'Mari', '6', '1998-03-20', '2019-02-19', 'OJT1', 'xxxxxxxxx', '2019-02-19', 'Single', '2314567', 'Chel', '12345', 'Employee', '20'),
+('12345', 'ghjkl', 'Orias', 'Apas', '6', '2019-02-21', '2019-02-27', 'Supervisor', 'yot.liscano', '2019-02-21', 'Single', '123456245', 'sample', '12345', 'Supervisor', '20'),
+('1234567890', 'dsf', '2drgqtwf', 'dg', '5', '3434-04-23', '0034-04-03', 'dg', '32r', '0043-03-31', 'Single', '34', '1234567890', '12345', 'Employee', '20'),
+('54555', 'dag', 'gdadg', 'adg', '5', '3333-03-03', '3333-03-03', 'reg', 'gr', '5532-04-04', 'Single', '34324', '54555', '12345', 'Employee', '20');
 
 -- --------------------------------------------------------
 
@@ -115,16 +131,49 @@ CREATE TABLE `employee_type` (
 --
 
 CREATE TABLE `leavedb` (
-  `date_of_filing` varchar(20) NOT NULL,
-  `place` text NOT NULL,
+  `id` int(11) NOT NULL,
+  `date_of_filing` date NOT NULL,
+  `employeeID` varchar(100) NOT NULL,
   `type` text NOT NULL,
   `type_info` varchar(100) NOT NULL,
   `inc_from` date NOT NULL,
   `inc_to` date NOT NULL,
-  `recommendation` varchar(50) NOT NULL,
   `supervisorID` varchar(100) NOT NULL,
   `no_of_days` varchar(20) NOT NULL,
   `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `leavedb`
+--
+
+INSERT INTO `leavedb` (`id`, `date_of_filing`, `employeeID`, `type`, `type_info`, `inc_from`, `inc_to`, `supervisorID`, `no_of_days`, `status`) VALUES
+(8, '2019-02-19', '02', 'Vacation Leave(Local)', 'Inside the Country', '2019-02-25', '2019-02-28', 'Armando, Alexia', '3', 'approved'),
+(9, '2019-02-20', '02', 'Vacation Leave(Local)', 'Inside the Country', '2019-02-27', '2019-02-28', 'Armando, Alexia', '1', 'disapproved'),
+(10, '2019-02-20', '02', 'Vacation Leave(Local)', 'Inside the Country', '2019-02-26', '2019-02-27', 'Armando, Alexia', '4', 'approved');
+
+--
+-- Triggers `leavedb`
+--
+DELIMITER $$
+CREATE TRIGGER `leave_notification` AFTER INSERT ON `leavedb` FOR EACH ROW INSERT INTO leaved_notification(id, employeeID, date_of_filing) VALUES (NEW.id, NEW.employeeID, NEW.date_of_filing)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `leave_notification_delete` AFTER DELETE ON `leavedb` FOR EACH ROW DELETE FROM leaved_notification WHERE id = OLD.id
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaved_notification`
+--
+
+CREATE TABLE `leaved_notification` (
+  `id` int(11) NOT NULL,
+  `employeeID` varchar(100) NOT NULL,
+  `date_of_filing` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -145,14 +194,18 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
-('01', 'Janelyn', 'janelyn', 'admin'),
-('02', 'Chesca', 'employee', 'employee'),
-('03', 'Anda', 'superadmin', 'superadmin'),
-('04', 'Noel', '12345', 'employee'),
-('05', 'Julius', '12345', 'employee'),
-('06', 'Lovely', '12345', 'depthead'),
-('23', '43', '12345', 'Employee'),
-('232', '23', '12345', 'Employee');
+('01', 'Janelyn', 'admin', 'Admin'),
+('02', 'Chesca', 'employee', 'Employee'),
+('03', 'Anda', 'superadmin', 'Supervisor'),
+('04', 'Noel', '12345', 'Employee'),
+('05', 'Julius', '12345', 'Employee'),
+('06', 'Lovely', '12345', 'Department Head'),
+('09', 'chengky', '12345', 'Employee'),
+('10', 'Angela', '12345', 'Employee'),
+('11', 'Chel', '12345', 'Employee'),
+('12345', 'sample', '12345', 'Supervisor'),
+('20', 'Alexia', '12345', 'Supervisor'),
+('54555', '54555', '12345', 'Employee');
 
 -- --------------------------------------------------------
 
@@ -196,6 +249,7 @@ CREATE TABLE `ot` (
   `id` int(100) NOT NULL,
   `employeeID` varchar(50) NOT NULL,
   `date_of_filing` date NOT NULL,
+  `date_of_ot` date NOT NULL,
   `auto_OT` varchar(100) NOT NULL,
   `aot_from` varchar(20) NOT NULL,
   `aot_to` varchar(20) NOT NULL,
@@ -213,14 +267,19 @@ CREATE TABLE `ot` (
 -- Dumping data for table `ot`
 --
 
-INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `auto_OT`, `aot_from`, `aot_to`, `hours_weekends`, `minutes_weekends`, `hours_weekdays`, `minutes_weekdays`, `task`, `authorized_by`, `status`, `remarks`) VALUES
-(16, '02', '2019-02-16', '2:00 - 3:00', '14:00', '15:00', '00', '00', '1', '00', 'asdffregrfh', 'Armando, Alexia', 'Pending', '');
+INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `date_of_ot`, `auto_OT`, `aot_from`, `aot_to`, `hours_weekends`, `minutes_weekends`, `hours_weekdays`, `minutes_weekdays`, `task`, `authorized_by`, `status`, `remarks`) VALUES
+(17, '02', '2019-02-16', '0000-00-00', '20', '14:00', '17:00', '00', '00', '2', '0', 'Debugging', 'Armando, Alexia', 'Pending', ''),
+(18, '02', '2019-02-19', '0000-00-00', '18:00 - 20:00', '18:00', '20:00', '00', '00', '2', '0', 'asdfghjkl', 'Armando, Alexia', 'Pending', '');
 
 --
 -- Triggers `ot`
 --
 DELIMITER $$
 CREATE TRIGGER `notification_ot` AFTER INSERT ON `ot` FOR EACH ROW INSERT INTO ot_notification (id, employeeID, date_of_filing) VALUES (NEW.id, NEW.employeeID, NEW.date_of_filing)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `ot_notification_delete` AFTER DELETE ON `ot` FOR EACH ROW DELETE FROM ot_notification WHERE id = OLD.id
 $$
 DELIMITER ;
 
@@ -241,10 +300,8 @@ CREATE TABLE `ot_notification` (
 --
 
 INSERT INTO `ot_notification` (`id`, `employeeID`, `date_of_filing`) VALUES
-(13, '03', '2019-02-11'),
-(14, '03', '2019-02-06'),
-(15, '02', '2019-02-16'),
-(16, '02', '2019-02-16');
+(17, '02', '2019-02-16'),
+(18, '02', '2019-02-19');
 
 -- --------------------------------------------------------
 
@@ -265,7 +322,9 @@ INSERT INTO `property` (`id`, `property_no`) VALUES
 (8, '15-094-423'),
 (9, '12345'),
 (10, '15-037-062'),
-(11, '15-037-074');
+(11, '15-037-074'),
+(12, '15-037-011'),
+(13, '2016-0001-0001');
 
 -- --------------------------------------------------------
 
@@ -285,7 +344,7 @@ CREATE TABLE `supervisor` (
 --
 
 INSERT INTO `supervisor` (`id`, `sv_firstname`, `sv_lastname`, `sv_middlename`) VALUES
-(1, 'Alexia', 'Armando', 'Mendoza');
+(20, 'Alexia', 'Armando', 'Mendoza');
 
 -- --------------------------------------------------------
 
@@ -304,13 +363,6 @@ CREATE TABLE `training` (
   `conducted_by` varchar(50) NOT NULL,
   `attachments` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `training`
---
-
-INSERT INTO `training` (`id`, `employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
-(2, '02', 'Chesca', 'Title 3', '2019-02-19', '2019-02-08', '12', 'fhbs', 'abundance-assortment-basket-1458694.jpg');
 
 -- --------------------------------------------------------
 
@@ -343,7 +395,8 @@ ALTER TABLE `credits`
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
-  ADD PRIMARY KEY (`employeeID`);
+  ADD PRIMARY KEY (`employeeID`),
+  ADD KEY `supervisorID` (`supervisorID`);
 
 --
 -- Indexes for table `employee_type`
@@ -355,7 +408,13 @@ ALTER TABLE `employee_type`
 -- Indexes for table `leavedb`
 --
 ALTER TABLE `leavedb`
-  ADD PRIMARY KEY (`date_of_filing`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leaved_notification`
+--
+ALTER TABLE `leaved_notification`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `login`
@@ -407,31 +466,37 @@ ALTER TABLE `training`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `leavedb`
+--
+ALTER TABLE `leavedb`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ot`
 --
 ALTER TABLE `ot`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ot_notification`
 --
 ALTER TABLE `ot_notification`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `supervisor`
@@ -443,7 +508,7 @@ ALTER TABLE `supervisor`
 -- AUTO_INCREMENT for table `training`
 --
 ALTER TABLE `training`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

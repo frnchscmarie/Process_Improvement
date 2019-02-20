@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Property Number</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control has-feedback-left"  required="required" for="property_no" id="inputSuccess2" placeholder="Property Number" name="property_no" value="<?php echo set_value('property_no'); ?>" id="property_no">
+                          <input type="text" class="form-control has-feedback-left"  required="required" for="property_no" placeholder="20xx-xxxx-xxxxx" name="property_no" value="<?php echo set_value('property_no'); ?>" id="property_no">
                         </div>
                       </div>
 
@@ -100,7 +100,7 @@
                 foreach($mrRecord as $p){
                 $spaghetti = $p['property_no'];  
                     echo "<tr><td>".$p['property_no']."</td>".'
-                    <td><a href="'.base_url('process_improvement/assignProperties/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> ASSIGN PROPERTY</a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/editProperties/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> ADD DETAILS</a><a href="'.base_url('process_improvement/assignProperties/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> ASSIGN PROPERTY</a></td></tr>';
                 }
         }
         else{
@@ -123,3 +123,19 @@
 </div>
 </div>
 </body>
+
+
+
+<script type="text/javascript">
+  
+$('#property_no').keyup(function() {
+  var today = new Date();
+  var y = today.getFullYear();
+  var foo = $(this).val().split("-").join(""); // remove hyphens
+  if (foo.length > 0) {
+    foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+  }
+  $(this).val(foo);
+});
+
+</script>

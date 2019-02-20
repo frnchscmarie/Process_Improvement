@@ -40,7 +40,15 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date </label>
                                           <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" >
+                                            <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_filing" id="date_of_filing" required="required" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                          </div>
+                                    </div>
+                                        <div>&nbsp;</div>
+
+                                        <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Overtime Date</label>
+                                          <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <input class="form-control col-md-4 col-sm-4 col-xs-6" type="date" name="date_of_ot" id="date_of_ot" required="required" value="<?php echo set_value('date_of_ot'); ?>" >
                                           </div>
                                     </div>
                                         <div>&nbsp;</div>
@@ -48,7 +56,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Authorized OT Time</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input type="text" id="auto_OT" name="auto_OT" value="<?php echo set_value('auto_OT'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Authorized Time">
+                         <input type="text" id="auto_OT" name="auto_OT" value="<?php echo set_value('auto_OT'); ?>"required="required" class="form-control col-md-7 col-xs-12" placeholder="Authorized Time" readonly>
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -67,7 +75,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Finish</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="aot_to" id="aot_to" required="required" value="<?php echo set_value('aot_to') ?>" >
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="time" name="aot_to" id="aot_to" required="required" value="<?php echo set_value('aot_to') ?>" max = "4:00" >
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -82,12 +90,12 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Hour/s</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                          <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekdays" id="hours_weekdays"  value="<?php echo set_value('hours_weekdays') ?>" >
+                          <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekdays" id="hours_weekdays"  value="<?php echo set_value('hours_weekdays') ?>" min=0>
                          </div>
 
 
                           <div class="col-md-4 col-sm-4 col-xs-12">
-                         <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekends" id="hours_weekends" value="<?php echo set_value('hours_weekends') ?>" >
+                         <input class="form-control col-md-6 col-sm-6 col-xs-12" type="number" name="hours_weekends" id="hours_weekends" value="<?php echo set_value('hours_weekends') ?>" min=0 >
                         </div>
                       </div>
                       <div>&nbsp;</div><br />
@@ -327,4 +335,59 @@ $(document).ready(function(){
  document.body.innerHTML = restorepage;
 }
 
+</script>
+
+
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    $("#date_of_ot").change(function(){
+      $("#aot_to").attr("disabled",false);
+      $("#aot_from").attr("disabled",false);
+      var day = new Date(document.getElementById("date_of_ot").value);
+      var getday = day.getDay();
+      if(getday == "1" || getday == "2" || getday == "3" || getday == "4" || getday == "5"){
+        $("#hours_weekends").attr("disabled", true);
+        $("#minutes_weekends").attr("disabled",true);
+        $("#hours_weekdays").attr("disabled", false);
+        $("#minutes_weekdays").attr("disabled",false);
+
+        var getto = document.getElementById("aot_to");
+        getto.onchange=function(){
+          var from = document.getElementById("aot_from").value;
+          var cheat = new Date('1970-01-01T' + from);
+          var hour = cheat.getHours();
+          var hourget = cheat.getHours();
+          var hour = (hour + 2);
+          var x = document.getElementById("aot_to").max = hour;
+          
+          var to = document.getElementById("aot_to").value;
+          var cheat2 = new Date('1970-01-01T' + to);
+          var hour2 = cheat2.getHours();
+          var diff = hour2 - hourget;
+          
+          if(hour2<=x){
+            $(":submit").attr("disabled", false);
+            document.getElementById("auto_OT").value =  hourget + ":00 - "+ hour2+":00";
+            document.getElementById("hours_weekdays").value = diff;
+          }else{
+            alert("Only until "+hour+":00 is allowed on weekdays");
+            $(":submit").attr("disabled", true);
+            document.getElementById("auto_OT").value = "Invalid Time";
+          }
+        }
+
+
+
+      }else{
+        $("#hours_weekdays").attr("disabled", true);
+        $("#minutes_weekdays").attr("disabled",true);
+        $("#hours_weekends").attr("disabled", false);
+        $("#minutes_weekends").attr("disabled",false);
+      }
+    });
+    $("#aot_to").attr("disabled",true);
+    $("#aot_from").attr("disabled",true);
+
+  })
 </script>
