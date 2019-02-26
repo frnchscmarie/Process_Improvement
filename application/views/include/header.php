@@ -125,6 +125,12 @@
                       <li><a href="<?php echo base_url('process_improvement/viewLeaveEmployee')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
                        </li>
 
+                       <li><a href="<?php echo base_url('process_improvement/viewTraining')?>"> <i class="fa fa-book"></i>TRAINING</a>
+                      </li>
+
+                       <li><a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-user"></i>MR</a>
+                  </li>
+
                       <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
                       </li>
                 </ul>
