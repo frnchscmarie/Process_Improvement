@@ -123,7 +123,8 @@
                           </tr>
                       </thead>
                        <tbody>
-                        <?php for($a = 0;$a<count($leave_pending); $a++) {
+                        <?php if($leave_pending!=null){
+                          for($a = 0;$a<count($leave_pending); $a++) {
                           $date = new DateTime($leave_pending[$a]['date_of_filing']);
                           $result = $date->format('M d Y'); 
                           $date2 = new DateTime($leave_pending[$a]['inc_from']);
@@ -142,7 +143,7 @@
                                                                             
                           <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View </a></td>
                         </tr>
-                      <?php }?>
+                      <?php }}?>
                       </tbody>
                      </table>
             </div>

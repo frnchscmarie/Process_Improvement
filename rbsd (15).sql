@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2019 at 10:36 PM
+-- Generation Time: Feb 26, 2019 at 11:50 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -101,10 +101,10 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `birthday`, `date_hired`, `position`, `email`, `promo_date`, `civil_stat`, `cp_no`, `username`, `password`, `type`, `supervisorID`) VALUES
-('2019-0001', 'Head', 'Department', '', '14', '2019-02-05', '2019-02-06', 'Vice President', 'xxxxxxxxx@gmail.com', '2019-02-04', 'Single', '12345678900', 'depthead', '12345', 'Department Head', '2019-0001-0001'),
-('2019-0002', '1', 'Supervisor', '', '13', '1999-01-30', '2019-01-02', 'Information Technolo', 'supervisor1@gmail.com', '2019-01-08', 'single', '09111111111', 'supervisor1', 'supervisor1', 'Supervisor', '2019-0001-0001'),
-('2019-0003', 'User', 'Admin', '', '8', '1999-08-08', '2019-01-02', 'Secretary', 'secretary@gmail.com', '2019-01-08', 'single', '09774643758', 'admin', 'admin', 'Admin', '20'),
-('2019-0004', '1', 'Employee', '', '5', '1998-11-12', '2019-01-02', 'Information Technolo', 'employee1@gmail.com', '2019-01-08', 'single', '09774643759', 'employee1', 'employee1', 'Employee', '2019-0001-0002');
+('2019-0001', 'Head', 'Department', '', '14', '2019-02-05', '2019-02-06', 'Vice President', 'xxxxxxxxx@gmail.com', '2019-02-04', 'Single', '12345678900', 'depthead', '12345', 'Department Head', '2019-0001'),
+('2019-0002', '1', 'Supervisor', '', '13', '1999-01-30', '2019-01-02', 'Information Technolo', 'supervisor1@gmail.com', '2019-01-08', 'single', '09111111111', 'supervisor1', 'supervisor1', 'Supervisor', '2019-0001'),
+('2019-0003', 'User', 'Admin', '', '8', '1999-08-08', '2019-01-02', 'Secretary', 'secretary@gmail.com', '2019-01-08', 'single', '09774643758', 'admin', 'admin', 'Admin', '2019-0002'),
+('2019-0004', '1', 'Employee', '', '5', '1998-11-12', '2019-01-02', 'Information Technolo', 'employee1@gmail.com', '2019-01-08', 'single', '09774643759', 'employee1', 'employee1', 'Employee', '2019-0002');
 
 -- --------------------------------------------------------
 
@@ -173,7 +173,7 @@ CREATE TABLE `leavedb` (
 --
 
 INSERT INTO `leavedb` (`id`, `date_of_filing`, `employeeID`, `type`, `type_info`, `inc_from`, `inc_to`, `supervisorID`, `no_of_days`, `status`) VALUES
-(29, '2019-02-26', '2019-0004', 'Vacation Leave(International)', 'Singapore', '2019-03-06', '2019-03-08', '2019-0001-0001', '3', 'pending');
+(29, '2019-02-26', '2019-0004', 'Vacation Leave(International)', 'Singapore', '2019-03-06', '2019-03-08', '2019-0002', '3', 'approved');
 
 --
 -- Triggers `leavedb`
@@ -198,13 +198,6 @@ CREATE TABLE `leaved_notification` (
   `employeeID` varchar(100) NOT NULL,
   `date_of_filing` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `leaved_notification`
---
-
-INSERT INTO `leaved_notification` (`id`, `employeeID`, `date_of_filing`) VALUES
-(29, '2019-0004', '2019-02-26');
 
 -- --------------------------------------------------------
 
@@ -418,8 +411,8 @@ CREATE TABLE `supervisor` (
 --
 
 INSERT INTO `supervisor` (`id`, `sv_firstname`, `sv_lastname`, `sv_middlename`) VALUES
-('2019-0001-0001', 'Head', 'Department', ''),
-('2019-0001-0002', '1', 'Supervisor', '');
+('2019-0001', 'Head', 'Department', ''),
+('2019-0002', '1', 'Supervisor', '');
 
 -- --------------------------------------------------------
 
@@ -438,6 +431,13 @@ CREATE TABLE `training` (
   `conducted_by` varchar(50) NOT NULL,
   `attachments` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `training`
+--
+
+INSERT INTO `training` (`id`, `employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
+(16, '2019-0004', 'employee1', 'Title 1', '2019-02-28', '2019-02-28', '8', 'Rizal', 'Doc1.docx');
 
 -- --------------------------------------------------------
 
@@ -595,7 +595,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `training`
 --
 ALTER TABLE `training`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

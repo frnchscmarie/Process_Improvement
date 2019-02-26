@@ -155,7 +155,7 @@
                       <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
-                      <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
+                      <li><a href="<?php echo base_url('process_improvement/viewDHleave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
                       </li>
                 </ul>
 

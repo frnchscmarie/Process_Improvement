@@ -1490,9 +1490,8 @@ class Process_Improvement extends CI_Controller {
     public function viewSVLeave($id=null){
       $data['ot'][0]["id"] = null;
       $data['active'] = "Leave";
-      $ids = "2019-0001-0001";
+      $ids = "2019-0002";
         $result_array = $this->leavedb->getallLeavesuper($ids);
-        echo $id;
         if($result_array != null){
             foreach($result_array as $i){
               $info = array(
@@ -1516,6 +1515,8 @@ class Process_Improvement extends CI_Controller {
             $data['name'] = $get;
             $data['leave_pending'] = $leave;
             $data2['leave_pending'] = $leave;
+        }else{
+            $data['leave_pending'] = "";
         }
         $result_array2 = $this->leavedb->getallOT();
         if($result_array2 != null){
@@ -1558,7 +1559,7 @@ class Process_Improvement extends CI_Controller {
         $usertype['types'] = $types;
      
           if($data['leave'][0]['status'] == 'pending'){
-            $this->load->view('include/header',$usertype);
+          $this->load->view('include/header',$usertype);
           $this->load->view('sv_leave',$data);
           $this->load->view('include/footer');            
           } else{
@@ -1584,6 +1585,106 @@ class Process_Improvement extends CI_Controller {
         $this->load->view('include/footer');
         }      
     }
+
+      public function viewDHleave($id=null){
+      $data['ot'][0]["id"] = null;
+      $data['active'] = "Leave";
+      $ids = "2019-0002";
+        $result_array = $this->leavedb->getallLeavesuper($ids);
+        if($result_array != null){
+            foreach($result_array as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'type' => $i['type'],
+                'no_of_days' => $i['no_of_days'],
+                'inc_from' => $i['inc_from'],
+                'inc_to' => $i['inc_to'],
+/*                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],*/
+                'id' => $i['id']
+              );
+              $leave[]=$info;
+            }        
+            $empname = $this->leavedb->getemp($info['employeeID']);
+            foreach($empname as $e){
+              $get = array(
+                'employee_name'=>$e['lname'].", ".$e['fname']." ".$e['mname']
+              );
+            }
+            $data['name'] = $get;
+            $data['leave_pending'] = $leave;
+            $data2['leave_pending'] = $leave;
+        }else{
+            $data['leave_pending'] = "";
+        }
+        $result_array2 = $this->leavedb->getallOT();
+        if($result_array2 != null){
+            foreach($result_array2 as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'date_of_ot' => $i['date_of_ot'],
+                'auto_OT' => $i['auto_OT'],
+                'aot_from' => $i['aot_from'],
+                'aot_to' => $i['aot_to'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'id' => $i['id'],
+                'hours_weekends' => $i['hours_weekends'],
+                'minutes_weekends' => $i['minutes_weekends'],
+                'hours_weekdays' => $i['hours_weekdays'],
+                'minutes_weekdays' => $i['minutes_weekdays'],
+                'task' => $i['task'],
+                'status' => $i['status'],
+                'authorized_by' => $i['authorized_by'],
+                'remarks' => $i['remarks']
+              );
+              $ot[]=$info;
+            }        
+            $data['ot_pending'] = $ot;
+            $data2['ot_pending'] = $ot;
+        }
+        if($id != null){
+        // $getvalues = $this->leavedb->getdata($id);
+        $getvalues = $this->leavedb->getLeave($id);
+        $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+     
+          if($data['leave'][0]['status'] == 'pending'){
+          $this->load->view('include/header',$usertype);
+          $this->load->view('sv_leave',$data);
+          $this->load->view('include/footer');            
+          } else{
+          $this->load->view('include/header',$usertype);
+          $this->load->view('sv_leave',$data2);
+          $this->load->view('include/footer');                    
+          }
+        } else{
+        //   $getvalues = $this->leavedb->getdata($id);
+        // $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        // print_r($data['leave']);
+        $this->load->view('include/header',$usertype);
+        $this->load->view('sv_leave', $data);
+        $this->load->view('include/footer');
+        }      
+    }
+
     public function viewMrNotification($id=null){
         if($id != null){
         // $getvalues = $this->leavedb->getdata($id);

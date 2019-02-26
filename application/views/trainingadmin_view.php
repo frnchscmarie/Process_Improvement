@@ -33,7 +33,7 @@
                                 <?php
                                   if($alltraining!=null){
                                     foreach($alltraining as $a){  
-                                      echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td>".$a['attachments']."</td>".'</tr>';
+                                      echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td><a href='#'>".$a['attachments']."</a></td>".'</tr>';
                                     }
                                   }
                                 ?>  

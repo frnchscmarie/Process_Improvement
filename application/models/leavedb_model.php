@@ -111,7 +111,7 @@ class Leavedb_model extends CI_Model {
         return $query->result_array();
     } 
     function getLeave($id){
-        $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id' AND status ='approved'");
+        $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id' AND status ='pending'");
         return $query->result_array();
     } 
     function getMr($id){
