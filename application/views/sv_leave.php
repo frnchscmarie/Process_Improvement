@@ -134,7 +134,7 @@
                          <tr>                          
                           <td><?php echo $result?></td>
                           <td><?php echo $leave_pending[$a]['employeeID']?></td>
-                          <td><?php echo $leave_pending[$a]['employee_name']?></td>
+                          <td><?php echo $name['employee_name'];?></td>
                           <td><?php echo $leave_pending[$a]['type']?></td>
                           <td><?php echo $leave_pending[$a]['no_of_days']?></td>                          
                           <td><?php echo $result2?></td>                          

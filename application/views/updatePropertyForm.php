@@ -53,7 +53,7 @@
                          <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" value="<?php echo $fname ?>" id="fname">
                         </div>
                         <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required"for="mname" placeholder="Middle Name" name="mname" value="<?php echo $mname ?>" id="mname">
+                         <input type="text" class="form-control"  for="mname" placeholder="Middle Name" name="mname" value="<?php echo $mname ?>" id="mname">
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -147,7 +147,7 @@
   
    <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewMR')?>" style="color: white;">Cancel</a></button>
+                          <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewMRAdmin')?>" style="color: white;">Cancel</a></button>
                           
                           <button type="submit" class="btn btn-success" name="submit" value="submit">Submit</button>
                         </div>

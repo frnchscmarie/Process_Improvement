@@ -90,24 +90,34 @@
                   </li>
                   <!--<li><a href="<?php echo base_url('process_improvement/EmployeeProfile')?>"> <i class="fa fa-user"></i> PROFILE </a>
                   </li>-->
-                  <li><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>"> <i class="fa fa-user-secret"></i>EMPLOYEE ADMIN</a>
+                  <li>
+                    <a href="<?php echo base_url('process_improvement/viewEmployeeAdmin')?>"> <i class="fa fa-user-secret"></i>EMPLOYEE ADMIN</a>
                   </li>
-               
-                 <li>
-                  <a href="<?php echo base_url('process_improvement/viewProperties')?>"> <i class="fa fa-qrcode"></i>PROPERTY</a>
+
+                  <li>
+                    <a href="<?php echo base_url('process_improvement/viewLeaveCredits')?>"> <i class="fa fa-calendar"></i>LEAVE CREDITS</a>
+                  </li>
+              
+                  <li><a><i class="fa fa-qrcode"></i>PROPERTIES<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url('process_improvement/viewProperties')?>">PROPERTY</a></li>
+                      <li><a href="<?php echo base_url('process_improvement/unassignedProperties')?>">UNASSIGNED PROPERTY</a></li>
+                    </ul>
                   </li>
           
-                  <li>
-                  <a href="<?php echo base_url('process_improvement/viewMRAdmin')?>"> <i class="fa fa-desktop"></i>MR ADMIN</a>
+                  <li><a><i class="fa fa-desktop"></i>MR ADMIN<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url('process_improvement/viewMRAdmin')?>">MR ADMIN</a></li>
+                      <li><a href="<?php echo base_url('process_improvement/pullout')?>">PULL OUT PROPERTIES</a></li>
+                    </ul>
                   </li>
-                
+          
+
                   <li>
                     <a href="<?php echo base_url('process_improvement/viewTrainingAdmin')?>"> <i class="fa fa-comment-o"></i>TRAINING ADMIN</a>
                   </li>
 
-                  <li>
-                    <a href="<?php echo base_url('process_improvement/viewLeaveCredits')?>"> <i class="fa fa-comment-o"></i>LEAVE CREDITS</a>
-                  </li>
+                  
                 </ul>
                 <!-- end -->
                 <?php 
@@ -336,7 +346,7 @@
             }             
             // console.log(notifs);
             // console.log(count);   
-            if((typeof notifs["leave_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){                
+           if((typeof notifs["leave_notification"] !== 'undefined') &&(notifs["type"][0]["type"] == "Supervisor")||(notifs["type"][0]["type"] == "Department Head")){                
               for(var a=0; a<count2; a++){
                     count_notif_all++;
                       var notif ='<li><a href = "#" id="leave'+a+'"><span><span>FILED A LEAVE</span>'

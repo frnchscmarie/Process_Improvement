@@ -183,6 +183,28 @@ public function supervisors(){
             return false;
     }
 
+    function read_credits($condition=null){
+        $this->db->select('*');
+        $this->db->from('credits');
+        if(isset($condition))
+            $this->db->where($condition);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function update_credits($employeeID, $newRecord){
+        $this->db->where('employeeID', $employeeID);
+        $this->db->update($this->leavecredits,$newRecord);
+    }
+    
+    function del_credits($where_array){
+        
+        $this->db->delete($this->leavecredits,$where_array);
+    }
+
     public function getSV($id){
         $this->db->select('*');
         $this->db->from('supervisor');
@@ -208,3 +230,4 @@ public function supervisors(){
     }
 
 }
+

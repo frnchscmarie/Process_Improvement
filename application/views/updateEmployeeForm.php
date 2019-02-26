@@ -120,9 +120,8 @@
     </div>
   
    <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button" style="margin-left: 30%;"><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin/')?>" style="color: white;">Cancel</a></button>
-                          
+                        <div class="col-md-12 col-sm-12 col-xs-12 ">
+                          <button class="btn btn-primary" type="button"><a href="<?php echo base_url('process_improvement/viewEmployeeAdmin/')?>" style="color: white;">Cancel</a></button>
                           <button type="submit" class="btn btn-success" for="inputSuccess2" value="submit">Submit</button>
                         </div>
       </div>

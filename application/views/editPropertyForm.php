@@ -91,7 +91,7 @@
                             </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Total Value</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                          <input type="number" class="form-control " required="required" for="total_value"  placeholder="  Total Value" name="total_value" value="<?php echo set_value('total_value'); ?>" id="total_value">
+                          <input type="number" class="form-control " required="required" for="total_value"  placeholder="  Total Value" name="total_value" value="<?php echo set_value('total_value'); ?>" id="total_value" readonly>
                         </div>
                         
                       </div>
@@ -146,8 +146,13 @@
                   $('#fname').attr("value", "NO DATA");
                   $('#mname').attr("value", "NO DATA");
                 }
-            });
+              });
     });
-
+      $("#unit_value").change(function(){
+        var getunit = document.getElementById("unit").value;
+        var getvalue = document.getElementById("unit_value").value;
+        var total = getunit * getvalue;
+        $('#total_value').val(total);
+      });
   })
 </script>

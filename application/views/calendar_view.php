@@ -37,7 +37,7 @@
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats" style="background-color: #CC3333; color: white;">
-                  <div class="icon" style="color: white;"><i class="fa fa-clock-o"></i></div>
+                  <div class="icon" style="color: white;"><i class="fa fa-comments-o"></i></div>
                   <div class="count">             
                   <?php 
                   if($training!=null){
@@ -50,23 +50,23 @@
                   }
                   echo $x;
                   ?></div>
-                  <h3 style="color: white;">TRAINING</h3>
+                  <h3 style="color: white;">TRAININGS</h3>
                   <p style="color: white;">Total no. of all employees training</p>
                 </div>
               </div>
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-12">
                 <div class="tile-stats" style="background-color: #FF9966; color: black;">
-                  <div class="icon" style="color: black;"><i class="fa fa-book"></i></div>
+                  <div class="icon" style="color: black;"><i class="fa fa-desktop"></i></div>
                   <div class="count"><?php echo $allprop?></div>
-                  <h3 style="color: black;">PROPERTIES</h3>
-                  <p>Total no. of properties</p>
+                  <h3 style="color: black; font-size: 180%">PROPERTIES</h3>
+                  <p>Total no. of properties in RBSD.</p>
                 </div>
               </div>
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats" style="background-color:  #669933; color:white;">
-                  <div class="icon" style="color: white;"><i class="fa fa-comments-o"></i></div>
+                  <div class="icon" style="color: white;"><i class="fa fa-calendar"></i></div>
                   <div class="count">             
                   <?php 
                   if($holiday!=null){
@@ -143,6 +143,7 @@
      </div>
  </div>
 </div>
+
 <script type="text/javascript">
   function deleteme(id)
  {
@@ -232,31 +233,28 @@ else if($t['type'] == "Employee"){?>
      </div>
   
 <div class="x_title">
-                    <h4>HOLIDAYS</h4>
-                    <div class="clearfix"></div>
-                  </div>
-                  <br/>
-                
-            
-                <table id="datatable" class="table table-striped table-bordered col-md-12">
-                        <thead>
-    
-                      <tr id="trHead">
-            <th >Holiday Name</th>
-            <th >Holiday Date</th>
-          </tr>
-        </thead>
-        <tbody>
-            <?php
-        if($holiday!=null){
-                foreach($holiday as $h){  
-                    echo "<tr><td>".$h['holiday']."</td><td>".$h['dates']."</td>".'</tr>';
-                    
-                }
-        }
-            ?>
-        </tbody>
-    </table>
+  <h4>HOLIDAYS</h4>
+    <div class="clearfix"></div>
+</div>
+<br/>
+                 <table id="datatable" class="table table-striped table-bordered col-md-12">
+                  <thead>
+                    <tr id="trHead">
+                      <th >Holiday Name</th>
+                      <th >Holiday Date</th>
+                    </tr>
+                   </thead>
+                 <tbody>
+                      <?php
+                  if($holiday!=null){
+                          foreach($holiday as $h){  
+                              echo "<tr><td>".$h['holiday']."</td><td>".$h['dates']."</td>".'</tr>';
+                              
+                          }
+                  }
+                      ?>
+                 </tbody>
+               </table>
 
             </div>
 
@@ -453,31 +451,29 @@ else if($t['type'] == "Department Head"){?>
               </div>
      </div>
      <div class="x_title">
-                    <h4>HOLIDAYS</h4>
-                    <div class="clearfix"></div>
-                  </div>
-                  <br/>
-                
-            
+        <h4>HOLIDAYS</h4>
+          <div class="clearfix"></div>
+      </div>
+      <br/>
                 <table id="datatable" class="table table-striped table-bordered col-md-12">
-                        <thead>
-    
-                      <tr id="trHead">
-            <th >Holiday Name</th>
-            <th >Holiday Date</th>
-          </tr>
-        </thead>
-        <tbody>
-            <?php
-        if($holiday!=null){
-                foreach($holiday as $h){  
-                    echo "<tr><td>".$h['holiday']."</td><td>".$h['dates']."</td>".'</tr>';
-                    
-                }
-        }
-            ?>
-        </tbody>
-    </table>
+                  <thead>
+                    <tr id="trHead">
+                      <th >Holiday Name</th>
+                      <th >Holiday Date</th>
+                    </tr>
+                 </thead>
+
+                  <tbody>
+                      <?php
+                  if($holiday!=null){
+                          foreach($holiday as $h){  
+                              echo "<tr><td>".$h['holiday']."</td><td>".$h['dates']."</td>".'</tr>';
+                              
+                          }
+                  }
+                      ?>
+                 </tbody>
+                </table>
 
             </div>
           </div>

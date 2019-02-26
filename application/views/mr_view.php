@@ -106,8 +106,6 @@
     var getID = $(this).data('id');
      $(".modal-body #bookId").val(getID);
      document.getElementById("imageid").src="../assets/qrcode/"+getID+".png";
-
-     
   });   
 
 </script>

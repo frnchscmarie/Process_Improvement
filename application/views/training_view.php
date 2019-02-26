@@ -11,7 +11,7 @@
                   <div class="x_title">
                       <h2>Training Attended</h2>
                          <ul class="nav navbar-right panel_toolbox">
-                            <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Training </a>
+                          <li  style="background-color: #008080; border-radius: 10px;"><a data-toggle="modal" data-target="#squarespaceModal" class="butt5"  style="color: white; font-weight: bold;><i class="fa fa-plus" style="color: black;"></i> + Add Training </a>
                               <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">

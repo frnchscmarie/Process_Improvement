@@ -29,7 +29,6 @@ foreach($getot as $ss){
   $nov = $ss['nov'];
   $dec = $ss['dec'];
 }
-
 ?>
 
 <div class="right_col" role="main">
@@ -41,7 +40,8 @@ foreach($getot as $ss){
             <div class="x_title">
               <h2>Overtime List</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Overtime </a>
+                      <li  style="background-color: #008080; border-radius: 10px;"><a data-toggle="modal" data-target="#squarespaceModal" class="butt5"  style="color: white; font-weight: bold;><i class="fa fa-plus" style="color: black;"></i> + Add Overtime </a>
+                    
                     <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -192,7 +192,7 @@ foreach($getot as $ss){
                     </ul>
                     <div class="clearfix"></div>
                    
-<!--pdf--> <dwiv class="x_content" id="otform" style="margin-top: 3%;">
+<!--pdf--> <div class="x_content" id="otform" style="margin-top: 3%;">
 
                    <label>Employee Name: <?php echo("$last, $first $middle")  ?></label>
                    <table id="datatable" class="table table-striped table-bordered">
@@ -257,53 +257,6 @@ foreach($getot as $ss){
                 <button class="btn btn-success"  onclick="printContent('otform'); alertfunction();">PRINT</a></button>
               </div>
  </div>
-
- <!--start of overtime history-->
-</div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h4>Overtime History</h4>
-                    <div class="clearfix"></div>
-                  </div>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered" style="width: 60%; margin-left: 200px;">
-                <thead>
-  
-                    <tr id="trHead">
-                      <th >Date</th>
-                      <th >Status</th>
-                      <th >Remarks</th>
-                      <th >Action</th>
-                     </tr>
-               </thead>
-
-        <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>            
-            <a href="" class="btn btn-success btn-xs print"><i class="fa fa-print"></i> Print</a></td>
-        </tr>
-        </tbody>
-    </table>
-                    
-     
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 </li>
 </ul>
@@ -313,6 +266,8 @@ foreach($getot as $ss){
 </div>
 </div>
 </div>
+
+
 
  <script>
 $(document).ready(function(){

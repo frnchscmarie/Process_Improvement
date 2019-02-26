@@ -4,6 +4,7 @@ class Leavedb_model extends CI_Model {
     private $table = 'leavedb';
     private $holiday = 'calendar';
     private $credits = 'credits';
+    private $employee = 'employee';
     
     function createleave($leaveRecord){
         
@@ -110,7 +111,7 @@ class Leavedb_model extends CI_Model {
         return $query->result_array();
     } 
     function getLeave($id){
-        $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id'");
+        $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id' AND status ='approved'");
         return $query->result_array();
     } 
     function getMr($id){
@@ -225,6 +226,36 @@ class Leavedb_model extends CI_Model {
             return $query->result_array();
         else
             return false;
+    }
+/*    function getallLeavesuper($id){
+        if(isset($id)){            
+            $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.status = 'pending' AND leavedb.id NOT IN ('$id')");
+        } else{
+            $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.status = 'pending' ");
+        }
+        return $query->result_array();
+    } */
+    function getallLeavesuper($id){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $where = "supervisorID = '$id' AND status = 'approved'";
+        $this->db->where($where);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function getemp($id){
+        $this->db->select('*');
+        $this->db->from($this->employee);
+        $this->db->where('employeeID', $id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;   
     }
 }
 ?>

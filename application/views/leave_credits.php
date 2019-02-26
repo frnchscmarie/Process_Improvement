@@ -11,14 +11,16 @@
                   <div class="x_title">
                     <h2>Leave Credit Management</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a data-toggle="modal" data-target="#squarespaceModal2" class="butt5" ><i class="fa fa-plus"></i> Add Leave Credits </a>
+                     <li  style="background-color: #008080; border-radius: 10px;"><a data-toggle="modal" data-target="#squarespaceModal2" class="butt5"  style="color: white; font-weight: bold;><i class="fa fa-plus" style="color: black;"></i> + Add Leave Credits </a>
 <!--MODAL-->
 <div class="modal fade" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content"><div class="modal-header">
+    <div class="modal-content">
+      <div class="modal-header" >
       <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
       <h3 class="modal-title" id="lineModalLabel">Add Leave Credits</h3>
     </div>
+
     <div class="modal-body">
      <div>&nbsp;</div>
         <div class="container">
@@ -139,7 +141,7 @@
               if($leavecredit!=null){
                 foreach($leavecredit as $l){  
                     echo "<tr><td>".$l['employeeID']."</td><td>".$l['lname'].", ".$l['fname']." ".$l['mname']."</td><td>".$l['vacation']."</td><td>".$l['sick']."</td><td>".$l['slp']."</td><td>".$l['others']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateLeaveCredits/'.$l['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delLeaveCredits/'.$l['employeeID']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateLC/'.$l['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delLC/'.$l['employeeID']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
                     
                 }
         }
