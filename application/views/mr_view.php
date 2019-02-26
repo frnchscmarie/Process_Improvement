@@ -1,32 +1,39 @@
-<div class="right_col" role="main">
-          <div class="">
-           
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+      <div class="right_col" role="main">
+        <div class="">
     
-    <div class="clearfix"></div>
-  <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h4>Memorandum Receipt</h4>
+                    <h2>Memorandum Receipt</h2>
                     
                     <div class="clearfix"></div>
+
                      <div class="x_content">
+                      <br />
                     
                   <table id="datatable" class="table table-striped table-bordered">
                       <thead>
   
                     <tr id="trHead">
+
+            <th >PROPERTY NO.</th>
+            <th >NAME</th>
             <th >QTY.</th>
             <th >UNIT</th>
-            <th >NAME</th>
             <th >DESCRIPTION</th>
             <th >DATE OF PURCHASE</th>
-            <th >PROPERTY NO.</th>
             <th >CLASSIFICATION NO.</th>
             <th >UNIT VALUE</th>
             <th >TOTAL VALUE</th>
             <th >MR NUMBER</th>
             <th >DATE ASSIGNED</th>
+            <th> STATUS</th>
             <th >ACTION</th>
           </tr>
         </thead>
@@ -34,17 +41,29 @@
             <?php
         if($mr!=null){
                 foreach($mr as $m){  
-                    echo "<tr><td>".$m['qty']."</td><td>".$m['unit']."</td><td>".$m['lname'].", ".$m['fname']." ".$m['mname']."</td><td>".$m['description']."</td><td>".$m['date_purchased']."</td><td>".$m['property_no']."</td><td>".$m['classification_no']."</td><td>".$m['unit_value']."</td><td>".$m['total_value']."</td><td>".$m['mr_no']."</td><td>".$m['date_assigned']."</td>".'
-                    <td><a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-eye"></i> VIEW</a></td></tr>';
+                    echo "<tr><td>".$m['property_no']."</td>
+                    <td>".$m['property_name']."</td><td>".$m['qty']."</td>
+                    <td>".$m['unit']."</td><td>".$m['description']."</td>
+                    <td>".$m['date_purchased']."</td><td>".$m['classification_no']."</td>
+                    <td>".$m['unit_value']."</td>
+                    <td>".$m['total_value']."</td>
+                    <td>".$m['mr_no']."</td>
+                    <td>".$m['date_assigned']."</td> 
+                    <td>".$m['status']."</td>".'
+                    <td>
+                    <a class="btn btn-primary btn-xs" data-toggle="modal" id="viewnow" data-id="'.$m['property_no'].'" data-target="#squarespaceModal">
+                    <i class="fa fa-eye"></i> VIEW</a>
+                    <a href="'.base_url('process_improvement/pulloutMr/'.$m['property_no']).'" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> PULLOUT</a></td></tr>';
                    
                 }
         }
-        else{
-            echo "No record";
-        }
-            ?>
+                  ?>
         
         </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 <!--modal start-->
 
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -59,8 +78,10 @@
      <div class="container" style="margin-left: 26%;">    
 
          <?php echo form_open('process_improvement/qrcode'); ?> 
-
-         <?php echo ('<img src="'.base_url('/assets/qrcode/').'15-082-238.png" />'); ?>
+         <input type="text" name="bookId" id="bookId" value=""/>
+         <?php echo ('<img id="imageid"'); ?>
+         <br/>
+         
      </div>
     </div>
 </div>
@@ -68,5 +89,25 @@
 </div>
 <!-- /modal-->
 
-</table>
+
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+  $(document).on('click', '#viewnow', function(){
+    var getID = $(this).data('id');
+     $(".modal-body #bookId").val(getID);
+     document.getElementById("imageid").src="../assets/qrcode/"+getID+".png";
+
+     
+  });   
+
+</script>

@@ -53,7 +53,7 @@
                                         <div class = "form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Usertype</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <select class="form-control" value="<?php echo set_value('type'); ?>" id="type" name="type">
+                                              <select class="form-control" value="<?php echo set_value('type'); ?>" onchange="showradiobutton()" id="type" name="type">
                                                 <option value="Employee">Employee</option>
                                                 <option value="Supervisor">Supervisor</option>
                                                 <option value="Department Head">Department Head</option>
@@ -143,7 +143,7 @@
                                         <div>&nbsp;</div>
 
                                         <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Supervisor</label>
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" id = "svlabel">Supervisor</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                               <select class="form-control" id="supervisorID" name="supervisorID">
                                                 <option value="">Select Supervisor</option>
@@ -198,7 +198,7 @@
 
                 
 <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >
-                <div class="x_panel">
+            
                   <div class="">
                     <h4>LIST OF EMPLOYEES</h4>
                   </div>
@@ -277,6 +277,18 @@
  } 
 
 
-//base_url('fetchemployee')
+function showradiobutton()
+{
+var select_status=$('#type').val();
+
+  if (select_status == 'Supervisor'){
+    $('#supervisorID').hide();
+    $('#svlabel').hide();
+   }else{
+    $('#supervisorID').show();
+    $('#svlabel').show();
+  }
+
+}
 </script>
 

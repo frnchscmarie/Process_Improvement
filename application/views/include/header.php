@@ -98,7 +98,7 @@
                   </li>
           
                   <li>
-                  <a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-desktop"></i>MR ADMIN</a>
+                  <a href="<?php echo base_url('process_improvement/viewMRAdmin')?>"> <i class="fa fa-desktop"></i>MR ADMIN</a>
                   </li>
                 
                   <li>
@@ -122,7 +122,7 @@
                       <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                       </li>  
 
-                      <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
+                      <li><a href="<?php echo base_url('process_improvement/viewLeaveEmployee')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
                        </li>
 
                       <li><a href="<?php echo base_url('process_improvement/viewSVLeave')?>"><i class="fa fa-info"></i>SUPERVISOR</a>
@@ -154,9 +154,9 @@
                   </li>-->
                   <li><a href="<?php echo base_url('process_improvement/viewcalendar')?>"> <i class="fa fa-home"></i> HOME </a>
                   </li>
-                  <li><a href="<?php echo base_url('process_improvement/viewLeave')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
+                  <li><a href="<?php echo base_url('process_improvement/viewLeaveEmployee')?>" > <i class="fa fa-calendar"></i>LEAVE </a>
                   </li>
-                  <li><a href="<?php echo base_url('process_improvement/viewOvertimeRegular')?>"><i class="fa fa-clock-o"></i>OVERTIME  </a>
+                  <li><a href="<?php echo base_url('process_improvement/viewOvertime')?>"><i class="fa fa-clock-o"></i>OVERTIME  </a>
                   </li>
                   <li><a href="<?php echo base_url('process_improvement/viewMR')?>"> <i class="fa fa-user"></i>MR</a>
                   </li>
@@ -270,7 +270,11 @@
         console.log("userlevel");
         var user = JSON.parse(data);
         console.log(user["type"][0]["type"]);
-        if((user["type"][0]["type"] != "Supervisor")&&(user["type"][0]["type"] != "Department Head")){
+        // if(((user["type"][0]["type"] != "admin")||(user["type"][0]["type"] != "Admin"))&&(user["type"][0]["type"] != "Department Head")){
+        // if(user["type"][0]["type"] != "Admin"){
+        //   $("#notif_tag").hide();
+        // }
+        if((user["type"][0]["type"] != "Supervisor")&&(user["type"][0]["type"] != "Department Head")&&(user["type"][0]["type"] != "Admin")){
           $("#notif_tag").hide();
         }
       }
@@ -284,10 +288,22 @@
           console.log(data);         
           if(data != "null"){
             var notifs = JSON.parse(data);
-            var count = Object.keys(notifs["ot_notification"]).length;
+            var count = 0;
+            var count2 = 0;
+            var count3 = 0;            
+            // if((user["type"][0]["type"] != "Supervisor")&&(user["type"][0]["type"] != "Department Head")&&(user["type"][0]["type"] != "Admin")){
+            
+            if((typeof notifs["ot_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+              count = Object.keys(notifs["ot_notification"]).length;
+            }
             // var notifs = JSON.parse(data);
-            var count2 = Object.keys(notifs["leave_notification"]).length;
-            var count_notif_all = count + count2;
+            if((typeof notifs["leave_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+              count2 = Object.keys(notifs["leave_notification"]).length;              
+            }
+            if((typeof notifs["mr_notification"] !== 'undefined')&&(notifs["type"][0]["type"] == "Admin")){
+              count3 = Object.keys(notifs["mr_notification"]).length;              
+            }
+            var count_notif_all = count + count2 + count3;
             if(count_notif_all != 0){
               var notif_head = '<i class="fa fa-envelope-o"></i>'
                                 +'<span class="badge bg-green" >'+count_notif_all+'</span>';
@@ -296,29 +312,47 @@
               var notif_head = '<i class="fa fa-envelope-o"></i>';
                   $("#notif_head").html(notif_head);
             }       
-            console.log(notifs);
-            console.log(count);   
-            for(var a=0; a<count; a++){
-              count_notif_all++;
-                var notif ="<li><a href='#' id='ot"+a+"'><span><span>FILED AN OVER TIME</span>"
-                      +"<span class='time'>"+notifs["ot_notification"][a]["date_of_filing"]+"</span>"
-                      +"</span><span class='message'>"+notifs["ot_notification"][a]["employee_name"]+" has requested an over time! Please give your remarks.</span></a></li>";                                      
-                $("#notification_tab").append(notif);
-                var url = notifs["ot_notification"][a]["id"];
-                $("#ot"+a).attr("href","<?php echo base_url('process_improvement/viewOT/'); ?>" + url);                  
+            // console.log(notifs["mr_notification"]);
+            console.log(notifs);   
+            console.log("count_notif_all"+count_notif_all);   
+            console.log("count"+count);   
+            if((typeof notifs["ot_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+              for(var a=0; a<count; a++){
+                count_notif_all++;
+                  var notif ="<li><a href='#' id='ot"+a+"'><span><span>FILED AN OVER TIME</span>"
+                        +"<span class='time'>"+notifs["ot_notification"][a]["date_of_filing"]+"</span>"
+                        +"</span><span class='message'>"+notifs["ot_notification"][a]["employee_name"]+" has requested an over time! Please give your remarks.</span></a></li>";                                      
+                  $("#notification_tab").append(notif);
+                  var url = notifs["ot_notification"][a]["id"];
+                  $("#ot"+a).attr("href","<?php echo base_url('process_improvement/viewOT/'); ?>" + url);                  
 
-            }             
-            console.log(notifs);
-            console.log(count);                   
-        for(var a=0; a<count2; a++){
-              count_notif_all++;
-                var notif ='<li><a href = "#" id="leave'+a+'"><span><span>FILED A LEAVE</span>'
-                      +'<span class="time">'+notifs["leave_notification"][a]["date_of_filing"]+'</span>'
-                      +'</span><span class="message">'+notifs["leave_notification"][a]["employee_name"]+' has requested an over time! Please give your remarks.</span></a></li>';
-                $("#notification_tab").append(notif);
-                var url2 = notifs["leave_notification"][a]["id"];
-                $("#leave"+a).attr("href","<?php echo base_url('process_improvement/viewSVLeave/'); ?>" + url2);     
               }
+            }             
+            // console.log(notifs);
+            // console.log(count);   
+            if((typeof notifs["leave_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){                
+              for(var a=0; a<count2; a++){
+                    count_notif_all++;
+                      var notif ='<li><a href = "#" id="leave'+a+'"><span><span>FILED A LEAVE</span>'
+                            +'<span class="time">'+notifs["leave_notification"][a]["date_of_filing"]+'</span>'
+                            +'</span><span class="message">'+notifs["leave_notification"][a]["employee_name"]+' has requested an over time! Please give your remarks.</span></a></li>';
+                      $("#notification_tab").append(notif);
+                      var url2 = notifs["leave_notification"][a]["id"];
+                      $("#leave"+a).attr("href","<?php echo base_url('process_improvement/viewSVLeave/'); ?>" + url2);     
+                    }
+            }
+            if((typeof notifs["mr_notification"] !== 'undefined')&&(notifs["type"][0]["type"] == "Admin")){ 
+              for(var a=0; a<count3; a++){
+                    count_notif_all++;
+                      var notif ='<li><a href = "#" id="mr'+a+'"><span><span>FILED A Memorandum Receipt</span>'
+                            +'<span class="time">'+notifs["mr_notification"][a]["dateassigned"]+'</span>'
+                            +'</span><span class="message">'+notifs["mr_notification"][a]["employee_name"]+' has requested a memorandum Rrceipt! Please give your remarks.</span></a></li>';
+                      $("#notification_tab").append(notif);
+                      var url3 = notifs["mr_notification"][a]["property_no"];
+                      // $("#mr"+a).attr("href","<?php echo base_url('process_improvement/viewMRAdmin/'); ?>" + url3);     
+                      $("#mr"+a).attr("href","<?php echo base_url('process_improvement/viewMRAdmin'); ?>");     
+                  }
+            }
           }
         }
       });

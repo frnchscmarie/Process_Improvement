@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+
+<?php if ($credits!=null){
+  foreach($credits as $c){
+  }
+}else{
+  $c['slp'] = 0;
+  $c['vacation'] = 0;
+  $c['others'] = 0;
+  $c['sick'] = 0;
+}
+foreach ($holidays as $h) {
+
+    $holdates = array(
+      'dates'=>$h['dates'],
+      'holiday'=>$h['holiday']
+    );
+    $hol[] = $holdates;
+}
+?>
+
 <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -83,7 +103,6 @@
                         </div>
                       </div>
 
-
                       <div class="form-group" style="display: none;" id="others">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Please specify  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -114,7 +133,12 @@
                         </div>
                       </div>
                       <div>&nbsp;</div>-->
-
+                            <div style="margin-right: 15%;">
+                               <label class="control-label col-md-2 col-sm-2 col-xs-12" id = "slv">SLV <?php echo $c['slp']?></label>
+                              <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "vl">VL <?php echo $c['vacation']?></label>
+                              <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "fml">FML <?php echo $c['others']?></label>
+                              <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "sl">SL <?php echo $c['sick']?></label>
+                            </div>
 
                       <label class=" col-md-12 col-sm-12 col-xs-12">INCLUSIVE DATES</label><br>
                       <div class="form-group">
@@ -189,7 +213,7 @@
 <div class="container">
   <?php echo validation_errors(); ?>
   
-  <?php echo form_open('process_improvement/viewLeave'); 
+  <?php echo form_open('process_improvement/viewLeaveEmployee'); 
   ?> 
                        
             </li>
@@ -200,7 +224,7 @@
 
 <!--first panel (TABLE) -->                      
 <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >
-                <div class="x_panel">
+
                   <div class="">
                     <h4>LIST OF EMPLOYEE'S LEAVE</h4>
                   </div>
@@ -233,7 +257,7 @@
            
 
     </div><!--/xcontent-->
-  </div><!--/panel-->
+
 
 
 
@@ -241,17 +265,17 @@
     <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" ">
                       <div class="x_panel">
                         <div class="x_content" style="margin-left:;">
-                               <label class="text-danger font-20 m-b-40">Availed Leaves</label>
+                               <label class="text-danger font-20 m-b-40">Available Leave Credits</label>
                           <br />
                             <div style="margin-right: 15%;">
                                <label class="control-label col-md-2 col-sm-2 col-xs-12">SLV</label>
-                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['slp']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">VL</label>
-                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['vacation']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">FML</label>
-                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['others']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">SL</label>
-                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;">1</label>
+                              <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['sick']?></label>
                             </div>
 
                             
@@ -275,65 +299,154 @@
 
 
 <script type="text/javascript">
-  
-  function showradiobutton()
+var remcred;
+function showradiobutton()
 {
-  var select_status=$('#type').val();
+var select_status=$('#type').val();
+$('#vl').hide();
+$('#sl').hide();
+$('#fml').hide();
+$('#slv').hide();
+
   if (select_status == 'Vacation Leave(International)')
    {
+    remcred = '<?php echo $c['vacation']; ?>'
     $('#vl_int').show();
+    $('#vl').show();
    } 
    else {
     $('#vl_int').hide();
+    $('#vl').hide();
   }
 
   if(select_status == 'Sick Leave')
   {
+  remcred = '<?php echo $c['sick']; ?>'
   $('#sick_leave').show();
   $('#sick_leave_specify').show();
+  $('#sl').show();
   }
   else{
   $('#sick_leave').hide();
   $('#sick_leave_specify').hide();
+  $('#sl').hide();
   }
 
   if (select_status == 'Others')
    {
+    remcred = '<?php echo $c['others']; ?>'
     $('#others').show();
+    $('#fml').show();
    } 
    else {
     $('#others').hide();
+    $('#fml').hide();
   }
 
   if(select_status == 'Special Leave Priveledge'){
+    remcred = '<?php echo $c['slp']; ?>'
     $('#special').show();
+    $('#slv').show();
   }else{
     $('#special').hide(); 
+    $('#slv').hide();
   }
+
 
 }
 
 $(document).ready(function(){
   $( "#squarespaceModal" ).on('shown.bs.modal', function (e){
+
           $("#inc_from").change(function(){
+            if(remcred>0){
             var difference;
             var datefrom = new Date(document.getElementById("inc_from").value);
             var dateday = datefrom.getDate();
-            var fromend = datefrom.getDay();
+            var frommonth = datefrom.getMonth();
 
-            alert(fromend);
             var currentdate = new Date(document.getElementById("date_of_filing").value);
             var currentday = currentdate.getDate();
-
-            if(dateday>currentday){
-             var dif = dateday - currentday; 
+            var currentmonth = currentdate.getMonth();
+            if(frommonth>=currentmonth){
+              if(dateday>currentday){
+                var dif = dateday - currentday; 
+              }
+            }else{
+              alert('Invalid Date');
             }
+
+            if(frommonth>currentmonth){
+            $(":submit").attr("disabled", false);
+            }else if(dif > 4){
+              $(":submit").attr("disabled", false);
+            }else{
+              alert("Cannot file leave under 5 days ago");
+              $(":submit").attr("disabled", true);
+            }
+
+
 
             $("#inc_to").change(function(){
               var dateto = new Date(document.getElementById("inc_to").value);
               var todate = dateto.getDate();
+              var tomonth = dateto.getMonth();
+              if(frommonth=="0"){
+                var today = "31";
+              }else if(frommonth=="1"){
+                var today = "28";
+              }else if(frommonth=="2"){
+                var today = "31";
+              }else if(frommonth=="3"){
+                var today = "30";
+              }else if(frommonth=="4"){
+                var today = "31";
+              }else if(frommonth=="5"){
+                var today = "30";
+              }else if(frommonth=="6"){
+                var today = "31";
+              }else if(frommonth=="7"){
+                var today = "31";
+              }else if(frommonth=="8"){
+                var today = "30";
+              }else if(frommonth=="9"){
+                var today = "31";
+              }else if(frommonth=="10"){
+                var today = "30";
+              }else if(frommonth=="11"){
+                var today = "31";
+              }
+              if(tomonth>frommonth){
+                difference = Math.abs(dateday - todate - today);
+                $(":submit").attr("disabled", false);
+                $('#no_of_days').val(difference);                
+              }else if(tomonth == frommonth){
+                if(todate>dateday){
 
-              if(todate>dateday){
+                  difference = todate - dateday;
+                  $(":submit").attr("disabled", false);
+                  $('#no_of_days').val(difference);
+                }else if(todate==dateday){
+
+                  difference = todate - dateday;
+                  $(":submit").attr("disabled", false);
+                  $('#no_of_days').val(difference);
+                }else{
+
+                  alert("invalid date");
+                  $(":submit").attr("disabled", true);
+                  $('#no_of_days').val("Date is not valid");
+                }
+
+              }else{
+                alert("invalid date");
+                $(":submit").attr("disabled", true);
+                $('#no_of_days').val("Date is not valid");
+              }
+
+
+
+/*              if(todate>dateday){
                difference = todate - dateday;
                $('#no_of_days').val(difference);
                 if(dif > 4){
@@ -345,18 +458,13 @@ $(document).ready(function(){
                 $('#no_of_days').val("Date is not valid");
                 $(":submit").attr("disabled", true);
               }
-              
+              */
             }); 
-
-
-
-            if(dif > 4){
-            $(":submit").attr("disabled", false);
             }else{
+              alert("Your leave credits is not enough");
               $(":submit").attr("disabled", true);
             }
-            
-          });
+          }); //end of file
       });
     })
 </script>

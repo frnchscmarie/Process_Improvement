@@ -82,12 +82,26 @@ class notification_controller extends CI_Controller {
         }
     }
 
-    public function all_notification() {        
+    public function all_notification() {  
+        $this->load->model('notification_model','estudyante');
+        // $result_array = $this->estudyante->read_ot_notification();
+        $result_array = $this->estudyante->get_type($this->session->userdata('username'));
+        if($result_array){
+            foreach($result_array as $i){
+              $info = array(
+                'type' => $i['type']                
+              );
+              $type[]=$info;
+            }        
+            $notification['type'] = $type;
+        }
+
+
         $this->load->model('notification_model','estudyante');
         // $result_array = $this->estudyante->read_ot_notification();
         $result_array = $this->estudyante->read_ot_notification();
         // $notifications[] = null;
-        if($result_array){
+        if($result_array != null){
             foreach($result_array as $i){
               $info = array(
                 'id' => $i['id'],
@@ -100,7 +114,7 @@ class notification_controller extends CI_Controller {
         } 
         // $result_array = $this->estudyante->read_ot_notification();
         $result_array2 = $this->estudyante->read_leave_notification();        
-        if($result_array2){
+        if($result_array2!= null){
             foreach($result_array2 as $i){
               $info = array(
                 'id' => $i['id'],
@@ -110,6 +124,18 @@ class notification_controller extends CI_Controller {
               $leave[]=$info;
             }        
             $notification['leave_notification'] = $leave;            
+        } 
+        $result_array3 = $this->estudyante->read_mr_notification();        
+        if($result_array3!= null){
+            foreach($result_array3 as $i){
+              $info = array(
+                'property_no' => $i['property_no'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'dateassigned' => $i['dateassigned']
+              );
+              $mr[]=$info;
+            }        
+            $notification['mr_notification'] = $mr;        
         } 
         if(isset($notification)){
             echo json_encode($notification);

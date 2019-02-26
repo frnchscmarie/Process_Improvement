@@ -2,6 +2,7 @@
 
 class OT_model extends CI_Model {
     private $table = 'ot';
+    private $ot = 'emp_ot';
     
     function createot($otRecord){
         $this->db->insert($this->table, $otRecord);
@@ -66,6 +67,20 @@ class OT_model extends CI_Model {
             return $query->result_array();
         }
     }
-
+    function getOT($id){
+        $this->db->select('*');
+        $this->db->from($this->ot);
+        $this->db->where('employeeID',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;        
+    }
+    function updateot($get, $month, $allotted){
+        $this->db->set($month,$allotted);
+        $this->db->where('employeeID', $get);
+        $this->db->update('emp_ot');        
+    }
 }
 ?>

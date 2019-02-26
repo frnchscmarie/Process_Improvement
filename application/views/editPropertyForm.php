@@ -16,7 +16,8 @@
                     </div>
                         <div class="x_content">
                         <br />
-                        <?php echo form_open('process_improvement/editProperties/' .$property_no); ?>  
+
+                      <?php echo form_open('process_improvement/addpropertyinfo/'); ?>  
                           <div class="col-md-7" style="margin-top: -3%;padding: px; text-align: center; margin-left: 18%;"> 
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <?php echo ('<img align= "center" style="margin-left: 18%;"src="'.base_url('/assets/qrcode/').$property_no.'.png" />'); ?>
@@ -25,28 +26,6 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Property No</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input type="text" class="form-control has-feedback-left" required="required" for="property_no" placeholder="Property" name="property_no" value="<?php echo $property_no ?>" id="property_no" readonly/>
-                        </div>
-                      </div>
-                      <div>&nbsp;</div>
-
-                      <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control has-feedback-left" required="required" for="employeeID" placeholder=" Employee ID" name="employeeID" value="<?php echo set_value('employeeID')?>" id="employeeID">
-                        </div>
-                      </div> 
-                      <div>&nbsp;</div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
-                        <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required" for=lname"placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname" readonly>
-                        </div>
-                        <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required" for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname" readonly>
-                        </div>
-                        <div class="col-md-3 col-sm-9 col-xs-12">
-                         <input type="text" class="form-control"  required="required" for="mname" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname" readonly>
                         </div>
                       </div>
                       <div>&nbsp;</div>
@@ -149,17 +128,6 @@
   $(document).ready(function(){
     $("#employeeID").change(function(){
       var employeeID = $(this).val();
-      if(employeeID == '')
-        {
-          $('#lname').prop('disabled', true);
-          $('#fname').prop('disabled', true);
-          $('#mname').prop('disabled', true);
-        }
-      else
-        {
-          $('#lname').prop('disabled', true);
-          $('#fname').prop('disabled', true);
-          $('#mname').prop('disabled', true);
           var empID = new Array();
             $.ajax({
               url:"<?php echo base_url() ?>process_improvement/getemployeename",
@@ -170,6 +138,7 @@
                   $('#lname').attr("value", data['lname']);
                   $('#fname').attr("value", data['fname']);
                   $('#mname').attr("value", data['mname']);
+                  alert(data['lname']);
                 },
                 error: function(){
                   alert('Employee ID is not valid');
@@ -178,7 +147,6 @@
                   $('#mname').attr("value", "NO DATA");
                 }
             });
-        }
     });
 
   })

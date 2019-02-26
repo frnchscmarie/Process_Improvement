@@ -13,6 +13,25 @@
     }
 ?> 
 
+
+<?php 
+foreach($getot as $ss){
+  $jan = $ss['jan'];
+  $feb = $ss['feb'];
+  $mar = $ss['mar'];
+  $apr = $ss['apr'];
+  $may = $ss['may'];
+  $june = $ss['june'];
+  $july = $ss['july'];
+  $aug = $ss['aug'];
+  $sept = $ss['sept'];
+  $oct = $ss['oct'];
+  $nov = $ss['nov'];
+  $dec = $ss['dec'];
+}
+
+?>
+
 <div class="right_col" role="main">
   <div class="">
     <div class="clearfix"></div>
@@ -32,6 +51,7 @@
                           </div>
                             <div class="modal-body">
                                 <div class="container">
+
                                   <?php echo validation_errors(); ?>
   
                                   <?php echo form_open('process_improvement/addOT'); ?> 
@@ -121,6 +141,22 @@
                       <div>&nbsp;</div><br />
 
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Remaining OT time</label>
+                        <div class="col-md-9 col-sm-9 ">
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="allotted" id="allotted" required="required" value="<?php echo set_value('task'); ?>" placeholder="Allotted Time for OT" readonly>
+                        </div>
+                      </div>
+                      <div>&nbsp;</div><br />
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">For the month of</label>
+                        <div class="col-md-9 col-sm-9 ">
+                          <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="month" id="month" required="required" value="<?php echo set_value('task'); ?>" placeholder="Month" readonly>
+                        </div>
+                      </div>
+                      <div>&nbsp;</div><br />                      
+
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Authorized By</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input class="form-control col-md-4 col-sm-4 col-xs-6" type="text" name="super" id="super" required="required" 
@@ -138,20 +174,16 @@
                           <button type="submit" class="btn btn-success" value="submit">Submit</button>
                         </div>
                        </div>
-    
+                      </form>
                       </div>
-  
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
-
   <div class="">
   <?php echo validation_errors(); ?>
-  <?php echo form_open('process_improvement/viewOvertimeRegular'); 
+  <?php echo form_open('process_improvement/viewOvertime'); 
   ?> 
-     <div class="x_panel">
         <div class="">
           <div class="x_content" >
                     <div class="clearfix"></div>
@@ -160,7 +192,7 @@
                     </ul>
                     <div class="clearfix"></div>
                    
-<!--pdf--> <div class="x_content" id="otform" style="margin-top: 3%;">
+<!--pdf--> <dwiv class="x_content" id="otform" style="margin-top: 3%;">
 
                    <label>Employee Name: <?php echo("$last, $first $middle")  ?></label>
                    <table id="datatable" class="table table-striped table-bordered">
@@ -222,7 +254,7 @@
   </div>
 
               <div style="float: right; margin-top: 10px;">
-                <button class="btn btn-success"  onclick="printContent('otform')">PRINT</a></button>
+                <button class="btn btn-success"  onclick="printContent('otform'); alertfunction();">PRINT</a></button>
               </div>
  </div>
 
@@ -265,10 +297,22 @@
      
 </div>
 </div>
-
-
-
-
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
  <script>
 $(document).ready(function(){
@@ -342,10 +386,13 @@ $(document).ready(function(){
   
   $(document).ready(function(){
     $("#date_of_ot").change(function(){
+
       $("#aot_to").attr("disabled",false);
       $("#aot_from").attr("disabled",false);
       var day = new Date(document.getElementById("date_of_ot").value);
       var getday = day.getDay();
+      var getmonth = day.getMonth();
+
       if(getday == "1" || getday == "2" || getday == "3" || getday == "4" || getday == "5"){
         $("#hours_weekends").attr("disabled", true);
         $("#minutes_weekends").attr("disabled",true);
@@ -370,6 +417,67 @@ $(document).ready(function(){
             $(":submit").attr("disabled", false);
             document.getElementById("auto_OT").value =  hourget + ":00 - "+ hour2+":00";
             document.getElementById("hours_weekdays").value = diff;
+            if(getmonth == 0){
+              var otcred = '<?php echo $jan ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "January";
+            }else if(getmonth == 1){
+              var otcred = '<?php echo $feb ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "February";
+            }else if(getmonth == 2){
+              var otcred = '<?php echo $mar ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "March";
+            }else if(getmonth == 3){
+              var otcred = '<?php echo $apr ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "April";
+            }else if(getmonth == 4){
+              var otcred = '<?php echo $may ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "May";
+            }else if(getmonth == 5){
+              var otcred = '<?php echo $june ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "June";
+            }else if(getmonth == 6){
+              var otcred = '<?php echo $july ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "July";
+            }else if(getmonth == 7){
+              var otcred = '<?php echo $aug ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "August";
+            }else if(getmonth == 8){
+              var otcred = '<?php echo $sept ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "September";
+            }else if(getmonth == 9){
+              var otcred = '<?php echo $oct ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "October";
+            }else if(getmonth == 10){
+              var otcred = '<?php echo $nov ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "November";
+            }else if(getmonth == 11){
+              var otcred = '<?php echo $dec ?>';
+              var news = otcred - diff;
+              document.getElementById("allotted").value = news;
+              document.getElementById("month").value = "December";
+            }
           }else{
             alert("Only until "+hour+":00 is allowed on weekdays");
             $(":submit").attr("disabled", true);

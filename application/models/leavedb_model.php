@@ -3,6 +3,7 @@
 class Leavedb_model extends CI_Model {
     private $table = 'leavedb';
     private $holiday = 'calendar';
+    private $credits = 'credits';
     
     function createleave($leaveRecord){
         
@@ -32,11 +33,22 @@ class Leavedb_model extends CI_Model {
         $this->db->delete($this->table,$where_array);
     }
 
-    function count(){
+    function countholidays(){
     $this->db->select('*');
     $this->db->from($this->table);
     $query = $this->db->get();
     return $query->num_rows();
+    }
+
+    function readleave($id){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('employeeID',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
     }
 
     function readholiday($id){
@@ -101,6 +113,30 @@ class Leavedb_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.id = '$id'");
         return $query->result_array();
     } 
+    function getMr($id){
+        $query = $this->db->query("SELECT * FROM mr JOIN employee WHERE mr.employeeID = employee.employeeID AND mr.property_no = '$id'");
+        return $query->result_array();
+    } 
+    function getallOT($id=null){
+        if(isset($id)){            
+            $query = $this->db->query("SELECT * FROM ot JOIN employee WHERE ot.employeeID = employee.employeeID AND ot.id NOT IN ('$id')");
+        } else{
+            $query = $this->db->query("SELECT * FROM ot JOIN employee WHERE ot.employeeID = employee.employeeID");
+        }
+        return $query->result_array();
+    } 
+    function getallLeave($id = null){
+        if(isset($id)){            
+            $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.status = 'pending' AND leavedb.id NOT IN ('$id')");
+        } else{
+            $query = $this->db->query("SELECT * FROM leavedb JOIN employee WHERE leavedb.employeeID = employee.employeeID AND leavedb.status = 'pending' ");
+        }
+        return $query->result_array();
+    } 
+    function getallMr(){
+        $query = $this->db->query("SELECT * FROM mr JOIN employee WHERE mr.employeeID = employee.employeeID");
+        return $query->result_array();
+    } 
     function approveleave($id){
         $this->db->set('status','approved');
         $this->db->where('id', $id);
@@ -116,6 +152,79 @@ class Leavedb_model extends CI_Model {
         
         $this->db->where('id', $id);
         $this->db->delete('leaved_notification');
+    }
+    function approveot($id){
+        $this->db->set('status','approved');
+        $this->db->where('id', $id);
+        $this->db->update('ot');
+
+        $this->db->where('id', $id);
+        $this->db->delete('ot_notification');
+    }
+    function diapproveot($id,$remarks){
+        $this->db->set('status','disapproved');
+        $this->db->set('remarks',$remarks);
+        $this->db->where('id', $id);
+        $this->db->update('ot');
+        
+        $this->db->where('id', $id);
+        $this->db->delete('ot_notification');
+    }
+
+    function check($id){
+        $this->db->select('*');
+        $this->db->from($this->credits);
+        $this->db->where('employeeID',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function getcredits($id){
+        $this->db->select('*');
+        $this->db->from($this->credits);
+        $this->db->where('employeeID',$id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function updatevacation($vacation, $id){
+        $this->db->set('vacation', $vacation);
+        $this->db->where('employeeID', $id);
+        $this->db->update('credits');        
+    }
+
+    function updatesick($sick, $id){
+        $this->db->set('sick', $sick);
+        $this->db->where('employeeID', $id);
+        $this->db->update('credits');        
+    }  
+    
+    function updateslp($slp, $id){
+        $this->db->set('slp', $slp);
+        $this->db->where('employeeID', $id);
+        $this->db->update('credits');        
+    }
+
+    function updateother($other, $id){
+        $this->db->set('others', $other);
+        $this->db->where('employeeID', $id);
+        $this->db->update('credits');        
+    }  
+
+    function getHoliday(){
+        $this->db->select('*');
+        $this->db->from($this->holiday);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
     }
 }
 ?>

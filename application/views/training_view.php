@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<body class="nav-md">
+ <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="right_col" role="main">
           <div class="">
             <div class="clearfix"></div>
               <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
                       <h2>Training Attended</h2>
                          <ul class="nav navbar-right panel_toolbox">
                             <li><a data-toggle="modal" data-target="#squarespaceModal" class="butt5" ><i class="fa fa-plus"></i> Add Training </a>
-
                               <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
@@ -69,10 +68,10 @@
                                                   </div>
                                                   <div>&nbsp;</div>
 
-                                                  <div class="form-group">
+                                                  <div class="form-group" enctype="multipart/form-data" method= "">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Attachments</label>
                                                       <div class="col-md-9 col-sm-9 col-xs-12">
-                                                        <input action= "/"method="post" type="file" for="attachments" placeholder="Attachments" name="attachments" value="<?php echo set_value('attachments'); ?>" >
+                                                        <input action="<?php echo base_url('process_improvement/do_upload');?>" method="post" type="file" for="attachments" placeholder="Attachments" name="attachments" value="<?php echo set_value('attachments'); ?>" >
                                                       </div>
                                                   </div>
 
@@ -93,53 +92,48 @@
                                 </div>
                               </div>
                             </div>
+<div class="clearfix"></div>
 
   <div class="container">
-  <?php echo validation_errors(); ?>
-  
-  <?php echo form_open('process_improvement/viewTraining'); 
-  ?> 
+ 
                        
             </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                       
-  <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >  
-  <div class="x_panel">
-                  <div class="x_content">
-                     <br />
-                  <table id="datatable_wrapper" class="table table-striped table-bordered">
-                  <thead>
+
+
+                    <div class="clearfix"></div>
+                        <div class="x_content" >
+                         <?php echo validation_errors(); ?>
   
-                    <tr id="trHead">
-                      <th rowspan="2">Title</th>
-                      <th colspan="2">Inclusive Dates</th>
-                      <th rowspan="2">No. of Hours</th>
-                      <th rowspan="2">Conducted/Sponsored By:</th>
-                      <th rowspan="2">ATTACHMENTS</th>
-                      <th rowspan="2">ACTION</th>
-                    </tr>
-
-                    
-                  </thead>
-        <tbody>
-             <?php
-        if($training!=null){
-                foreach($training as $t){  
-                    echo "<tr><td>".$t['title']."</td><td>".$t['inc_from']."</td><td>".$t['inc_to']."</td><td>".$t['no_of_hours']."</td><td>".$t['conducted_by']."</td><td>".$t['attachments']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateTraining/'.$t['id']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delTraining/'.$t['id']).'"class="btn btn-danger btn-xs" onclick="confirmdeltraining(id); return false;"><i class="fa fa-trash-o"></i></a></td></tr>';
-                    
-                }
-        }
-            ?>
-        </tbody>
-    </table>
-
-     <div style="float: right;"> 
-                    <a href="" class="btn btn-success btn-xs"><i class="fa fa-print"></i> Print</a>
-                  </div>
-                          </div>
+                          <?php echo form_open('process_improvement/viewTraining'); 
+                          ?> 
+                            <div class="col-md-12" >
+                              <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                  <tr id="trHead">
+                                    <th >Employee ID</th>
+                                    <th >Employee Name</th>
+                                    <th >Title of Seminar/Conference/Workshop/Short Courses<br>(write in full)</th>
+                                    <th colspan="2">Inclusive Dates<br><label style="margin-left: 0%;">From</label><label style="margin-left: 30%;">To</label></th>
+                                    <th >Number of Hours</th>
+                                    <th >Conducted/Sponsored by<br>(Write in full)</th>
+                                    <th >Attachments</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                  if($training!=null){
+                                    foreach($training as $a){  
+                                      echo "<tr><td>".$a['employeeID']."</td><td>".$a['username']."</td><td>".$a['title']."</td><td>".$a['inc_from']."</td><td>".$a['inc_to']."</td><td>".$a['no_of_hours']."</td><td>".$a['conducted_by']."</td><td>".$a['attachments']."</td>".'</tr>';
+                                    }
+                                  }
+                                ?>  
+                                </tbody>
+                              </table>
+                            </div>
                         </div>
                       
        
@@ -157,101 +151,3 @@
 </div>
 </div>
 </body>
-
-<script type="text/javascript">
-var globalFunctions = {};
-
-globalFunctions.ddInput = function(elem) {
-  if ($(elem).length == 0 || typeof FileReader === "undefined") return;
-  var $fileupload = $('input[type="file"]');
-  var noitems = '<li class="no-items"><span class="blue-text underline">Browse</span> or drop here</li>';
-  var hasitems = '<div class="browse hasitems">Other files to upload? <span class="blue-text underline">Browse</span> or drop here</div>';
-  var file_list = '<ul class="file-list"></ul>';
-  var rmv = '<div class="remove"><i class="icon-close icons">x</i></div>'
-
-  $fileupload.each(function() {
-    var self = this;
-    var $dropfield = $('<div class="drop-field"><div class="drop-area"></div></div>');
-    $(self).after($dropfield).appendTo($dropfield.find('.drop-area'));
-    var $file_list = $(file_list).appendTo($dropfield);
-    $dropfield.append(hasitems);
-    $dropfield.append(rmv);
-    $(noitems).appendTo($file_list);
-    var isDropped = false;
-    $(self).on("change", function(evt) {
-      if ($(self).val() == "") {
-        $file_list.find('li').remove();
-        $file_list.append(noitems);
-      } else {
-        if (!isDropped) {
-          $dropfield.removeClass('hover');
-          $dropfield.addClass('loaded');
-          var files = $(self).prop("files");
-          traverseFiles(files);
-        }
-      }
-    });
-
-    $dropfield.on("dragleave", function(evt) {
-      $dropfield.removeClass('hover');
-      evt.stopPropagation();
-    });
-
-    $dropfield.on('click', function(evt) {
-      $(self).val('');
-      $file_list.find('li').remove();
-      $file_list.append(noitems);
-      $dropfield.removeClass('hover').removeClass('loaded');
-    });
-
-    $dropfield.on("dragenter", function(evt) {
-      $dropfield.addClass('hover');
-      evt.stopPropagation();
-    });
-
-    $dropfield.on("drop", function(evt) {
-      isDropped = true;
-      $dropfield.removeClass('hover');
-      $dropfield.addClass('loaded');
-      var files = evt.originalEvent.dataTransfer.files;
-      traverseFiles(files);
-      isDropped = false;
-    });
-
-
-    function appendFile(file) {
-      console.log(file);
-      $file_list.append('<li>' + file.name + '</li>');
-    }
-
-    function traverseFiles(files) {
-      if ($dropfield.hasClass('loaded')) {
-        $file_list.find('li').remove();
-      }
-      if (typeof files !== "undefined") {
-        for (var i = 0, l = files.length; i < l; i++) {
-          appendFile(files[i]);
-        }
-      } else {
-        alert("No support for the File API in this web browser");
-      }
-    }
-
-  });
-};
-
-$(document).ready(function() {
-  globalFunctions.ddInput('input[type="file"]');
-});
-
-
-  function confirmdeltraining(id)
- {
- if(confirm("Are you sure you want to delete this training?")){
- window.location.href='process_improvement/delTraining?del_id=' +$id+'';
- return true;
- }
- } 
-
-</script>
- 

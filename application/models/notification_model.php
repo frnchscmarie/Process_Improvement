@@ -16,6 +16,10 @@ class Notification_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM leaved_notification JOIN employee WHERE leaved_notification.employeeID = employee.employeeID");
         return $query->result_array();
     }
+    function read_mr_notification(){        
+        $query = $this->db->query("SELECT * FROM mr_notification JOIN employee WHERE mr_notification.employeeID = employee.employeeID");
+        return $query->result_array();
+    }
     function get_type($username){
         $query = $this->db->query("SELECT * FROM login WHERE username = '$username'");
         return $query->result_array();

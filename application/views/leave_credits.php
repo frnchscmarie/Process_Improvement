@@ -37,15 +37,15 @@
                                               <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee Name</label>
                                                   <div class="col-md-3 col-sm-9 col-xs-12">
-                                                    <input type="text" class="form-control"  required="required"for="lname" placeholder=" Last Name" name="lname" value="<?php echo set_value('lname'); ?>" id="lname">
+                                                    <input type="text" class="form-control" value="<?php echo set_value('lname'); ?>"  required="required" for="lname" placeholder="Last Name" name="lname"  id="lname" readonly>
                                               </div>
                                             
                                               <div class="col-md-3 col-sm-9 col-xs-12">
-                                                <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" value="<?php echo set_value('fname'); ?>" id="fname">
+                                                <input type="text" class="form-control"  required="required"for="fname" placeholder=" First Name" name="fname" id="fname" readonly>
                                                 </div>
                               
                                               <div class="col-md-3 col-sm-9 col-xs-12">
-                                                  <input type="text" class="form-control" for="mname" placeholder="Middle Name" name="mname" value="<?php echo set_value('mname'); ?>" id="mname" >
+                                                  <input type="text" class="form-control" for="mname" placeholder="Middle Name" name="mname"  id="mname" readonly >
                                               </div>
                                             </div>
                                             <div>&nbsp;</div>
@@ -114,14 +114,14 @@
 
                 
 <div class="col-md-12 col-sm-12 col-xs-12" style="top:10px;" >
-                <div class="x_panel">
+              
                   <div class="">
                     <h4>LIST OF LEAVE CREDITS PER EMPLOYEES</h4>
                   </div>
                  <div class="x_content" >
                     <br />
                      <table id="datatable" class="table table-striped table-bordered col-md-12">
-                      <table id="datatable" class="table table-striped table-bordered col-md-12">
+                      
                         <thead>
     
                       <tr id="trHead">
@@ -179,3 +179,42 @@
 //base_url('fetchemployee')
 </script>
 
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#employeeID").change(function(){
+      var employeeID = $(this).val();
+      if(employeeID == '')
+        {
+          $('#lname').prop('disabled', true);
+          $('#fname').prop('disabled', true);
+          $('#mname').prop('disabled', true);
+        }
+      else
+        {
+
+          var empID = new Array();
+            $.ajax({
+              url:"<?php echo base_url() ?>process_improvement/getemployeename",
+              type: "POST",
+              data: {'employeeID' : employeeID},
+              dataType: 'json',
+                success: function(data){
+                  $('#lname').val(data['lname']);
+                  $('#fname').val(data['fname']);
+                  $('#mname').val(data['mname']);
+                  $(":submit").attr("disabled", false);
+                },
+                error: function(){
+                  alert('Employee ID is not valid');
+                  $('#lname').val("NO DATA");
+                  $('#fname').val("NO DATA");
+                  $('#mname').val("NO DATA");
+                  $(":submit").attr("disabled", true);
+                }
+            });
+        }
+    });
+
+  })
+</script>

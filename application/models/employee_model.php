@@ -14,9 +14,20 @@ class Employee_model extends CI_Model {
         'type'=>$_POST['type'],
         'password'=> '12345'
         );
-        $this-> db->insert('login', $data);
+        $this->db->insert('login', $data);
     }
     
+    function createsupervisor($employeeRecord){
+        $this->db->insert($this->table, $employeeRecord);
+        $data = array( 
+        'id'=>$_POST['employeeID'],
+        'sv_firstname'=>$_POST['fname'],
+        'sv_lastname'=>$_POST['lname'],
+        'sv_middlename'=> $_POST['mname']
+        );
+        $this->db->insert('supervisor', $data);
+    }
+
     function read($condition=null){
         $this->db->select('*');
         $this->db->from('login');
@@ -45,6 +56,17 @@ class Employee_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('employee');
         $this->db->where('employeeID', $id);
+        $query = $this->db->get();
+        if($query->num_rows()>0)
+            return $query->result_array();
+        else
+            return false;
+    }
+
+    function remployees($id){
+        $this->db->select('*');
+        $this->db->from('employee');
+        $this->db->where('supervisorID', $id);
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();

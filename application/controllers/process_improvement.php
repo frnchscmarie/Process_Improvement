@@ -299,7 +299,29 @@ class Process_Improvement extends CI_Controller {
     }
    
     public function addEmployee(){
+      if($_POST['type'] == "Supervisor"){
+        $employeeRecord=array(
+                'employeeID'=>$_POST['employeeID'],
+                'lname'=>$_POST['lname'],
+                'fname'=>$_POST['fname'],
+                'mname'=>$_POST['mname'],
+                'username'=>$_POST['employeeID'],
+                'type'=>$_POST['type'],
+                'password'=> '12345',
+                'pg_level'=>$_POST['pg_level'],
+                'birthday'=>$_POST['birthday'],
+                'date_hired'=>$_POST['date_hired'],
+                'position'=>$_POST['position'],
+                'email'=>$_POST['email'],
+                'promo_date'=>$_POST['promo_date'],
+                'civil_stat'=>$_POST['civil_stat'],
+                'cp_no'=>$_POST['cp_no'],
+                'supervisorID'=>$_POST['supervisorID']
 
+            );
+            $this->employee->createsupervisor($employeeRecord);
+            redirect('process_improvement/viewEmployeeAdmin');
+      }else{
             $employeeRecord=array(
                 'employeeID'=>$_POST['employeeID'],
                 'lname'=>$_POST['lname'],
@@ -321,6 +343,7 @@ class Process_Improvement extends CI_Controller {
             );
             $this->employee->createemployee($employeeRecord);
             redirect('process_improvement/viewEmployeeAdmin');
+      }
     }
 
     public function updateEmployee($employeeID){
@@ -457,6 +480,65 @@ class Process_Improvement extends CI_Controller {
         $supervisorname = $this->employee->getSV($use['supervisorID']);
         $data['supervisor'] = $supervisorname;
 
+
+        $getcredits = $this->leavedb->getcredits($info['id']);
+        $data['credits'] = $getcredits;
+
+        $getholiday = $this->leavedb->getHoliday();
+        $data['holidays'] = $getholiday;
+
+        $this->load->view('include/header',$usertype);
+        $this->load->view('leave_view',$data);
+        $this->load->view('include/footer');   
+    }
+
+    public function viewLeaveEmployee(){
+       $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+     
+        $result_array = $this->leavedb->readleave($info['id']);
+        $data['leavedb'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+            'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+        $supervisorinfo = $this->employee->remployee($info['id']);
+
+        foreach ($supervisorinfo as $sv) {
+          $use = array(
+            'supervisorID'=>$sv['supervisorID']
+          );
+        }
+        $supervisorname = $this->employee->getSV($use['supervisorID']);
+        $data['supervisor'] = $supervisorname;
+
+
+        $getcredits = $this->leavedb->getcredits($info['id']);
+        $data['credits'] = $getcredits;
+
+        $getholiday = $this->leavedb->getHoliday();
+        $data['holidays'] = $getholiday;
+
         $this->load->view('include/header',$usertype);
         $this->load->view('leave_view',$data);
         $this->load->view('include/footer');   
@@ -481,6 +563,13 @@ class Process_Improvement extends CI_Controller {
     }
 
     public function addLeaveCredits(){
+      $checking = $_POST['employeeID'];
+      $result = $this->leavedb->check($checking);
+      if($result!=null){
+            $message = "Leave credits for this user is already set. \\nGo back.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            redirect('process_improvement/viewLeaveCredits', 'refresh');
+        }else{
             $leaveCreditsRecord=array(
                 'employeeID'=>$_POST['employeeID'],
                 'lname'=>$_POST['lname'],
@@ -494,7 +583,8 @@ class Process_Improvement extends CI_Controller {
             );
             $this->employee->createleavecredits($leaveCreditsRecord);
             redirect('process_improvement/viewLeaveCredits');
-}
+        }
+    }
     public function addLeave(){
         $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
@@ -505,12 +595,29 @@ class Process_Improvement extends CI_Controller {
             $info;
         } 
         $data1 = $_SESSION['username'];
+
+        $getcredits = $this->leavedb->getcredits($info['id']);
+        foreach($getcredits as $c){
+          $credits = array(
+            'vacation'=>$c['vacation'],
+            'sick'=>$c['sick'],
+            'slp'=>$c['slp'],
+            'others'=>$c['others']
+          );
+        }
+
+        $data['credits'] = $credits;
+
         if($_POST['desc_1']!=null){
             $type_info = $_POST['desc_1'];
+            $remaining =  $credits['vacation'] - $_POST['no_of_days'];
+            $this->leavedb->updatevacation($remaining, $info['id']);
            }
             
            else if(isset($_POST['desc_2'])){
             $type_info = $_POST['desc_2'];
+            $remaining =  $credits['sick'] - $_POST['no_of_days'];
+            $this->leavedb->updatesick($remaining, $info['id']);
            }
             
            else if($_POST['desc_3']!=null){
@@ -519,10 +626,20 @@ class Process_Improvement extends CI_Controller {
             
            else if($_POST['desc_4']!=null){
             $type_info = $_POST['desc_4'];
-           }else if(isset($_POST['desc_5'])){
+            $remaining =  $credits['others'] - $_POST['no_of_days'];
+            $this->leavedb->updateother($remaining, $info['id']);
+           }
+
+           else if(isset($_POST['desc_5'])){
             $type_info = $_POST['desc_5'];
-           }else{
+            $remaining =  $credits['slp'] - $_POST['no_of_days'];
+            $this->leavedb->updateslp($remaining, $info['id']);
+           }
+
+           else{
             $type_info = "Inside the Country";
+            $remaining =  $credits['vacation'] - $_POST['no_of_days'];
+            $this->leavedb->updatevacation($remaining, $info['id']);           
            }
         $leaveRecord=array(
                 'employeeID'=>$info['id'],
@@ -544,8 +661,10 @@ class Process_Improvement extends CI_Controller {
 
     
 
-   public function viewMR(){
-        $result_array = $this->mr->readmr();
+   public function viewMRAdmin(){
+        $result_array = $this->mr->readmrall();
+        $ra = $this->mr->readapprove();
+        $data['approve'] = $ra;
         $data['records'] = $result_array; 
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
@@ -556,15 +675,56 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+        // $result_array3 = $this->mr->readmrall();        
+        // if($result_array3!= null){
+        //     foreach($result_array3 as $i){
+        //       $info = array(
+        //         'property_no' => $i['property_no'],
+        //         'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+        //         'dateassigned' => $i['dateassigned']
+        //       );
+        //       $mr[]=$info;
+        //     }        
+        //     $notification['mr_notification'] = $mr;        
+        // } 
         $this->load->view('include/header',$usertype);        
         $this->load->view('mradmin_view',$data);
         $this->load->view('include/footer');
         }
 
 
+    public function viewMR(){
+        $data['username'] = $this->session->userdata('username');            
+        $userinfo = $this->employee->read($data['username']);
+        foreach($userinfo as $i){
+          $info = array(
+              'id' => $i['id'],
+            );
+            $info;
+        } 
+
+        $result_array = $this->mr->readmr($info['id']);
+        $data['mr'] = $result_array; 
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        $this->load->view('include/header',$usertype);        
+        $this->load->view('mr_view',$data);
+        $this->load->view('include/footer');
+        }
+
+
    public function viewProperties(){
+        $result_array = $this->mr->emptyProp();
         $result_array1 = $this->mr->unassignedProp();
-        $data['mrRecord'] = $result_array1; 
+        $data['mrRecord'] = $result_array; 
+        $data['mrs'] = $result_array1;
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -575,6 +735,32 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
 
+
+        $getmr = $this->mr->unassigned();
+        if($getmr!=null){
+          foreach($getmr as $g){
+          $mr = array(
+            'date_assigned'=>$g['date_assigned'],
+            'qty'=>$g['qty'],
+            'unit'=>$g['unit'],
+            'property_name'=>$g['property_name'],
+            'description'=>$g['description'],
+            'date_purchased'=>$g['date_purchased'],
+            'classification_no'=>$g['classification_no'],
+            'unit_value'=>$g['unit_value'],
+            'total_value'=>$g['total_value'],
+            'mr_no'=>$g['mr_no'],
+            'status'=>$g['status'],
+            'property_no'=>$g['property_no']
+          );
+          $memo[] = $mr;
+          }        
+        }else{
+          $memo = null;
+        }
+
+
+        $data['memo'] = $memo;
         $this->load->view('include/header',$usertype);
         $this->load->view('property_view',$data);
         $this->load->view('include/footer');
@@ -646,7 +832,6 @@ class Process_Improvement extends CI_Controller {
 
 
     public function editProperties($property_no){
-
           $data1 = $_SESSION['username'];
           $type= $this->employee->read($data1);
           foreach($type as $t){
@@ -665,14 +850,28 @@ class Process_Improvement extends CI_Controller {
               }
 
             $usertype['types'] = $types;
+
+
+
             $this->load->view('include/header',$usertype);
             $this->load->view('editPropertyForm',$data);
             $this->load->view('include/footer');
 
           }
+    public function addpropertydetails(){
+      $property_no = $_POST['property_no'];
+      $assign = array(
+        'employeeID'=>$_POST['employeeID'],
+        'lname'=>$_POST['lname'],
+        'fname'=>$_POST['fname'],
+        'mname'=>$_POST['mname']
+      );
+      $this->mr->assignMR($property_no, $assign);
+      redirect('process_improvement/viewProperties');
+    }
+
 
     public function assignProperties($property_no){
-
           $data1 = $_SESSION['username'];
           $type= $this->employee->read($data1);
           foreach($type as $t){
@@ -690,6 +889,8 @@ class Process_Improvement extends CI_Controller {
                 $data['property_no']=$o['property_no'];
               }
 
+        $getunass = $this->mr->getunass($property_no);
+        $data['getted'] = $getunass;
             $usertype['types'] = $types;
             $this->load->view('include/header',$usertype);
             $this->load->view('assignPropertyForm',$data);
@@ -913,7 +1114,7 @@ class Process_Improvement extends CI_Controller {
         redirect('process_improvement/viewTraining');
           }
 
-     public function viewOvertimeRegular(){
+     public function viewOvertime(){
 
         $data['username'] = $this->session->userdata('username');            
         $userinfo = $this->employee->read($data['username']);
@@ -936,9 +1137,14 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
+
+        $ot = $this->ot->getOT($info['id']);
+
         $newresult_array = $this->employee->remployee($info['id']);
         $data['name'] = $newresult_array;
         $data['supervisor'] = $supervisorname;
+        $data['getot'] = $ot;
+
         $this->load->view('include/header',$usertype);
         $this->load->view('otregular_view',$data);
         $this->load->view('include/footer');
@@ -977,7 +1183,48 @@ class Process_Improvement extends CI_Controller {
             $hw;    
             $mw;
             $he;
-            $me; 
+            $me;
+            $month;
+            if($_POST['month']=="January"){
+              $month = "jan";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="February"){
+              $month = "feb";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="March"){
+              $month = "mar";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="April"){
+              $month = "apr";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="May"){
+              $month = "may";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="June"){
+              $month = "june";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="July"){
+              $month = "july";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="August"){
+              $month = "aug";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="September"){
+              $month = "sept";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="October"){
+              $month = "oct";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="November"){
+              $month = "nov";
+              $allotted = $_POST['allotted'];
+            }else if($_POST['month']=="December"){
+              $month = "dec";
+              $allotted = $_POST['allotted'];
+            }
+
+            $this->ot->updateot($info['id'], $month, $allotted);
+
             if($_POST['hours_weekdays']!=null){
               $hw = $_POST['hours_weekdays'];
             }else{
@@ -1006,6 +1253,7 @@ class Process_Improvement extends CI_Controller {
                 'date_of_filing'=>$_POST['date_of_filing'],
                 'auto_OT'=>$_POST['auto_OT'],
                 'aot_from'=>$_POST['aot_from'],
+                'date_of_ot'=>$_POST['date_of_ot'],
                 'aot_to'=>$_POST['aot_to'],
                 'hours_weekdays'=> $hw,
                 'minutes_weekdays'=>$mw,
@@ -1016,16 +1264,105 @@ class Process_Improvement extends CI_Controller {
                 'authorized_by'=>$_POST['super'],
                 'status'=>'Pending'
             );
+
             $this->ot->createot($otRecord);
-            redirect('process_improvement/viewOvertimeRegular');
+            redirect('process_improvement/viewOvertime');
             }
     }
 
     public function viewSVLeave($id=null){
+      $data['ot'][0]["id"] = null;
+      $data['active'] = "Leave";
+        $result_array = $this->leavedb->getallLeave($id);
+        if($result_array != null){
+            foreach($result_array as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'type' => $i['type'],
+                'no_of_days' => $i['no_of_days'],
+                'inc_from' => $i['inc_from'],
+                'inc_to' => $i['inc_to'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'id' => $i['id']
+              );
+              $leave[]=$info;
+            }        
+            $data['leave_pending'] = $leave;
+            $data2['leave_pending'] = $leave;
+        }
+        $result_array2 = $this->leavedb->getallOT();
+        if($result_array2 != null){
+            foreach($result_array2 as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'date_of_ot' => $i['date_of_ot'],
+                'auto_OT' => $i['auto_OT'],
+                'aot_from' => $i['aot_from'],
+                'aot_to' => $i['aot_to'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'id' => $i['id'],
+                'hours_weekends' => $i['hours_weekends'],
+                'minutes_weekends' => $i['minutes_weekends'],
+                'hours_weekdays' => $i['hours_weekdays'],
+                'minutes_weekdays' => $i['minutes_weekdays'],
+                'task' => $i['task'],
+                'status' => $i['status'],
+                'authorized_by' => $i['authorized_by'],
+                'remarks' => $i['remarks']
+              );
+              $ot[]=$info;
+            }        
+            $data['ot_pending'] = $ot;
+            $data2['ot_pending'] = $ot;
+        }
         if($id != null){
         // $getvalues = $this->leavedb->getdata($id);
         $getvalues = $this->leavedb->getLeave($id);
         $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+     
+          if($data['leave'][0]['status'] == 'pending'){
+            $this->load->view('include/header',$usertype);
+          $this->load->view('sv_leave',$data);
+          $this->load->view('include/footer');            
+          } else{
+          $this->load->view('include/header',$usertype);
+          $this->load->view('sv_leave',$data2);
+          $this->load->view('include/footer');                    
+          }
+        } else{
+        //   $getvalues = $this->leavedb->getdata($id);
+        // $data['leave'] = $getvalues;
+        $data1 = $_SESSION['username'];
+        $type= $this->employee->read($data1);
+        foreach($type as $t){
+          $ut= array(
+                      'type'=>$t['type']
+          );
+          $types[]=$ut;
+        }
+        $usertype['types'] = $types;
+        // print_r($data['leave']);
+        $this->load->view('include/header',$usertype);
+        $this->load->view('sv_leave');
+        $this->load->view('include/footer');
+        }      
+    }
+    public function viewMrNotification($id=null){
+        if($id != null){
+        // $getvalues = $this->leavedb->getdata($id);
+        $getvalues = $this->leavedb->getMr($id);
+        $data['mr'] = $getvalues;
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -1057,6 +1394,52 @@ class Process_Improvement extends CI_Controller {
         }      
     }
     public function viewOT($id=null){
+      $data['leave'][0]["id"] = null;
+      $data['active'] = "OT";
+      $result_array = $this->leavedb->getallLeave();
+        if($result_array != null){
+            foreach($result_array as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'type' => $i['type'],
+                'no_of_days' => $i['no_of_days'],
+                'inc_from' => $i['inc_from'],
+                'inc_to' => $i['inc_to'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'id' => $i['id']
+              );
+              $leave[]=$info;
+            }        
+            $data['leave_pending'] = $leave;
+            $data2['leave_pending'] = $leave;
+        }
+        $result_array2 = $this->leavedb->getallOT($id);
+        if($result_array2 != null){
+            foreach($result_array2 as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'date_of_ot' => $i['date_of_ot'],
+                'auto_OT' => $i['auto_OT'],
+                'aot_from' => $i['aot_from'],
+                'aot_to' => $i['aot_to'],
+                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],
+                'id' => $i['id'],
+                'hours_weekends' => $i['hours_weekends'],
+                'minutes_weekends' => $i['minutes_weekends'],
+                'hours_weekdays' => $i['hours_weekdays'],
+                'minutes_weekdays' => $i['minutes_weekdays'],
+                'task' => $i['task'],
+                'status' => $i['status'],
+                'authorized_by' => $i['authorized_by'],
+                'remarks' => $i['remarks']
+              );
+              $ot[]=$info;
+            }        
+            $data['ot_pending'] = $ot;
+            $data2['ot_pending'] = $ot;
+        }
         if($id != null){
         // $getvalues = $this->leavedb->getdata($id);
         $getvalues = $this->leavedb->getOT($id);
@@ -1070,7 +1453,7 @@ class Process_Improvement extends CI_Controller {
           $types[]=$ut;
         }
         $usertype['types'] = $types;
-        // print_r($data);
+        // print_r($data['ot_pending']);
         $this->load->view('include/header',$usertype);
         $this->load->view('sv_leave',$data);
         $this->load->view('include/footer');          
@@ -1102,15 +1485,29 @@ class Process_Improvement extends CI_Controller {
         $datas = $this->leavedb->diapproveleave($id);
         redirect('process_improvement/viewcalendar');
     }
+    public function approveot(){
+        $id = $_POST['id'];
+        $result_array = $this->leavedb->approveot($id);
+        redirect('process_improvement/viewcalendar');
+    }
+    public function disapproveot(){
+        $id = $_POST['id'];
+        $remarks = $_POST['remarks'];
+        $datas = $this->leavedb->diapproveot($id,$remarks);
+        redirect('process_improvement/viewcalendar');
+    }
+
+    public function approvemr(){
+        $id = $_POST['id'];
+        echo $id;
+        $result_array = $this->mr->approvemr($id);
+        redirect('process_improvement/viewMRAdmin');
+    }    
 
 
 public function addpropertyinfo(){
 
   $newRecord=array(
-    'employeeID'=>$_POST['employeeID'],
-    'lname'=>$_POST['lname'],
-    'fname'=>$_POST['fname'],
-    'mname'=>$_POST['mname'],
     'date_assigned'=>$_POST['date_assigned'],
     'qty'=>$_POST['qty'],
     'unit'=>$_POST['unit'],
@@ -1125,7 +1522,7 @@ public function addpropertyinfo(){
     );
                     
     $this->mr->createproperty($newRecord);
-    redirect('process_improvement/viewMR');
+    redirect('process_improvement/viewProperties');
 }
 
 public function addHoliday(){
@@ -1215,7 +1612,9 @@ public function addHoliday(){
         } 
 
         $result_array = $this->leavedb->readallholidays();
+        $result_array1 = $this->employee->read_employees();
         $data['holiday'] = $result_array; 
+        $data['emp'] = $result_array1;
         $data1 = $_SESSION['username'];
         $type= $this->employee->read($data1);
         foreach($type as $t){
@@ -1227,6 +1626,14 @@ public function addHoliday(){
         $usertype['types'] = $types;
         $data['types'] = $types;
         $data['total'] = $this->training->read($info['id']);
+        $data['training'] = $this->training->readtraining();
+        $data['prop'] = $this->mr->readmr($info['id']);
+
+        $allprop = $this->mr->getallprop();
+        $allprop2 = $this->mr->getallprop2();
+
+        $data['allprop'] = count($allprop) + count($allprop2);
+
         $this->load->view('include/header',$usertype);
         $this->load->view('calendar_view',$data);
         $this->load->view('include/footer');   
@@ -1234,26 +1641,18 @@ public function addHoliday(){
 
     public function do_upload()
     {
-      $type = explode('.', $_FILES["file"]["name"]);
-      $type = strtolower($type[count($type)-1]);
-      $url = "./assets/uploads/".uniqid(rand()).'.'.$type;
-      if(in_array($type, array("jpg", "jpeg", "gif", "png", "docx", "xls", "pdf")))
-        if(is_uploaded_file($_FILES["file"]["tmp_name"]))
-          if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
-            return $url;
-      return "";
+      if(!empty($_FILES['uploaded_file']))
+      {
+    $path = "./assets/uploads/";
+    $path = $path . basename( $_FILES['uploaded_file']['name']);
+    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
+      echo "The file ".  basename( $_FILES['uploaded_file']['name']). 
+      " has been uploaded";
+    } else{
+        echo "There was an error uploading the file, please try again!";
     }
-
-    public function profile_pic(){
-      if($_SERVER['REQUEST_METHOD']=='POST')
-            {
-              $url = $this->do_upload();
-              $user =  $this->session->userdata('username');
-              $condition = array('username' => $user);
-              $result_array = $this->Peter->read_ownerinfo($condition);
-              $this->Peter->update_ownerinfo($profilepic);
-              redirect('user/setting');
       }
+    
     }
 
   public function getemployeename(){
@@ -1269,9 +1668,53 @@ public function addHoliday(){
     echo json_encode($info);
   }
 
+
+  public function pulloutMr($id){
+
+    $result_array = $this->mr->getmr($id);
+
+    foreach ($result_array as $mr) {
+      $getmr = array(
+        'employeeID' => $mr['employeeID'],
+        'lname'=> $mr['lname'],
+        'fname'=> $mr['fname'],
+        'mname'=> $mr['mname'],
+        'date_assigned'=> $mr['date_assigned'],
+        'qty'=> $mr['qty'],
+        'unit'=> $mr['unit'],
+        'property_name'=> $mr['property_name'],
+        'description'=> $mr['description'],
+        'date_purchased'=> $mr['date_purchased'],
+        'property_no'=> $mr['property_no'],
+        'classification_no'=> $mr['classification_no'],
+        'unit_value'=> $mr['unit_value'],
+        'total_value'=> $mr['total_value'],
+        'mr_no'=> $mr['mr_no'],
+        'status'=> $mr['status']
+      );
+    }
+    if($getmr['status'] == "pending"){
+      $id = $getmr['property_no'];
+      $this->mr->updatemr($id);
+    }else if($getmr['status'] == "approved"){
+    $this->mr->backupmr($getmr);
+    $delete = $this->mr->deleteMr($id);
+    }else if($getmr['status'] == "disapproved"){
+      $id = $getmr['property_no'];
+      $this->mr->updatedismr($id);
+    } else if($getmr['status'] == "unassigned"){      
+      $this->mr->updateMRtoPending($id);
+    }
+     redirect('process_improvement/viewMR');
+  
+    }
+
+    public function returnmr(){
+      $result = $this->mr->getmemo($_POST['id']);
+      redirect('process_improvement/viewMRAdmin');
+    }
  
 }
-
     
 
 
