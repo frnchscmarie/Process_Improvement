@@ -41,14 +41,35 @@
         if($approve!=null){
                 foreach($approve as $ma){  
                     echo "<tr><td>".$ma['property_no']."</td><td>".$ma['property_name']."</td><td>".$ma['qty']."</td><td>".$ma['unit']."</td><td>".$ma['description']."</td><td>".$ma['date_purchased']."</td><td>".$ma['classification_no']."</td><td>".$ma['unit_value']."</td><td>".$ma['total_value']."</td><td>".$ma['mr_no']."</td><td>".$ma['date_assigned']."</td> <td>".$ma['status']."</td>".'
-                    <td><a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-eye"></i> VIEW</a>
-                    <button class="btn btn-danger btn-xs" id="return" data-id="'.$ma['property_no'].'"><i class="fa fa-trash-o"></i> RETURN </button></td></tr>';
+                    <td><a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-eye"></i> VIEW</a><a class="btn btn-success btn-xs" data-toggle="modal" id="viewnow" data-id="'.$ma['property_no'].'" data-target="#squarespaceModal"><i class="fa fa-eye">CHECK</i></a>
+                    </td></tr>';
                    
                 }
         }
                   ?>
         
         </tbody>
+        <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <h3 class="modal-title" id="lineModalLabel">QR CODE</h3>
+    </div>
+
+    <div class="modal-body">
+     <div class="container" style="margin-left: 26%;">    
+         <input type="text" name="qr" id="qr" value="<?php echo$ma['property_no']?>" readonly />
+         <input type="text" name="check" id="check" maxlength="14" />
+         <button class="btn btn-danger btn-xs" id="return" data-id=""><i class="fa fa-trash-o"></i> RETURN </button>
+         <?php echo ('<img id="imageid"'); ?>
+        
+     </div>
+    </div>
+</div>
+</div> 
+</div> 
+<!-- /modal-->
       </table>
     </div>
   </div>
@@ -77,5 +98,20 @@
       }
     });  
   });  
-
+  
+  $(document).on('click', '#viewnow', function(){
+    var getID = $(this).data('id');
+    $('#approve').attr('data-id' , getID);
+     $(".modal-body #qr").val(getID);
+     $("#check").change(function(){
+      var checkid = document.getElementById("check").value;
+      if(getID==checkid){
+        $(":button").attr("disabled", false);
+      }else{
+        $(":button").attr("disabled", true);
+        alert("Qr is not the same");
+      }
+     });
+     document.getElementById("imageid").src="../assets/qrcode/"+getID+".png";
+  });   
 </script>

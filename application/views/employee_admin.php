@@ -118,6 +118,24 @@
                                         </div>
                                         <div>&nbsp;</div>
 
+                                        <div class = "form-group">
+                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                              <select class="form-control" value="<?php echo set_value('position'); ?>" onchange="showradiobutton()" id="position" name="position">
+                                                <option value="Vice President">Vice President</option>
+                                                <option value="Information Technology Manager">Information Technology Manager</option>
+                                                <option value="Senior Information Technology Officer">Senior Information Technology Officer</option>
+                                                <option value="Information Technology Officer">Information Technology Officer</option>
+                                                <option value="Senior Information Technology Specialist">Senior Information Technology Specialist</option>
+                                                <option value="Information Technology Specialist III">Information Technology Specialist III</option>
+                                                <option value="Information Technology Specialist II">Information Technology Specialist II</option>
+                                                <option value="Information Technology Specialist I">Information Technology Specialist I</option>
+                                              </select>
+                                            </div>
+
+                                        </div>
+                                        <div>&nbsp;</div>
+
                                         <div class="form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
