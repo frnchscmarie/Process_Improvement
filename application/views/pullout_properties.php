@@ -101,7 +101,7 @@
   
   $(document).on('click', '#viewnow', function(){
     var getID = $(this).data('id');
-    $('#approve').attr('data-id' , getID);
+    $('#return').attr('data-id' , getID);
      $(".modal-body #qr").val(getID);
      $("#check").change(function(){
       var checkid = document.getElementById("check").value;

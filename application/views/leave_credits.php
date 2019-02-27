@@ -141,7 +141,7 @@
               if($leavecredit!=null){
                 foreach($leavecredit as $l){  
                     echo "<tr><td>".$l['employeeID']."</td><td>".$l['lname'].", ".$l['fname']." ".$l['mname']."</td><td>".$l['vacation']."</td><td>".$l['sick']."</td><td>".$l['slp']."</td><td>".$l['others']."</td>".'
-                    <td><a href="'.base_url('process_improvement/updateLC/'.$l['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><a href="'.base_url('process_improvement/delLC/'.$l['employeeID']).'"class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/updateLC/'.$l['employeeID']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
                     
                 }
         }
