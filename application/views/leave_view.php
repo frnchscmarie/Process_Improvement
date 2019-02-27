@@ -65,7 +65,7 @@ foreach ($holidays as $h) {
                             <option value="Vacation Leave(Local)">Vacation Leave (Local)</option>
                             <option value="Vacation Leave(International)">Vacation Leave (International)</option>
                             <option value="Sick Leave">Sick Leave</option>
-                            <option value="Special Leave Priveledge">Special Leave Privilege</option>
+                            <option value="Special Leave Privelege">Special Leave Privilege</option>
                             <option value="Others">Others</option>
                           </select>
                         </div>
@@ -136,7 +136,7 @@ foreach ($holidays as $h) {
                             <div style="margin-right: 15%;">
                                <label class="control-label col-md-2 col-sm-2 col-xs-12" id = "slv">SLV <?php echo $c['slp']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "vl">VL <?php echo $c['vacation']?></label>
-                              <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "fml">FML <?php echo $c['others']?></label>
+                              <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "fml">Others <?php echo $c['others']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12"  id = "sl">SL <?php echo $c['sick']?></label>
                             </div>
 
@@ -272,7 +272,7 @@ foreach ($holidays as $h) {
                               <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['slp']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">VL</label>
                               <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['vacation']?></label>
-                              <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">FML</label>
+                              <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">OTHERS</label>
                               <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['others']?></label>
                               <label class="control-label col-md-2 col-sm-2 col-xs-12" style="margin-left: -8%;">SL</label>
                               <label class="control-label col-sm-2 col-xs-2" style="margin-left: -10%;"><?php echo $c['sick']?></label>

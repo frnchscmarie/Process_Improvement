@@ -304,25 +304,32 @@
           console.log(data);         
           if(data != "null"){
             var notifs = JSON.parse(data);
+            // alert(notifs['asas']);
             var count = 0;
             var count2 = 0;
             var count3 = 0;            
+            console.log(notifs["type"][0]["type"]);
+            var count_all = 0;
             // if((user["type"][0]["type"] != "Supervisor")&&(user["type"][0]["type"] != "Department Head")&&(user["type"][0]["type"] != "Admin")){
             
-            if((typeof notifs["ot_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+            if((typeof notifs["ot_notification"] !== 'undefined')&&((notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head"))){
               count = Object.keys(notifs["ot_notification"]).length;
+              count_all = count_all+ Object.keys(notifs["ot_notification"]).length;;
+              // alert(Object.keys(notifs["ot_notification"]).length);
             }
             // var notifs = JSON.parse(data);
-            if((typeof notifs["leave_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+            if((typeof notifs["leave_notification"] !== 'undefined')&&((notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head"))){
               count2 = Object.keys(notifs["leave_notification"]).length;              
+              count_all = count_all + Object.keys(notifs["leave_notification"]).length;
             }
             if((typeof notifs["mr_notification"] !== 'undefined')&&(notifs["type"][0]["type"] == "Admin")){
               count3 = Object.keys(notifs["mr_notification"]).length;              
+              count_all = count_all + Object.keys(notifs["mr_notification"]).length;
             }
-            var count_notif_all = count + count2 + count3;
-            if(count_notif_all != 0){
+            var count_notif_all = count + count2 + count3;            
+            if(count_all != 0){
               var notif_head = '<i class="fa fa-envelope-o"></i>'
-                                +'<span class="badge bg-green" >'+count_notif_all+'</span>';
+                                +'<span class="badge bg-green" >'+count_all+'</span>';
                   $("#notif_head").html(notif_head);
             } else{
               var notif_head = '<i class="fa fa-envelope-o"></i>';
@@ -332,7 +339,7 @@
             console.log(notifs);   
             console.log("count_notif_all"+count_notif_all);   
             console.log("count"+count);   
-            if((typeof notifs["ot_notification"] !== 'undefined')&&(notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head")){
+            if((typeof notifs["ot_notification"] !== 'undefined')&&((notifs["type"][0]["type"]=="Supervisor")||(notifs["type"][0]["type"]=="Department Head"))){
               for(var a=0; a<count; a++){
                 count_notif_all++;
                   var notif ="<li><a href='#' id='ot"+a+"'><span><span>FILED AN OVER TIME</span>"
@@ -346,7 +353,7 @@
             }             
             // console.log(notifs);
             // console.log(count);   
-           if((typeof notifs["leave_notification"] !== 'undefined') &&(notifs["type"][0]["type"] == "Supervisor")||(notifs["type"][0]["type"] == "Department Head")){                
+           if((typeof notifs["leave_notification"] !== 'undefined') &&((notifs["type"][0]["type"] == "Supervisor")||(notifs["type"][0]["type"] == "Department Head"))){                
               for(var a=0; a<count2; a++){
                     count_notif_all++;
                       var notif ='<li><a href = "#" id="leave'+a+'"><span><span>FILED A LEAVE</span>'

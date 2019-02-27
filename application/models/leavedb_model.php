@@ -235,11 +235,13 @@ class Leavedb_model extends CI_Model {
         }
         return $query->result_array();
     } */
-    function getallLeavesuper($id){
+    function getallLeavesuper($id=null){
         $this->db->select('*');
         $this->db->from($this->table);
+        if(isset($id)){
         $where = "supervisorID = '$id' AND status = 'approved'";
-        $this->db->where($where);
+        $this->db->where($where);            
+        }
         $query = $this->db->get();
         if($query->num_rows()>0)
             return $query->result_array();

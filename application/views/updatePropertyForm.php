@@ -5,7 +5,7 @@
     <div class="container body">
       <div class="main_container">
         
-        
+        <?php echo form_open('process_improvement/updateMR/'.$property_no); ?>  
 
 <div class="right_col" role="main">
           <div class="">
@@ -22,7 +22,7 @@
                </div>
                   <div class="x_content">
                     <br />
-<?php echo form_open('process_improvement/updateMR/'.$property_no); ?>  
+
 <br/>
         <div class="col-md-7" style="margin-top: -3%;padding: px; text-align: center; margin-left: 18%;"> 
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -149,7 +149,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button" style="margin-left: 50px;"><a href="<?php echo base_url('process_improvement/viewMRAdmin')?>" style="color: white;">Cancel</a></button>
                           
-                          <button type="submit" class="btn btn-success" name="submit" value="submit">Submit</button>
+                          <button type="submit" class="btn btn-success" for="inputSuccess2" value="submit">Submit</button>
                         </div>
       </div>
   </div>

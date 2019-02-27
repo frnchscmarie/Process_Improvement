@@ -788,7 +788,7 @@ class Process_Improvement extends CI_Controller {
                 'no_of_days'=>$_POST['no_of_days'],
                 'inc_from' =>$_POST['inc_from'],
                 'inc_to' =>$_POST['inc_to'],
-                'supervisorID'=>'2019-0001-0001', 
+                'supervisorID'=>'2019-0002', 
                 'status'=>"pending" 
             );
 
@@ -1165,7 +1165,7 @@ class Process_Improvement extends CI_Controller {
              }
           else{
           $newRecord=array(
-             'property_no'=>$_POST['property_no'],
+             'property_no'=>$property_no,
              'employeeID'=>$_POST['employeeID'],
              'lname'=>$_POST['lname'],
              'fname'=>$_POST['fname'],
@@ -1487,11 +1487,15 @@ class Process_Improvement extends CI_Controller {
             }
     }
 
-    public function viewSVLeave($id=null){
+    public function viewSVLeave($id=null){      
       $data['ot'][0]["id"] = null;
       $data['active'] = "Leave";
-      $ids = "2019-0002";
-        $result_array = $this->leavedb->getallLeavesuper($ids);
+      // $ids = "2019-0002";
+      if(isset($id)){
+        $result_array = $this->leavedb->getallLeavesuper($ids);        
+      } else{
+        $result_array = $this->leavedb->getallLeavesuper();                
+      }
         if($result_array != null){
             foreach($result_array as $i){
               $info = array(
@@ -1501,6 +1505,7 @@ class Process_Improvement extends CI_Controller {
                 'no_of_days' => $i['no_of_days'],
                 'inc_from' => $i['inc_from'],
                 'inc_to' => $i['inc_to'],
+      // }
 /*                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],*/
                 'id' => $i['id']
               );
@@ -1558,13 +1563,13 @@ class Process_Improvement extends CI_Controller {
         }
         $usertype['types'] = $types;
      
-          if($data['leave'][0]['status'] == 'pending'){
+          if($data['leave']/*[0]['status']*/ == 'pending'){
           $this->load->view('include/header',$usertype);
           $this->load->view('sv_leave',$data);
           $this->load->view('include/footer');            
           } else{
           $this->load->view('include/header',$usertype);
-          $this->load->view('sv_leave',$data2);
+          $this->load->view('sv_leave',$data);
           $this->load->view('include/footer');                    
           }
         } else{
@@ -1723,6 +1728,34 @@ class Process_Improvement extends CI_Controller {
     public function viewOT($id=null){
       $data['leave'][0]["id"] = null;
       $data['active'] = "OT";
+
+      $result_array2 = $this->leavedb->getallLeavesuper();
+        if($result_array2 != null){
+            foreach($result_array2 as $i){
+              $info = array(
+                'date_of_filing' => $i['date_of_filing'],
+                'employeeID' => $i['employeeID'],
+                'type' => $i['type'],
+                'no_of_days' => $i['no_of_days'],
+                'inc_from' => $i['inc_from'],
+                'inc_to' => $i['inc_to'],
+/*                'employee_name' => $i['lname'].", ".$i['fname']." ".$i['mname'],*/
+                'id' => $i['id']
+              );
+              $leave[]=$info;
+            }        
+            $empname = $this->leavedb->getemp($info['employeeID']);
+            foreach($empname as $e){
+              $get = array(
+                'employee_name'=>$e['lname'].", ".$e['fname']." ".$e['mname']
+              );
+            }
+            $data['name'] = $get;
+            $data['leave_pending'] = $leave;
+            $data2['leave_pending'] = $leave;
+        }
+
+
       $result_array = $this->leavedb->getallLeave();
         if($result_array != null){
             foreach($result_array as $i){
@@ -2045,11 +2078,8 @@ public function addHoliday(){
       $result = $this->mr->getmemo($_POST['id']);
       redirect('process_improvement/viewMRAdmin');
     }
- 
+
 }
-    
-
-
 ?>
 
 

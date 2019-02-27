@@ -61,7 +61,7 @@ class notification_controller extends CI_Controller {
             echo json_encode(null);
         }
     }
-    public function leave_notification() {        
+    public function leave_notification() {                
         $this->load->model('notification_model','estudyante');
         // $result_array = $this->estudyante->read_ot_notification();
         $result_array = $this->estudyante->read_leave_notification();
@@ -83,8 +83,13 @@ class notification_controller extends CI_Controller {
     }
 
     public function all_notification() {  
+        // $notification["asas"] = $_SESSION['username'];
+
         $this->load->model('notification_model','estudyante');
         // $result_array = $this->estudyante->read_ot_notification();
+        $id = $this->estudyante->get_id_admin($_SESSION['username']);
+        // $notification["asas"] = $id[0]['id'];
+        $notification["asas"] = $id[0]['type'];
         $result_array = $this->estudyante->get_type($this->session->userdata('username'));
         if($result_array){
             foreach($result_array as $i){
@@ -113,7 +118,17 @@ class notification_controller extends CI_Controller {
             $notification['ot_notification'] = $ot;
         } 
         // $result_array = $this->estudyante->read_ot_notification();
-        $result_array2 = $this->estudyante->read_leave_notification();        
+        // $result_array2 = $this->estudyante->read_leave_notification();        
+        // if($id[0]['type'] == 'Supervisor') $result_array2 = $this->estudyante->get_all_for_admin($_SESSION['username']);                    
+
+
+        if($id[0]['type'] == 'Department Head'){
+                $result_array2 = $this->estudyante->read_leave_notification();                     
+        } else{
+                $result_array2 = $this->estudyante->get_all_for_admin($_SESSION['username']);
+        }
+                    
+        // $result_array2 = $this->estudyante->read_leave_notification();        
         if($result_array2!= null){
             foreach($result_array2 as $i){
               $info = array(

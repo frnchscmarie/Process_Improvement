@@ -109,14 +109,6 @@
                                             </div>
                                         </div>
                                         <div>&nbsp;</div>
-                    
-                                        <div class="form-group">
-                                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                              <input type="text" class="form-control has-feedback-left"  required="required" for="position" placeholder="Position" name="position" value="<?php echo set_value('position'); ?>" id="position">
-                                            </div>
-                                        </div>
-                                        <div>&nbsp;</div>
 
                                         <div class = "form-group">
                                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>

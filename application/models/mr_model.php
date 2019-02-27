@@ -110,7 +110,7 @@ class MR_model extends CI_Model {
 
 
     function backupmr($data){
-        $this->db->insert($this->table2, $data);
+        $this->db->insert($this->table2, $data);    
     }    
 
     function readmrall(){
@@ -131,6 +131,8 @@ class MR_model extends CI_Model {
         $this->db->set('status','requested');
         $this->db->where('property_no', $status);
         $this->db->update('mr');
+        $this->db->where('property_no', $status);
+        $this->db->delete('mr_notification');  
     }
     
     function updatedismr($status){

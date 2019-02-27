@@ -41,7 +41,7 @@
         if($approve!=null){
                 foreach($approve as $ma){  
                     echo "<tr><td>".$ma['property_no']."</td><td>".$ma['property_name']."</td><td>".$ma['qty']."</td><td>".$ma['unit']."</td><td>".$ma['description']."</td><td>".$ma['date_purchased']."</td><td>".$ma['classification_no']."</td><td>".$ma['unit_value']."</td><td>".$ma['total_value']."</td><td>".$ma['mr_no']."</td><td>".$ma['date_assigned']."</td> <td>".$ma['status']."</td>".'
-                    <td><a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-eye"></i> VIEW</a><a class="btn btn-success btn-xs" data-toggle="modal" id="viewnow" data-id="'.$ma['property_no'].'" data-target="#squarespaceModal"><i class="fa fa-eye">CHECK</i></a>
+                    <td><a class="btn btn-success btn-xs" data-toggle="modal" id="viewnow" data-id="'.$ma['property_no'].'" data-target="#squarespaceModal"><i class="fa fa-eye">CHECK</i></a>
                     </td></tr>';
                    
                 }

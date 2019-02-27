@@ -34,7 +34,7 @@
                                   if($memo!=null){
                                     foreach($memo as $m){  
                                       echo "<tr><td>".$m['property_no']."</td><td>".$m['property_name']."</td><td>".$m['qty']."</td><td>".$m['unit']."</td><td>".$m['description']."</td><td>".$m['date_purchased']."</td><td>".$m['classification_no']."</td><td>".$m['unit_value']."</td><td>".$m['total_value']."</td><td>".$m['mr_no']."</td><td>".$m['status']."</td>".'
-                                        <td><a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-eye"></i> VIEW</a><a href="'.base_url('process_improvement/assignProperties/'.$m['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> ASSIGN PROPERTY</a></td></tr>';  
+                                        <td><a href="'.base_url('process_improvement/assignProperties/'.$m['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> ASSIGN PROPERTY</a></td></tr>';  
                                     }
                                   }
                                 ?>        

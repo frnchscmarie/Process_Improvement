@@ -22,20 +22,20 @@
   
                     <tr id="trHead">
 
-            <th >PROPERTY NO.</th>
-            <th >NAME</th>
-            <th >QTY.</th>
-            <th >UNIT</th>
-            <th >DESCRIPTION</th>
-            <th >DATE OF PURCHASE</th>
-            <th >CLASSIFICATION NO.</th>
-            <th >UNIT VALUE</th>
-            <th >TOTAL VALUE</th>
-            <th >MR NUMBER</th>
-            <th >DATE ASSIGNED</th>
-            <th> STATUS</th>
-            <th >ACTION</th>
-          </tr>
+                      <th >PROPERTY NO.</th>
+                      <th >NAME</th>
+                      <th >QTY.</th>
+                      <th >UNIT</th>
+                      <th >DESCRIPTION</th>
+                      <th >DATE OF PURCHASE</th>
+                      <th >CLASSIFICATION NO.</th>
+                      <th >UNIT VALUE</th>
+                      <th >TOTAL VALUE</th>
+                      <th >MR NUMBER</th>
+                      <th >DATE ASSIGNED</th>
+                      <th> STATUS</th>
+                      <th >ACTION</th>
+                    </tr>
         </thead>
         <tbody>
             <?php
@@ -50,10 +50,7 @@
                     <td>".$m['mr_no']."</td>
                     <td>".$m['date_assigned']."</td> 
                     <td>".$m['status']."</td>".'
-                    <td>
-                    <a class="btn btn-primary btn-xs" data-toggle="modal" id="viewnow" data-id="'.$m['property_no'].'" data-target="#squarespaceModal">
-                    <i class="fa fa-eye"></i> VIEW</a>
-                    <a href="'.base_url('process_improvement/pulloutMr/'.$m['property_no']).'" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> PULLOUT</a></td></tr>';
+                    <td><a href="'.base_url('process_improvement/pulloutMr/'.$m['property_no']).'" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> PULLOUT</a></td></tr>';
                    
                 }
         }

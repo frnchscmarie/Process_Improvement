@@ -11,7 +11,11 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>MR Admin</h2>
-                  
+                  <!-- <div style="margin-left: 83%;">
+                    <form method="post" action="ExportCSV.php" align="center">
+                    <a><input style="float:left;" type="submit" name="export" value="&#xf019; ANNUAL REPORT " class="fa submit"/></a>
+                    </form>
+                  </div> -->
                     <div class="clearfix"></div>
                   </div>
                      <div class="x_content">
@@ -43,7 +47,6 @@
                 foreach($records as $p){  
                     echo "<tr><td>".$p['property_no']."</td><td>".$p['employeeID']."</td><td>".$p['lname'].", ".$p['fname']." ".$p['mname']."</td><td>".$p['date_assigned']."</td><td>".$p['qty']."</td><td>".$p['unit']."</td><td>".$p['property_name']."</td><td>".$p['description']."</td><td>".$p['date_purchased']."</td><td>".$p['classification_no']."</td><td>".$p['unit_value']."</td><td>".$p['total_value']."</td><td>".$p['mr_no']."</td><td>".$p['status']."</td>".' <td><a class="btn btn-success btn-xs" data-toggle="modal" id="viewnow" data-id="'.$p['property_no'].'" data-target="#squarespaceModal"><i class="fa fa-eye">CHECK</i></a> <a href="'.base_url('process_improvement/updateMR/'.$p['property_no']).'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                       </td></tr>';
-
                 }
 
         }

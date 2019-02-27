@@ -1,4 +1,4 @@
-<?php 
+  <?php 
 // foreach($leave as $l){
 // echo $l['date_of_filing']; 
 // }
@@ -123,7 +123,8 @@
                           </tr>
                       </thead>
                        <tbody>
-                        <?php if($leave_pending!=null){
+                        <?php if(isset($leave_pending)){
+                        // <?php if(isset($leave_pending!=null)){
                           for($a = 0;$a<count($leave_pending); $a++) {
                           $date = new DateTime($leave_pending[$a]['date_of_filing']);
                           $result = $date->format('M d Y'); 
@@ -139,7 +140,8 @@
                           <td><?php echo $leave_pending[$a]['type']?></td>
                           <td><?php echo $leave_pending[$a]['no_of_days']?></td>                          
                           <td><?php echo $result2?></td>                          
-                          <td><?php echo $result3?></td>                          
+                          <td><?php echo $result3?></td> 
+                          <!-- <td><?php echo $status?></td>    -->                        
                                                                             
                           <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View </a></td>
                         </tr>
@@ -167,14 +169,14 @@
                             <th >Date Filed</th>          
                             <th >Employee ID</th>
                             <th >Employee Name</th>          
-                            <th >Action</th>
+                            <!-- <th >Action</th> -->
                           </tr>
                         </thead>
                         <tbody>                         
                          <td><?php if(isset($ot[0]['date_of_filing'])) { echo $ot[0]['date_of_filing']; }?></td>
                           <td><?php if(isset($ot[0]['employeeID'])) { echo $ot[0]['employeeID']; }?></td>
                           <td><?php if(isset($ot[0]['employeeID'])) { echo $ot[0]['lname'].', '.$ot[0]['fname']; }?></td>
-                         <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> VIEW </a></td>
+                         <!-- <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> VIEW </a></td> -->
                        </tbody>
         
                      </table>
@@ -234,12 +236,12 @@
                       </tfoot>
                      </table>
 
-              <div style="float: left;" class="ot_main">
+              <!-- <div style="float: left;" class="ot_main">
                 <button class="btn btn-success btn-xs otapprove" id="otapprove"><i class="fa fa-eye"></i> APPROVE </button>
                 <button class="btn btn-success btn-xs otdisapprove" id="otdisapprove"><i class="fa fa-eye"></i> DISAPPROVE </button>
               <!-- <a href="" class="btn btn-success btn-xs"><i class="fa fa-check"></i> APPROVED </a>
                <a href="" class="btn btn-success btn-xs"><i class="fa fa-times"></i> DISAPPROVED </a> -->
-            </div>
+            <!-- </div>
               <div class="col-sm-6 ot_main">
           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -248,7 +250,7 @@
                         <div class="col-md-9 col-sm-12 col-xs-9">
                           <input type="text" class="form-control" placeholder="Default Input" id="ot_remarks" >
                         </div>
-                      </div>
+                      </div> --> 
 
               </form>
               </div>
@@ -290,7 +292,7 @@
                             <th >Employee ID</th>
                             <th >Employee Name</th>          
                             <th >STATUS</th>
-                            <th >ACTION</th>
+                            <!-- <th >ACTION</th> -->
                           </tr>
                         </thead>
                         <tbody>
@@ -298,7 +300,7 @@
                           <td><?php if(isset($ot_pending[$a]['employeeID'])) { echo $ot_pending[$a]['employeeID']; }?></td>
                           <td><?php if(isset($ot_pending[$a]['employeeID'])) { echo $ot_pending[$a]['employee_name']; }?></td>
                           <td><?php if(isset($ot_pending[$a]['status'])) { echo $ot_pending[$a]['status']; }?></td>
-                         <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> VIEW </a></td>
+                         <!-- <td><a href="" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> VIEW </a></td> -->
                        </tbody>
         
                      </table>

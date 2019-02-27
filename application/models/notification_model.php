@@ -24,5 +24,16 @@ class Notification_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM login WHERE username = '$username'");
         return $query->result_array();
     }
+    function get_id_admin($username){
+        $query = $this->db->query("SELECT * FROM login WHERE username = '$username'");
+        return $query->result_array();   
+    }
+    function get_all_for_admin($username){
+//         $query = $this->db->query("SELECT * FROM login JOIN leavedb WHERE login.id = leavedb.employeeID AND login.type NOT IN ('    
+// Supervisor','Department Head')");
+        $query = $this->db->query("SELECT * FROM login JOIN leaved_notification JOIN employee WHERE login.id = leaved_notification.employeeID AND login.type NOT IN ('    
+Supervisor','Department Head')");
+        return $query->result_array();   
+    }
 }
 ?>
