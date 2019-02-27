@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2019 at 11:50 PM
+-- Generation Time: Feb 27, 2019 at 02:57 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -69,7 +69,9 @@ CREATE TABLE `credits` (
 
 INSERT INTO `credits` (`id`, `employeeID`, `lname`, `fname`, `mname`, `vacation`, `sick`, `slp`, `others`) VALUES
 (14, '2019-0002', 'Supervisor', '1', '', '9', '10', '10', '10'),
-(15, '2019-0004', 'Employee', '1', '', '7', '10', '10', '10');
+(15, '2019-0004', 'Employee', '1', '', '-1', '10', '8', '10'),
+(16, '2019-0007', 'Gellado', 'Janelyn Ann', '', '6', '10', '10', '10'),
+(17, '2019-0008', 'Garcia', 'May', 'xx', '10', '10', '10', '10');
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,9 @@ INSERT INTO `employee` (`employeeID`, `fname`, `lname`, `mname`, `pg_level`, `bi
 ('2019-0001', 'Head', 'Department', '', '14', '2019-02-05', '2019-02-06', 'Vice President', 'xxxxxxxxx@gmail.com', '2019-02-04', 'Single', '12345678900', 'depthead', '12345', 'Department Head', '2019-0001'),
 ('2019-0002', '1', 'Supervisor', '', '13', '1999-01-30', '2019-01-02', 'Information Technolo', 'supervisor1@gmail.com', '2019-01-08', 'single', '09111111111', 'supervisor1', 'supervisor1', 'Supervisor', '2019-0001'),
 ('2019-0003', 'User', 'Admin', '', '8', '1999-08-08', '2019-01-02', 'Secretary', 'secretary@gmail.com', '2019-01-08', 'single', '09774643758', 'admin', 'admin', 'Admin', '2019-0002'),
-('2019-0004', '1', 'Employee', '', '5', '1998-11-12', '2019-01-02', 'Information Technolo', 'employee1@gmail.com', '2019-01-08', 'single', '09774643759', 'employee1', 'employee1', 'Employee', '2019-0002');
+('2019-0004', '1', 'Employee', '', '5', '1998-11-12', '2019-01-02', 'Information Technolo', 'employee1@gmail.com', '2019-01-08', 'single', '09774643759', 'employee1', 'employee1', 'Employee', '2019-0002'),
+('2019-0007', 'Janelyn Ann', 'Gellado', '', '10', '1999-08-08', '2019-02-27', 'Information Technolo', 'janelynanngellado@gmail.com', '2019-02-27', 'Single', '09123456789', '2019-0007', '12345', 'Employee', '2019-0002'),
+('2019-0008', 'May', 'Garcia', 'xx', '8', '2019-02-27', '2019-02-27', 'Information Technolo', 'xxxxxxxxx', '2019-02-27', 'Single', '09123456778', '2019-0008', '12345', 'Employee', '2019-0002');
 
 -- --------------------------------------------------------
 
@@ -147,7 +151,7 @@ CREATE TABLE `emp_ot` (
 --
 
 INSERT INTO `emp_ot` (`employeeID`, `fname`, `lname`, `mname`, `jan`, `feb`, `mar`, `apr`, `may`, `june`, `july`, `aug`, `sept`, `oct`, `nov`, `dec`) VALUES
-('2019-0004', '1', 'Employee', '', '60', 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60);
+('2019-0004', '1', 'Employee', '', '60', 56, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60);
 
 -- --------------------------------------------------------
 
@@ -173,7 +177,11 @@ CREATE TABLE `leavedb` (
 --
 
 INSERT INTO `leavedb` (`id`, `date_of_filing`, `employeeID`, `type`, `type_info`, `inc_from`, `inc_to`, `supervisorID`, `no_of_days`, `status`) VALUES
-(29, '2019-02-26', '2019-0004', 'Vacation Leave(International)', 'Singapore', '2019-03-06', '2019-03-08', '2019-0002', '3', 'approved');
+(29, '2019-02-26', '2019-0004', 'Vacation Leave(International)', 'Singapore', '2019-03-06', '2019-03-08', '2019-0002', '3', 'approved'),
+(30, '2019-02-27', '2019-0004', 'Vacation Leave(International)', 'Greece', '2019-03-07', '2019-03-14', '2019-0002', '8', 'approved'),
+(31, '2019-02-27', '2019-0007', 'Vacation Leave(International)', 'Paris', '2019-03-19', '2019-03-22', '2019-0002', '4', 'approved'),
+(32, '2019-02-27', '2019-0004', 'Special Leave Priveledge', 'Birthday', '2019-03-13', '2019-03-13', '2019-0002', '1', 'approved'),
+(33, '2019-02-27', '2019-0004', 'Special Leave Priveledge', 'Birthday', '2019-03-06', '2019-03-06', '2019-0002', '1', 'approved');
 
 --
 -- Triggers `leavedb`
@@ -220,7 +228,9 @@ INSERT INTO `login` (`id`, `username`, `password`, `type`) VALUES
 ('2019-0001', 'depthead', '12345', 'Department Head'),
 ('2019-0002', 'supervisor1', 'supervisor1', 'Supervisor'),
 ('2019-0003', 'admin', 'admin', 'Admin'),
-('2019-0004', 'employee1', 'employee1', 'Employee');
+('2019-0004', 'employee1', 'employee1', 'Employee'),
+('2019-0007', '2019-0007', '12345', 'Employee'),
+('2019-0008', '2019-0008', '12345', 'Employee');
 
 -- --------------------------------------------------------
 
@@ -252,14 +262,14 @@ CREATE TABLE `mr` (
 --
 
 INSERT INTO `mr` (`employeeID`, `lname`, `fname`, `mname`, `date_assigned`, `qty`, `unit`, `property_name`, `description`, `date_purchased`, `property_no`, `classification_no`, `unit_value`, `total_value`, `mr_no`, `status`) VALUES
-('2019-0004', 'Employee', '1', '', '2019-02-28', '10', '20', 'PC', 'Personal Computer', '2019-02-28', '2019-0001-0001', '0001', '40', '800', '0001', 'returned'),
-('2019-0004', 'Employee', '1', '', '2019-02-27', '10', '2', 'Printer', 'Epson Printer', '2019-02-18', '2019-0001-0002', '0001', '5000', '10000', '0002', 'pending');
+(NULL, NULL, NULL, NULL, '2019-02-27', '10', '2', 'PC', 'Personal Computer', '2019-02-27', '2019-0001-0001', '0001', '25000', '50000', '0001', 'pending'),
+('2019-0008', 'Garcia', 'May', 'xx', '2019-02-27', '1', '1', 'PC', 'Personal Computer', '2019-02-27', '2019-0001-0008', '0001', '50000', '50000', '0008', 'approved');
 
 --
 -- Triggers `mr`
 --
 DELIMITER $$
-CREATE TRIGGER `mr_notification_delete` AFTER DELETE ON `mr` FOR EACH ROW DELETE FROM `mr_notification` WHERE `dateassigned` = old.date_assigned AND `property_no` = old.property_no AND `employeeID` = old.employeeID
+CREATE TRIGGER `mr_notification_delete` BEFORE DELETE ON `mr` FOR EACH ROW DELETE FROM mr_notification WHERE property_no = OLD.property_no
 $$
 DELIMITER ;
 DELIMITER $$
@@ -284,11 +294,7 @@ CREATE TABLE `mr_notification` (
 --
 
 INSERT INTO `mr_notification` (`property_no`, `employeeID`, `dateassigned`) VALUES
-('2018-0001-0002', '', '2019-02-28'),
-('2018-0001-0003', '', '2019-02-28'),
-('2018-0001-0004', NULL, '2019-02-27'),
-('2019-0001-0001', NULL, '2019-02-28'),
-('2019-0001-0002', NULL, '2019-02-27');
+('2019-0001-0001', NULL, '2019-02-27');
 
 -- --------------------------------------------------------
 
@@ -320,7 +326,9 @@ CREATE TABLE `ot` (
 
 INSERT INTO `ot` (`id`, `employeeID`, `date_of_filing`, `date_of_ot`, `auto_OT`, `aot_from`, `aot_to`, `hours_weekends`, `minutes_weekends`, `hours_weekdays`, `minutes_weekdays`, `task`, `authorized_by`, `status`, `remarks`) VALUES
 (19, '02', '2019-02-25', '2019-02-27', '17:00 - 19:00', '17:00', '19:00', '2', '34', '2', '20', 'dasda', 'Armando, Alexia', 'approved', ''),
-(20, '02', '2019-02-25', '2019-02-28', '17:00 - 19:00', '17:00', '19:00', '00', '00', '2', '00', 'Dami', 'Armando, Alexia', 'disapproved', 'ddsds');
+(20, '02', '2019-02-25', '2019-02-28', '17:00 - 19:00', '17:00', '19:00', '00', '00', '2', '00', 'Dami', 'Armando, Alexia', 'disapproved', 'ddsds'),
+(21, '2019-0004', '2019-02-27', '2019-02-27', '18:00 - 20:00', '18:00', '20:00', '00', '00', '2', '00', 'Debugging', 'Supervisor, 1', 'approved', ''),
+(22, '2019-0004', '2019-02-27', '2019-02-26', '18:00 - 20:00', '18:00', '20:00', '00', '00', '2', '00', 'Debugging', 'Supervisor, 1', 'Pending', '');
 
 --
 -- Triggers `ot`
@@ -346,6 +354,13 @@ CREATE TABLE `ot_notification` (
   `date_of_filing` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ot_notification`
+--
+
+INSERT INTO `ot_notification` (`id`, `employeeID`, `date_of_filing`) VALUES
+(22, '2019-0004', '2019-02-27');
+
 -- --------------------------------------------------------
 
 --
@@ -362,11 +377,10 @@ CREATE TABLE `property` (
 --
 
 INSERT INTO `property` (`id`, `property_no`) VALUES
-(18, '2019-0001-0001'),
-(19, '2019-0001-0002'),
-(20, '2019-0001-0003'),
-(21, '2019-0001-0004'),
-(22, '2019-0001-0005');
+(27, '2019-0001-0001'),
+(28, '2019-0001-0002'),
+(29, '2019-0001-0003'),
+(30, '2019-0001-0008');
 
 -- --------------------------------------------------------
 
@@ -437,7 +451,8 @@ CREATE TABLE `training` (
 --
 
 INSERT INTO `training` (`id`, `employeeID`, `username`, `title`, `inc_from`, `inc_to`, `no_of_hours`, `conducted_by`, `attachments`) VALUES
-(16, '2019-0004', 'employee1', 'Title 1', '2019-02-28', '2019-02-28', '8', 'Rizal', 'Doc1.docx');
+(16, '2019-0004', 'employee1', 'Title 1', '2019-02-28', '2019-02-28', '8', 'Rizal', 'Doc1.docx'),
+(17, '2019-0004', 'employee1', 'Training 2', '2019-02-27', '2019-02-28', '8', 'TUP', 'OT Form.pdf');
 
 -- --------------------------------------------------------
 
@@ -565,37 +580,37 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `leavedb`
 --
 ALTER TABLE `leavedb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `ot`
 --
 ALTER TABLE `ot`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `ot_notification`
 --
 ALTER TABLE `ot_notification`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `training`
 --
 ALTER TABLE `training`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
